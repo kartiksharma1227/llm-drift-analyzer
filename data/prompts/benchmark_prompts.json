@@ -1,0 +1,112 @@
+{
+  "name": "LLM Behavioral Drift Benchmark Prompts",
+  "version": "1.0.0",
+  "description": "15 benchmark prompts for drift analysis based on the research paper methodology",
+  "prompts": [
+    {
+      "id": "IF-001",
+      "text": "Summarize the benefits of renewable energy in exactly 3 bullet points, with each point being no more than 15 words.",
+      "category": "instruction_following",
+      "description": "Tests bullet point formatting and word count constraints",
+      "expected_format": "Exactly 3 bullet points, each under 15 words"
+    },
+    {
+      "id": "IF-002",
+      "text": "Explain quantum computing to a 12-year-old in 2 paragraphs, using simple analogies.",
+      "category": "instruction_following",
+      "description": "Tests paragraph structure and audience-appropriate language",
+      "expected_format": "2 paragraphs with simple analogies suitable for a child"
+    },
+    {
+      "id": "IF-003",
+      "text": "List the top 5 programming languages for beginners in a numbered list. After each language, provide exactly one sentence explaining why it's good for beginners.",
+      "category": "instruction_following",
+      "description": "Tests numbered list formatting and sentence constraints",
+      "expected_format": "Numbered list 1-5, with exactly one sentence explanation per item"
+    },
+    {
+      "id": "IF-004",
+      "text": "Write a product description for a smartphone in exactly 50 words. Include at least 3 key features.",
+      "category": "instruction_following",
+      "description": "Tests exact word count and content requirements",
+      "expected_format": "Exactly 50 words containing at least 3 features"
+    },
+    {
+      "id": "IF-005",
+      "text": "Provide step-by-step instructions for making a cup of tea. Use no more than 6 steps, and start each step with an action verb.",
+      "category": "instruction_following",
+      "description": "Tests multi-step instruction format and verb usage",
+      "expected_format": "6 or fewer steps, each beginning with an action verb"
+    },
+    {
+      "id": "QA-001",
+      "text": "What were the main causes of World War I? Provide specific dates and events.",
+      "category": "factual_qa",
+      "description": "Tests historical knowledge accuracy",
+      "reference_answer": "Key causes include: assassination of Archduke Franz Ferdinand (June 28, 1914), alliance systems, nationalism, imperialism, and militarism."
+    },
+    {
+      "id": "QA-002",
+      "text": "Explain the process of photosynthesis, including the chemical equations involved.",
+      "category": "factual_qa",
+      "description": "Tests scientific accuracy and chemical notation",
+      "reference_answer": "6CO2 + 6H2O + light energy -> C6H12O6 + 6O2"
+    },
+    {
+      "id": "QA-003",
+      "text": "What is the theory of general relativity, and who developed it? Include the year it was published.",
+      "category": "factual_qa",
+      "description": "Tests physics knowledge and historical accuracy",
+      "reference_answer": "Developed by Albert Einstein, published in 1915. Describes gravity as curvature of spacetime caused by mass and energy."
+    },
+    {
+      "id": "QA-004",
+      "text": "Describe the structure and function of DNA. Include the names of the scientists who discovered its structure.",
+      "category": "factual_qa",
+      "description": "Tests biology knowledge and attribution accuracy",
+      "reference_answer": "Double helix structure discovered by James Watson and Francis Crick in 1953, with contributions from Rosalind Franklin."
+    },
+    {
+      "id": "QA-005",
+      "text": "What are the three laws of motion, and who formulated them? Provide a brief explanation of each law.",
+      "category": "factual_qa",
+      "description": "Tests physics knowledge comprehensiveness",
+      "reference_answer": "Newton's three laws: 1) Inertia, 2) F=ma, 3) Action-reaction. Formulated by Isaac Newton in 1687."
+    },
+    {
+      "id": "CR-001",
+      "text": "Write a short story (200-300 words) about a robot learning to understand human emotions.",
+      "category": "creative_reasoning",
+      "description": "Tests creative writing within length constraints",
+      "expected_format": "Narrative story between 200-300 words"
+    },
+    {
+      "id": "CR-002",
+      "text": "If a train travels at 80 km/h for 2.5 hours, then slows to 60 km/h for 1 hour, what is the average speed for the entire journey? Show your work.",
+      "category": "creative_reasoning",
+      "description": "Tests mathematical reasoning and problem-solving",
+      "reference_answer": "Total distance = (80 * 2.5) + (60 * 1) = 200 + 60 = 260 km. Total time = 3.5 hours. Average speed = 260/3.5 = 74.29 km/h"
+    },
+    {
+      "id": "CR-003",
+      "text": "A farmer has chickens and cows. If there are 50 heads and 140 legs in total, how many chickens and cows are there? Explain your reasoning.",
+      "category": "creative_reasoning",
+      "description": "Tests algebraic reasoning and explanation skills",
+      "reference_answer": "Let c = chickens, w = cows. c + w = 50, 2c + 4w = 140. Solving: c = 30, w = 20"
+    },
+    {
+      "id": "CR-004",
+      "text": "Write a haiku about artificial intelligence. Remember: 5-7-5 syllable structure.",
+      "category": "creative_reasoning",
+      "description": "Tests creative writing with strict format constraints",
+      "expected_format": "Three lines with 5-7-5 syllable pattern"
+    },
+    {
+      "id": "CR-005",
+      "text": "You have a 3-gallon jug and a 5-gallon jug. How can you measure exactly 4 gallons of water? Describe the steps.",
+      "category": "creative_reasoning",
+      "description": "Tests logical reasoning and problem-solving",
+      "reference_answer": "1) Fill 5-gallon, pour into 3-gallon (leaves 2 in 5-gallon). 2) Empty 3-gallon. 3) Pour 2 gallons from 5-gallon into 3-gallon. 4) Fill 5-gallon. 5) Pour from 5-gallon into 3-gallon until full (need 1 gallon). 6) 4 gallons remain in 5-gallon jug."
+    }
+  ]
+}

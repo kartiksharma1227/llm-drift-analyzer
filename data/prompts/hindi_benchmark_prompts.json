@@ -1,0 +1,199 @@
+{
+  "name": "Hindi Benchmark Prompts",
+  "version": "1.0.0",
+  "description": "Natural, conversational Hindi prompts for LLM drift analysis. Written as a native Hindi speaker would naturally phrase them.",
+  "language": "hi",
+  "prompts": [
+    {
+      "id": "HI-IF-001",
+      "text": "सोलर एनर्जी के तीन मुख्य फायदे बताओ, और हर पॉइंट को 20-25 शब्दों में समझाओ।",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Tests bullet point formatting and word limits in Hindi",
+      "expected_format": "3 bullet points, each 20-25 words in Hindi",
+      "parallel_id": "IF-001",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "renewable_energy"
+      }
+    },
+    {
+      "id": "HI-IF-002",
+      "text": "एक ऐसी कहानी लिखो जो 'बारिश की उस रात' से शुरू हो और 'सब कुछ बदल गया' पर खत्म हो। कहानी 100-150 शब्दों की होनी चाहिए।",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Tests specific start/end constraints and word count in Hindi",
+      "expected_format": "Story starting with 'बारिश की उस रात' and ending with 'सब कुछ बदल गया', 100-150 words",
+      "parallel_id": "IF-002",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "creative_writing"
+      }
+    },
+    {
+      "id": "HI-IF-003",
+      "text": "मुझे बिना किसी इंट्रो या कन्क्लूज़न के सीधे पांच हेल्थ टिप्स दो। हर टिप एक लाइन में होनी चाहिए।",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Tests format adherence and conciseness",
+      "expected_format": "5 single-line health tips, no introduction or conclusion",
+      "parallel_id": "IF-003",
+      "metadata": {
+        "difficulty": "easy",
+        "topic": "health"
+      }
+    },
+    {
+      "id": "HI-IF-004",
+      "text": "'टाइम मैनेजमेंट' के बारे में तीन पैराग्राफ लिखो - पहले में प्रॉब्लम, दूसरे में सॉल्यूशन, और तीसरे में इम्प्लीमेंटेशन। हर पैराग्राफ 50 शब्दों के आसपास हो।",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Tests structured paragraph format and word limits",
+      "expected_format": "3 paragraphs (problem, solution, implementation), ~50 words each",
+      "parallel_id": "IF-004",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "productivity"
+      }
+    },
+    {
+      "id": "HI-IF-005",
+      "text": "किसी भी विषय पर एक formal email लिखो जिसमें subject line, greeting, main body (2-3 sentences), और sign-off हो। पूरा email हिंदी में हो।",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Tests email format compliance in Hindi",
+      "expected_format": "Formal Hindi email with all standard components",
+      "parallel_id": "IF-005",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "communication"
+      }
+    },
+    {
+      "id": "HI-FQ-001",
+      "text": "भारत की आज़ादी की लड़ाई में महात्मा गांधी का क्या रोल था? मुख्य आंदोलनों के नाम भी बताओ।",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Tests knowledge of Indian independence movement",
+      "reference_answer": "गांधी ने अहिंसा और सत्याग्रह के सिद्धांतों पर आधारित आंदोलन चलाए। मुख्य आंदोलन: असहयोग आंदोलन (1920), नमक सत्याग्रह (1930), भारत छोड़ो आंदोलन (1942)।",
+      "parallel_id": "FQ-001",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "indian_history"
+      }
+    },
+    {
+      "id": "HI-FQ-002",
+      "text": "फोटोसिंथेसिस क्या होता है? आसान भाषा में समझाओ जैसे किसी 10वीं क्लास के बच्चे को बता रहे हो।",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Tests scientific concept explanation in accessible Hindi",
+      "reference_answer": "पौधे सूरज की रोशनी, पानी और हवा से कार्बन डाइऑक्साइड लेकर अपना खाना बनाते हैं। इस प्रोसेस में ऑक्सीजन भी निकलती है जो हम सांस लेते हैं। यह पत्तियों में होता है जहां क्लोरोफिल होता है।",
+      "parallel_id": "FQ-002",
+      "metadata": {
+        "difficulty": "easy",
+        "topic": "science"
+      }
+    },
+    {
+      "id": "HI-FQ-003",
+      "text": "भारत का संविधान कब लागू हुआ और इसे किसने लिखा? संविधान की कुछ खास बातें भी बताओ।",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Tests knowledge of Indian Constitution",
+      "reference_answer": "भारत का संविधान 26 जनवरी 1950 को लागू हुआ। डॉ. बी.आर. अम्बेडकर इसके मुख्य आर्किटेक्ट थे। यह दुनिया का सबसे लंबा लिखित संविधान है जो नागरिकों को मौलिक अधिकार देता है।",
+      "parallel_id": "FQ-003",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "civics"
+      }
+    },
+    {
+      "id": "HI-FQ-004",
+      "text": "इंटरनेट कैसे काम करता है? एक आम इंसान को समझ आ जाए ऐसे बताओ।",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Tests technical concept explanation for layman",
+      "reference_answer": "इंटरनेट दुनिया भर के कंप्यूटरों का एक बड़ा नेटवर्क है जो केबल और वायरलेस से जुड़े हैं। जब आप कुछ सर्च करते हो, आपका request servers तक जाता है और वहां से जानकारी वापस आती है।",
+      "parallel_id": "FQ-004",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "technology"
+      }
+    },
+    {
+      "id": "HI-FQ-005",
+      "text": "ग्लोबल वार्मिंग क्या है और यह हमारी ज़िंदगी को कैसे affect करती है? 2-3 practical examples दो।",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Tests climate change knowledge with practical examples",
+      "reference_answer": "ग्लोबल वार्मिंग का मतलब है धरती का तापमान बढ़ना। इसकी वजह से: (1) गर्मियां ज्यादा तेज़ हो रही हैं, (2) बारिश का pattern बदल रहा है - कहीं बाढ़ तो कहीं सूखा, (3) ग्लेशियर पिघल रहे हैं जिससे समुद्र का level बढ़ रहा है।",
+      "parallel_id": "FQ-005",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "environment"
+      }
+    },
+    {
+      "id": "HI-CR-001",
+      "text": "एक ऐसी दुनिया की कल्पना करो जहां लोग सपनों में travel कर सकते हैं। एक छोटी कहानी लिखो जिसमें कोई पहली बार इस ability को discover करता है।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Tests creative storytelling in Hindi",
+      "parallel_id": "CR-001",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "creative_fiction"
+      }
+    },
+    {
+      "id": "HI-CR-002",
+      "text": "अगर तुम्हें एक दिन के लिए भारत का PM बना दिया जाए, तो तुम कौन से 3 फैसले लोगे और क्यों?",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Tests logical reasoning with hypothetical scenario",
+      "parallel_id": "CR-002",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "governance"
+      }
+    },
+    {
+      "id": "HI-CR-003",
+      "text": "एक रहस्यमयी पुरानी हवेली में एक लड़की को एक ऐसा कमरा मिलता है जो सिर्फ रात 12 बजे दिखाई देता है। आगे क्या होता है?",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Tests narrative continuation in Hindi",
+      "parallel_id": "CR-003",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "mystery_fiction"
+      }
+    },
+    {
+      "id": "HI-CR-004",
+      "text": "एक किसान के पास 100 पेड़ हैं। वो उन्हें 10 rows में लगाना चाहता है और हर row में exactly 12 पेड़ होने चाहिए। यह कैसे possible है? सोचो और बताओ।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Tests logical puzzle solving (star pattern problem)",
+      "reference_answer": "यह possible है अगर पेड़ों को star pattern में लगाया जाए। पांच pointed star में 10 lines होती हैं और कुछ पेड़ multiple lines पर आते हैं। इस तरह 100 से कम पेड़ों में भी 10 rows बन सकती हैं जिसमें हर row में 12 पेड़ हों।",
+      "parallel_id": "CR-004",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "math_puzzle"
+      }
+    },
+    {
+      "id": "HI-CR-005",
+      "text": "अगर smartphones कभी invent नहीं होते, तो आज की दुनिया कैसी होती? 5 major differences बताओ।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Tests counterfactual reasoning",
+      "parallel_id": "CR-005",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "counterfactual"
+      }
+    }
+  ]
+}

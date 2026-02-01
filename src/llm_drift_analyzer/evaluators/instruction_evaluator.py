@@ -3,9 +3,13 @@ Instruction adherence evaluator for LLM Drift Analyzer.
 
 This module provides evaluation of how well LLM responses
 follow the given instructions in the prompt.
+
+Supports both OpenAI (GPT-4) and Ollama (local models) as evaluation backends.
 """
 
 from typing import Optional
+
+import requests
 
 from llm_drift_analyzer.evaluators.base_evaluator import BaseEvaluator
 
@@ -14,8 +18,8 @@ class InstructionEvaluator(BaseEvaluator):
     """
     Evaluates instruction adherence in LLM responses.
 
-    Uses GPT-4 to score how well a response follows the
-    instructions given in the original prompt.
+    Uses GPT-4 or a local Ollama model to score how well a response
+    follows the instructions given in the original prompt.
 
     Score Range (0-3):
         0: Does not follow instructions at all
@@ -24,13 +28,20 @@ class InstructionEvaluator(BaseEvaluator):
         3: Perfectly follows all instructions
 
     Example:
-        >>> evaluator = InstructionEvaluator(api_key="sk-...")
+        >>> # Using GPT-4 (costs money)
+        >>> evaluator = InstructionEvaluator(openai_api_key="sk-...")
         >>> score = evaluator.evaluate(
         ...     prompt="Write exactly 3 bullet points about AI",
         ...     response="• Point 1\\n• Point 2\\n• Point 3"
         ... )
         >>> print(score)
         3
+
+        >>> # Using Ollama (free, local)
+        >>> evaluator = InstructionEvaluator(
+        ...     evaluator_provider="ollama",
+        ...     evaluator_model="llama3"
+        ... )
     """
 
     @property
@@ -86,6 +97,44 @@ Evaluation Guidelines:
 
 Provide only the numeric score (0, 1, 2, or 3)."""
 
+    def _query_evaluator(self, prompt_text: str, max_tokens: int = 100) -> str:
+        """
+        Query the evaluator model (works with both OpenAI and Ollama).
+
+        Args:
+            prompt_text: The prompt to send to the evaluator.
+            max_tokens: Maximum tokens in response.
+
+        Returns:
+            str: Model's response text.
+        """
+        if self.evaluator_provider == "openai":
+            response = self.openai_client.chat.completions.create(
+                model=self.evaluator_model,
+                messages=[{"role": "user", "content": prompt_text}],
+                max_tokens=max_tokens,
+                temperature=self.temperature
+            )
+            return response.choices[0].message.content.strip()
+        else:  # ollama
+            payload = {
+                "model": self.evaluator_model,
+                "prompt": prompt_text,
+                "stream": False,
+                "options": {
+                    "temperature": self.temperature,
+                    "num_predict": max_tokens,
+                }
+            }
+            response = requests.post(
+                f"{self.ollama_base_url}/api/generate",
+                json=payload,
+                timeout=60
+            )
+            if response.status_code != 200:
+                raise RuntimeError(f"Ollama API error: {response.text}")
+            return response.json().get("response", "").strip()
+
     def evaluate_with_details(
         self,
         prompt: str,
@@ -128,13 +177,7 @@ Provide a 1-2 sentence explanation of why this score was given.
 Focus on specific instruction requirements that were met or missed."""
 
         try:
-            feedback_response = self.openai_client.chat.completions.create(
-                model=self.evaluator_model,
-                messages=[{"role": "user", "content": feedback_prompt}],
-                max_tokens=100,
-                temperature=self.temperature
-            )
-            feedback = feedback_response.choices[0].message.content.strip()
+            feedback = self._query_evaluator(feedback_prompt, max_tokens=100)
         except Exception:
             feedback = "Feedback unavailable"
 
@@ -142,4 +185,6 @@ Focus on specific instruction requirements that were met or missed."""
             "score": score,
             "feedback": feedback,
             "metric": self.metric_name,
+            "evaluator_provider": self.evaluator_provider,
+            "evaluator_model": self.evaluator_model,
         }

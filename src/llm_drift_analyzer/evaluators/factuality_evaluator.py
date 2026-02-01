@@ -3,9 +3,13 @@ Factuality evaluator for LLM Drift Analyzer.
 
 This module provides evaluation of factual accuracy in LLM responses,
 detecting hallucinations and verifying claims.
+
+Supports both OpenAI (GPT-4) and Ollama (local models) as evaluation backends.
 """
 
 from typing import Optional, List
+
+import requests
 
 from llm_drift_analyzer.evaluators.base_evaluator import BaseEvaluator
 
@@ -14,8 +18,8 @@ class FactualityEvaluator(BaseEvaluator):
     """
     Evaluates factual accuracy in LLM responses.
 
-    Uses GPT-4 to assess whether the response contains
-    factually accurate information or hallucinations.
+    Uses GPT-4 or a local Ollama model to assess whether the response
+    contains factually accurate information or hallucinations.
 
     Score Range (0-2):
         0: Contains significant factual errors or hallucinations
@@ -23,13 +27,20 @@ class FactualityEvaluator(BaseEvaluator):
         2: Completely factual with accurate information
 
     Example:
-        >>> evaluator = FactualityEvaluator(api_key="sk-...")
+        >>> # Using GPT-4 (costs money)
+        >>> evaluator = FactualityEvaluator(openai_api_key="sk-...")
         >>> score = evaluator.evaluate(
         ...     prompt="What year did WWII end?",
         ...     response="WWII ended in 1945."
         ... )
         >>> print(score)
         2
+
+        >>> # Using Ollama (free, local)
+        >>> evaluator = FactualityEvaluator(
+        ...     evaluator_provider="ollama",
+        ...     evaluator_model="llama3"
+        ... )
     """
 
     @property
@@ -90,6 +101,44 @@ Focus on verifiable facts, not opinions or interpretations.
 
 Provide only the numeric score (0, 1, or 2)."""
 
+    def _query_evaluator(self, prompt_text: str, max_tokens: int = 300) -> str:
+        """
+        Query the evaluator model (works with both OpenAI and Ollama).
+
+        Args:
+            prompt_text: The prompt to send to the evaluator.
+            max_tokens: Maximum tokens in response.
+
+        Returns:
+            str: Model's response text.
+        """
+        if self.evaluator_provider == "openai":
+            response = self.openai_client.chat.completions.create(
+                model=self.evaluator_model,
+                messages=[{"role": "user", "content": prompt_text}],
+                max_tokens=max_tokens,
+                temperature=self.temperature
+            )
+            return response.choices[0].message.content.strip()
+        else:  # ollama
+            payload = {
+                "model": self.evaluator_model,
+                "prompt": prompt_text,
+                "stream": False,
+                "options": {
+                    "temperature": self.temperature,
+                    "num_predict": max_tokens,
+                }
+            }
+            response = requests.post(
+                f"{self.ollama_base_url}/api/generate",
+                json=payload,
+                timeout=60
+            )
+            if response.status_code != 200:
+                raise RuntimeError(f"Ollama API error: {response.text}")
+            return response.json().get("response", "").strip()
+
     def detect_hallucinations(
         self,
         prompt: str,
@@ -133,14 +182,7 @@ CONCERNS: [List each concern on a new line, or "None" if accurate]
 CONFIDENCE: [HIGH, MEDIUM, or LOW - your confidence in the assessment]"""
 
         try:
-            eval_response = self.openai_client.chat.completions.create(
-                model=self.evaluator_model,
-                messages=[{"role": "user", "content": detection_prompt}],
-                max_tokens=300,
-                temperature=self.temperature
-            )
-
-            result_text = eval_response.choices[0].message.content.strip()
+            result_text = self._query_evaluator(detection_prompt, max_tokens=300)
             return self._parse_hallucination_result(result_text)
 
         except Exception as e:
@@ -232,13 +274,7 @@ Briefly note:
 3. Any additional claims not in reference"""
 
         try:
-            comparison_response = self.openai_client.chat.completions.create(
-                model=self.evaluator_model,
-                messages=[{"role": "user", "content": comparison_prompt}],
-                max_tokens=200,
-                temperature=self.temperature
-            )
-            analysis = comparison_response.choices[0].message.content.strip()
+            analysis = self._query_evaluator(comparison_prompt, max_tokens=200)
         except Exception:
             analysis = "Comparison unavailable"
 
@@ -246,4 +282,6 @@ Briefly note:
             "score": score,
             "analysis": analysis,
             "metric": self.metric_name,
+            "evaluator_provider": self.evaluator_provider,
+            "evaluator_model": self.evaluator_model,
         }

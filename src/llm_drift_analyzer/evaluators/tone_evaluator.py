@@ -3,9 +3,13 @@ Tone and style evaluator for LLM Drift Analyzer.
 
 This module provides evaluation of tone appropriateness and
 stylistic consistency in LLM responses.
+
+Supports both OpenAI (GPT-4) and Ollama (local models) as evaluation backends.
 """
 
 from typing import Optional
+
+import requests
 
 from llm_drift_analyzer.evaluators.base_evaluator import BaseEvaluator
 
@@ -14,8 +18,8 @@ class ToneEvaluator(BaseEvaluator):
     """
     Evaluates tone and style appropriateness in LLM responses.
 
-    Uses GPT-4 to assess whether the response has an appropriate
-    tone for the context and maintains stylistic consistency.
+    Uses GPT-4 or a local Ollama model to assess whether the response
+    has an appropriate tone for the context and maintains stylistic consistency.
 
     Score Range (0-2):
         0: Inappropriate tone for context (too casual/formal, inconsistent)
@@ -23,13 +27,20 @@ class ToneEvaluator(BaseEvaluator):
         2: Appropriate and consistent tone throughout
 
     Example:
-        >>> evaluator = ToneEvaluator(api_key="sk-...")
+        >>> # Using GPT-4 (costs money)
+        >>> evaluator = ToneEvaluator(openai_api_key="sk-...")
         >>> score = evaluator.evaluate(
         ...     prompt="Explain gravity to a child",
         ...     response="Gravity is like a big invisible hand..."
         ... )
         >>> print(score)
         2
+
+        >>> # Using Ollama (free, local)
+        >>> evaluator = ToneEvaluator(
+        ...     evaluator_provider="ollama",
+        ...     evaluator_model="llama3"
+        ... )
     """
 
     @property
@@ -101,6 +112,44 @@ Evaluation Guidelines:
 
 Provide only the numeric score (0, 1, or 2)."""
 
+    def _query_evaluator(self, prompt_text: str, max_tokens: int = 200) -> str:
+        """
+        Query the evaluator model (works with both OpenAI and Ollama).
+
+        Args:
+            prompt_text: The prompt to send to the evaluator.
+            max_tokens: Maximum tokens in response.
+
+        Returns:
+            str: Model's response text.
+        """
+        if self.evaluator_provider == "openai":
+            response = self.openai_client.chat.completions.create(
+                model=self.evaluator_model,
+                messages=[{"role": "user", "content": prompt_text}],
+                max_tokens=max_tokens,
+                temperature=self.temperature
+            )
+            return response.choices[0].message.content.strip()
+        else:  # ollama
+            payload = {
+                "model": self.evaluator_model,
+                "prompt": prompt_text,
+                "stream": False,
+                "options": {
+                    "temperature": self.temperature,
+                    "num_predict": max_tokens,
+                }
+            }
+            response = requests.post(
+                f"{self.ollama_base_url}/api/generate",
+                json=payload,
+                timeout=60
+            )
+            if response.status_code != 200:
+                raise RuntimeError(f"Ollama API error: {response.text}")
+            return response.json().get("response", "").strip()
+
     def analyze_tone(
         self,
         prompt: str,
@@ -141,14 +190,7 @@ CONSISTENCY: [HIGH, MEDIUM, LOW]
 RECOMMENDATION: [One sentence suggestion for improvement, or "None needed"]"""
 
         try:
-            eval_response = self.openai_client.chat.completions.create(
-                model=self.evaluator_model,
-                messages=[{"role": "user", "content": analysis_prompt}],
-                max_tokens=200,
-                temperature=self.temperature
-            )
-
-            result_text = eval_response.choices[0].message.content.strip()
+            result_text = self._query_evaluator(analysis_prompt, max_tokens=200)
             return self._parse_tone_analysis(result_text)
 
         except Exception as e:
@@ -263,4 +305,6 @@ RECOMMENDATION: [One sentence suggestion for improvement, or "None needed"]"""
             "drift_detected": drift_detected,
             "formality_drift": formality_drift,
             "metric": self.metric_name,
+            "evaluator_provider": self.evaluator_provider,
+            "evaluator_model": self.evaluator_model,
         }

@@ -3,6 +3,9 @@ Prompt data models for LLM Drift Analyzer.
 
 This module defines the Prompt dataclass and PromptCategory enum
 for representing benchmark prompts used in drift analysis.
+
+Supports multilingual prompts including English, Hindi, and other
+Indic languages for cross-lingual drift analysis.
 """
 
 import json
@@ -10,6 +13,61 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, List, Optional, Any
 from pathlib import Path
+
+
+class Language(Enum):
+    """
+    Enumeration of supported languages for multilingual analysis.
+
+    Used for cross-lingual drift comparison between models'
+    performance in different languages.
+
+    Attributes:
+        ENGLISH: English language prompts and responses.
+        HINDI: Hindi language prompts and responses (Devanagari script).
+        HINGLISH: Mixed Hindi-English (code-mixed) content.
+    """
+    ENGLISH = "en"
+    HINDI = "hi"
+    HINGLISH = "hi-en"  # Code-mixed Hindi-English
+
+    @classmethod
+    def from_string(cls, value: str) -> "Language":
+        """
+        Create Language from string value.
+
+        Args:
+            value: String representation (e.g., "en", "hi", "hindi", "english").
+
+        Returns:
+            Language: Corresponding enum value.
+
+        Example:
+            >>> lang = Language.from_string("hindi")
+            >>> print(lang)
+            Language.HINDI
+        """
+        value_lower = value.lower().strip()
+
+        # Handle full names
+        name_mapping = {
+            "english": cls.ENGLISH,
+            "hindi": cls.HINDI,
+            "hinglish": cls.HINGLISH,
+            "hi-en": cls.HINGLISH,
+            "en": cls.ENGLISH,
+            "hi": cls.HINDI,
+        }
+
+        if value_lower in name_mapping:
+            return name_mapping[value_lower]
+
+        # Try direct enum value match
+        for member in cls:
+            if member.value == value_lower:
+                return member
+
+        raise ValueError(f"Unknown language: {value}")
 
 
 class PromptCategory(Enum):
@@ -63,39 +121,57 @@ class Prompt:
     Represents a benchmark prompt for LLM drift analysis.
 
     Encapsulates all information about a prompt including its
-    identifier, text, category, and optional metadata.
+    identifier, text, category, language, and optional metadata.
+
+    Supports multilingual prompts for cross-lingual drift analysis,
+    including English, Hindi (Devanagari), and code-mixed content.
 
     Attributes:
-        id: Unique identifier for the prompt (e.g., "IF-001").
+        id: Unique identifier for the prompt (e.g., "IF-001", "HI-IF-001").
         text: The actual prompt text to send to LLMs.
         category: Category classification of the prompt.
+        language: Language of the prompt (default: English).
         description: Optional human-readable description.
         expected_format: Optional description of expected response format.
         reference_answer: Optional reference answer for factual prompts.
+        parallel_id: Optional ID of equivalent prompt in another language
+            (for cross-lingual comparison).
         metadata: Optional dictionary for additional metadata.
 
     Example:
-        >>> prompt = Prompt(
+        >>> # English prompt
+        >>> prompt_en = Prompt(
         ...     id="IF-001",
         ...     text="Summarize renewable energy benefits in 3 bullet points.",
         ...     category=PromptCategory.INSTRUCTION_FOLLOWING,
-        ...     description="Tests bullet point formatting and word limits"
+        ...     language=Language.ENGLISH
         ... )
-        >>> print(prompt.id)
-        'IF-001'
+
+        >>> # Hindi prompt (parallel)
+        >>> prompt_hi = Prompt(
+        ...     id="HI-IF-001",
+        ...     text="नवीकरणीय ऊर्जा के फायदे 3 बिंदुओं में बताइए।",
+        ...     category=PromptCategory.INSTRUCTION_FOLLOWING,
+        ...     language=Language.HINDI,
+        ...     parallel_id="IF-001"
+        ... )
     """
     id: str
     text: str
     category: PromptCategory
+    language: Language = Language.ENGLISH
     description: Optional[str] = None
     expected_format: Optional[str] = None
     reference_answer: Optional[str] = None
+    parallel_id: Optional[str] = None  # For cross-lingual comparison
     metadata: Dict[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
-        """Validate and convert category if needed."""
+        """Validate and convert category and language if needed."""
         if isinstance(self.category, str):
             self.category = PromptCategory.from_string(self.category)
+        if isinstance(self.language, str):
+            self.language = Language.from_string(self.language)
 
     def to_dict(self) -> Dict[str, Any]:
         """
@@ -114,9 +190,11 @@ class Prompt:
             "id": self.id,
             "text": self.text,
             "category": self.category.value,
+            "language": self.language.value,
             "description": self.description,
             "expected_format": self.expected_format,
             "reference_answer": self.reference_answer,
+            "parallel_id": self.parallel_id,
             "metadata": self.metadata,
         }
 
@@ -137,15 +215,33 @@ class Prompt:
             >>> print(prompt.category)
             PromptCategory.INSTRUCTION_FOLLOWING
         """
+        # Handle language field (default to English for backward compatibility)
+        language_str = data.get("language", "en")
+        language = Language.from_string(language_str)
+
         return cls(
             id=data["id"],
             text=data["text"],
             category=PromptCategory.from_string(data["category"]),
+            language=language,
             description=data.get("description"),
             expected_format=data.get("expected_format"),
             reference_answer=data.get("reference_answer"),
+            parallel_id=data.get("parallel_id"),
             metadata=data.get("metadata", {}),
         )
+
+    def is_hindi(self) -> bool:
+        """Check if this is a Hindi language prompt."""
+        return self.language == Language.HINDI
+
+    def is_english(self) -> bool:
+        """Check if this is an English language prompt."""
+        return self.language == Language.ENGLISH
+
+    def has_parallel(self) -> bool:
+        """Check if this prompt has a parallel version in another language."""
+        return self.parallel_id is not None
 
 
 class PromptSet:
@@ -248,6 +344,77 @@ class PromptSet:
             List[PromptCategory]: Unique categories.
         """
         return list(set(p.category for p in self.prompts))
+
+    def filter_by_language(self, language: Language) -> List[Prompt]:
+        """
+        Filter prompts by language.
+
+        Args:
+            language: Language to filter by.
+
+        Returns:
+            List[Prompt]: Prompts matching the language.
+
+        Example:
+            >>> hindi_prompts = prompt_set.filter_by_language(Language.HINDI)
+        """
+        return [p for p in self.prompts if p.language == language]
+
+    def get_languages(self) -> List[Language]:
+        """
+        Get unique languages in the prompt set.
+
+        Returns:
+            List[Language]: Unique languages.
+        """
+        return list(set(p.language for p in self.prompts))
+
+    def get_parallel_pairs(self) -> List[tuple]:
+        """
+        Get pairs of parallel prompts (same content in different languages).
+
+        Returns:
+            List[tuple]: List of (prompt1, prompt2) tuples where prompts
+                are parallel versions in different languages.
+
+        Example:
+            >>> pairs = prompt_set.get_parallel_pairs()
+            >>> for en, hi in pairs:
+            ...     print(f"{en.id} <-> {hi.id}")
+        """
+        pairs = []
+        processed = set()
+
+        for prompt in self.prompts:
+            if prompt.id in processed:
+                continue
+
+            if prompt.parallel_id:
+                parallel = self.get_by_id(prompt.parallel_id)
+                if parallel and parallel.id not in processed:
+                    pairs.append((prompt, parallel))
+                    processed.add(prompt.id)
+                    processed.add(parallel.id)
+
+        return pairs
+
+    def get_hindi_prompts(self) -> List[Prompt]:
+        """
+        Convenience method to get all Hindi prompts.
+
+        Returns:
+            List[Prompt]: All Hindi language prompts.
+        """
+        return self.filter_by_language(Language.HINDI)
+
+    def get_english_prompts(self) -> List[Prompt]:
+        """
+        Convenience method to get all English prompts.
+
+        Returns:
+            List[Prompt]: All English language prompts.
+        """
+        return self.filter_by_language(Language.ENGLISH)
 
     def to_dict(self) -> Dict[str, Any]:
         """

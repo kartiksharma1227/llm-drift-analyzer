@@ -1,112 +1,154 @@
 {
   "name": "LLM Behavioral Drift Benchmark Prompts",
-  "version": "1.0.0",
-  "description": "15 benchmark prompts for drift analysis based on the research paper methodology",
+  "version": "1.1.0",
+  "description": "15 benchmark prompts for drift analysis based on the research paper methodology. Updated with language and parallel_id for cross-lingual analysis.",
+  "language": "en",
   "prompts": [
     {
       "id": "IF-001",
       "text": "Summarize the benefits of renewable energy in exactly 3 bullet points, with each point being no more than 15 words.",
       "category": "instruction_following",
+      "language": "en",
       "description": "Tests bullet point formatting and word count constraints",
-      "expected_format": "Exactly 3 bullet points, each under 15 words"
+      "expected_format": "Exactly 3 bullet points, each under 15 words",
+      "parallel_id": "HI-IF-001",
+      "metadata": {"difficulty": "medium", "topic": "renewable_energy"}
     },
     {
       "id": "IF-002",
-      "text": "Explain quantum computing to a 12-year-old in 2 paragraphs, using simple analogies.",
+      "text": "Write a short story that starts with 'On that rainy night' and ends with 'everything had changed'. The story should be 100-150 words.",
       "category": "instruction_following",
-      "description": "Tests paragraph structure and audience-appropriate language",
-      "expected_format": "2 paragraphs with simple analogies suitable for a child"
+      "language": "en",
+      "description": "Tests specific start/end constraints and word count",
+      "expected_format": "Story starting with 'On that rainy night' and ending with 'everything had changed', 100-150 words",
+      "parallel_id": "HI-IF-002",
+      "metadata": {"difficulty": "hard", "topic": "creative_writing"}
     },
     {
       "id": "IF-003",
-      "text": "List the top 5 programming languages for beginners in a numbered list. After each language, provide exactly one sentence explaining why it's good for beginners.",
+      "text": "Give me exactly five health tips without any introduction or conclusion. Each tip should be a single line.",
       "category": "instruction_following",
-      "description": "Tests numbered list formatting and sentence constraints",
-      "expected_format": "Numbered list 1-5, with exactly one sentence explanation per item"
+      "language": "en",
+      "description": "Tests format adherence and conciseness",
+      "expected_format": "5 single-line health tips, no introduction or conclusion",
+      "parallel_id": "HI-IF-003",
+      "metadata": {"difficulty": "easy", "topic": "health"}
     },
     {
       "id": "IF-004",
-      "text": "Write a product description for a smartphone in exactly 50 words. Include at least 3 key features.",
+      "text": "Write three paragraphs about time management - first about the problem, second about solutions, and third about implementation. Each paragraph should be around 50 words.",
       "category": "instruction_following",
-      "description": "Tests exact word count and content requirements",
-      "expected_format": "Exactly 50 words containing at least 3 features"
+      "language": "en",
+      "description": "Tests structured paragraph format and word limits",
+      "expected_format": "3 paragraphs (problem, solution, implementation), ~50 words each",
+      "parallel_id": "HI-IF-004",
+      "metadata": {"difficulty": "medium", "topic": "productivity"}
     },
     {
       "id": "IF-005",
-      "text": "Provide step-by-step instructions for making a cup of tea. Use no more than 6 steps, and start each step with an action verb.",
+      "text": "Write a formal email on any topic with a subject line, greeting, main body (2-3 sentences), and sign-off.",
       "category": "instruction_following",
-      "description": "Tests multi-step instruction format and verb usage",
-      "expected_format": "6 or fewer steps, each beginning with an action verb"
+      "language": "en",
+      "description": "Tests email format compliance",
+      "expected_format": "Formal email with all standard components",
+      "parallel_id": "HI-IF-005",
+      "metadata": {"difficulty": "medium", "topic": "communication"}
     },
     {
-      "id": "QA-001",
-      "text": "What were the main causes of World War I? Provide specific dates and events.",
+      "id": "FQ-001",
+      "text": "What was Mahatma Gandhi's role in India's independence movement? Name the major movements he led.",
       "category": "factual_qa",
-      "description": "Tests historical knowledge accuracy",
-      "reference_answer": "Key causes include: assassination of Archduke Franz Ferdinand (June 28, 1914), alliance systems, nationalism, imperialism, and militarism."
+      "language": "en",
+      "description": "Tests knowledge of Indian independence movement",
+      "reference_answer": "Gandhi led the independence movement through non-violence and satyagraha. Major movements: Non-Cooperation Movement (1920), Salt March (1930), Quit India Movement (1942).",
+      "parallel_id": "HI-FQ-001",
+      "metadata": {"difficulty": "medium", "topic": "indian_history"}
     },
     {
-      "id": "QA-002",
-      "text": "Explain the process of photosynthesis, including the chemical equations involved.",
+      "id": "FQ-002",
+      "text": "What is photosynthesis? Explain it simply as if you're teaching a 10th grader.",
       "category": "factual_qa",
-      "description": "Tests scientific accuracy and chemical notation",
-      "reference_answer": "6CO2 + 6H2O + light energy -> C6H12O6 + 6O2"
+      "language": "en",
+      "description": "Tests scientific concept explanation in accessible language",
+      "reference_answer": "Plants make their food using sunlight, water, and carbon dioxide from air. This process happens in leaves where chlorophyll is present. Oxygen is released as a byproduct, which we breathe.",
+      "parallel_id": "HI-FQ-002",
+      "metadata": {"difficulty": "easy", "topic": "science"}
     },
     {
-      "id": "QA-003",
-      "text": "What is the theory of general relativity, and who developed it? Include the year it was published.",
+      "id": "FQ-003",
+      "text": "When was the Indian Constitution enacted and who wrote it? What are some key features of the Constitution?",
       "category": "factual_qa",
-      "description": "Tests physics knowledge and historical accuracy",
-      "reference_answer": "Developed by Albert Einstein, published in 1915. Describes gravity as curvature of spacetime caused by mass and energy."
+      "language": "en",
+      "description": "Tests knowledge of Indian Constitution",
+      "reference_answer": "The Indian Constitution was enacted on January 26, 1950. Dr. B.R. Ambedkar was its chief architect. It's the world's longest written constitution and grants fundamental rights to citizens.",
+      "parallel_id": "HI-FQ-003",
+      "metadata": {"difficulty": "medium", "topic": "civics"}
     },
     {
-      "id": "QA-004",
-      "text": "Describe the structure and function of DNA. Include the names of the scientists who discovered its structure.",
+      "id": "FQ-004",
+      "text": "How does the internet work? Explain it so a regular person can understand.",
       "category": "factual_qa",
-      "description": "Tests biology knowledge and attribution accuracy",
-      "reference_answer": "Double helix structure discovered by James Watson and Francis Crick in 1953, with contributions from Rosalind Franklin."
+      "language": "en",
+      "description": "Tests technical concept explanation for layman",
+      "reference_answer": "The internet is a huge network of computers worldwide connected through cables and wireless. When you search something, your request goes to servers and information comes back to you.",
+      "parallel_id": "HI-FQ-004",
+      "metadata": {"difficulty": "medium", "topic": "technology"}
     },
     {
-      "id": "QA-005",
-      "text": "What are the three laws of motion, and who formulated them? Provide a brief explanation of each law.",
+      "id": "FQ-005",
+      "text": "What is global warming and how does it affect our daily lives? Give 2-3 practical examples.",
       "category": "factual_qa",
-      "description": "Tests physics knowledge comprehensiveness",
-      "reference_answer": "Newton's three laws: 1) Inertia, 2) F=ma, 3) Action-reaction. Formulated by Isaac Newton in 1687."
+      "language": "en",
+      "description": "Tests climate change knowledge with practical examples",
+      "reference_answer": "Global warming means Earth's temperature is rising. Effects: (1) Summers are getting more intense, (2) Rainfall patterns are changing - floods in some places, droughts in others, (3) Glaciers are melting, raising sea levels.",
+      "parallel_id": "HI-FQ-005",
+      "metadata": {"difficulty": "medium", "topic": "environment"}
     },
     {
       "id": "CR-001",
-      "text": "Write a short story (200-300 words) about a robot learning to understand human emotions.",
+      "text": "Imagine a world where people can travel through dreams. Write a short story about someone discovering this ability for the first time.",
       "category": "creative_reasoning",
-      "description": "Tests creative writing within length constraints",
-      "expected_format": "Narrative story between 200-300 words"
+      "language": "en",
+      "description": "Tests creative storytelling",
+      "parallel_id": "HI-CR-001",
+      "metadata": {"difficulty": "hard", "topic": "creative_fiction"}
     },
     {
       "id": "CR-002",
-      "text": "If a train travels at 80 km/h for 2.5 hours, then slows to 60 km/h for 1 hour, what is the average speed for the entire journey? Show your work.",
+      "text": "If you were made Prime Minister of India for one day, what 3 decisions would you make and why?",
       "category": "creative_reasoning",
-      "description": "Tests mathematical reasoning and problem-solving",
-      "reference_answer": "Total distance = (80 * 2.5) + (60 * 1) = 200 + 60 = 260 km. Total time = 3.5 hours. Average speed = 260/3.5 = 74.29 km/h"
+      "language": "en",
+      "description": "Tests logical reasoning with hypothetical scenario",
+      "parallel_id": "HI-CR-002",
+      "metadata": {"difficulty": "medium", "topic": "governance"}
     },
     {
       "id": "CR-003",
-      "text": "A farmer has chickens and cows. If there are 50 heads and 140 legs in total, how many chickens and cows are there? Explain your reasoning.",
+      "text": "A girl finds a mysterious room in an old mansion that only appears at midnight. What happens next?",
       "category": "creative_reasoning",
-      "description": "Tests algebraic reasoning and explanation skills",
-      "reference_answer": "Let c = chickens, w = cows. c + w = 50, 2c + 4w = 140. Solving: c = 30, w = 20"
+      "language": "en",
+      "description": "Tests narrative continuation",
+      "parallel_id": "HI-CR-003",
+      "metadata": {"difficulty": "hard", "topic": "mystery_fiction"}
     },
     {
       "id": "CR-004",
-      "text": "Write a haiku about artificial intelligence. Remember: 5-7-5 syllable structure.",
+      "text": "A farmer has 100 trees. He wants to plant them in 10 rows with exactly 12 trees in each row. How is this possible? Think and explain.",
       "category": "creative_reasoning",
-      "description": "Tests creative writing with strict format constraints",
-      "expected_format": "Three lines with 5-7-5 syllable pattern"
+      "language": "en",
+      "description": "Tests logical puzzle solving (star pattern problem)",
+      "reference_answer": "This is possible if trees are planted in a star pattern. A five-pointed star has 10 lines and some trees sit on multiple lines. This way, fewer than 100 trees can form 10 rows with 12 trees each.",
+      "parallel_id": "HI-CR-004",
+      "metadata": {"difficulty": "hard", "topic": "math_puzzle"}
     },
     {
       "id": "CR-005",
-      "text": "You have a 3-gallon jug and a 5-gallon jug. How can you measure exactly 4 gallons of water? Describe the steps.",
+      "text": "If smartphones were never invented, what would today's world be like? List 5 major differences.",
       "category": "creative_reasoning",
-      "description": "Tests logical reasoning and problem-solving",
-      "reference_answer": "1) Fill 5-gallon, pour into 3-gallon (leaves 2 in 5-gallon). 2) Empty 3-gallon. 3) Pour 2 gallons from 5-gallon into 3-gallon. 4) Fill 5-gallon. 5) Pour from 5-gallon into 3-gallon until full (need 1 gallon). 6) 4 gallons remain in 5-gallon jug."
+      "language": "en",
+      "description": "Tests counterfactual reasoning",
+      "parallel_id": "HI-CR-005",
+      "metadata": {"difficulty": "medium", "topic": "counterfactual"}
     }
   ]
 }

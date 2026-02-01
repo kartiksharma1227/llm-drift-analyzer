@@ -47,6 +47,8 @@ class Config:
         mistral_api_key: API key for Mistral AI services.
         ollama_base_url: Base URL for Ollama server (default: http://localhost:11434).
         evaluator_model: Model to use for automated evaluation (default: gpt-4).
+        evaluator_provider: Provider for evaluation ("openai" or "ollama").
+            Use "ollama" to evaluate with local models and avoid API costs.
         log_level: Logging level (DEBUG, INFO, WARNING, ERROR).
         output_dir: Directory for saving reports and results.
         api_config: API parameters for LLM queries.
@@ -63,12 +65,19 @@ class Config:
 
         >>> # For local/offline models via Ollama
         >>> config = Config(ollama_base_url="http://localhost:11434")
+
+        >>> # Use Ollama for evaluation (free, no API costs)
+        >>> config = Config(
+        ...     evaluator_provider="ollama",
+        ...     evaluator_model="llama3"
+        ... )
     """
     openai_api_key: Optional[str] = None
     anthropic_api_key: Optional[str] = None
     mistral_api_key: Optional[str] = None
     ollama_base_url: str = "http://localhost:11434"
     evaluator_model: str = "gpt-4"
+    evaluator_provider: str = "openai"  # "openai" or "ollama"
     log_level: str = "INFO"
     output_dir: Path = field(default_factory=lambda: Path("output"))
     api_config: APIConfig = field(default_factory=APIConfig)
@@ -111,6 +120,7 @@ class Config:
             mistral_api_key=os.getenv("MISTRAL_API_KEY"),
             ollama_base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),
             evaluator_model=os.getenv("EVALUATOR_MODEL", "gpt-4"),
+            evaluator_provider=os.getenv("EVALUATOR_PROVIDER", "openai"),
             log_level=os.getenv("LOG_LEVEL", "INFO"),
             output_dir=Path(os.getenv("OUTPUT_DIR", "output")),
         )
@@ -155,6 +165,7 @@ class Config:
             "mistral_api_key": self._mask_key(self.mistral_api_key),
             "ollama_base_url": self.ollama_base_url,
             "evaluator_model": self.evaluator_model,
+            "evaluator_provider": self.evaluator_provider,
             "log_level": self.log_level,
             "output_dir": str(self.output_dir),
             "api_config": {

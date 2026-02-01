@@ -38,6 +38,9 @@ class LLMDriftAnalyzer:
     - Collecting metrics like token count and latency
     - Managing iterations for statistical significance
 
+    Supports both cloud-based evaluation (GPT-4) and local evaluation (Ollama)
+    for response scoring. Use Ollama for free, offline evaluation.
+
     Attributes:
         config: Configuration object with API keys and settings.
         clients: Dictionary of initialized LLM clients.
@@ -47,6 +50,7 @@ class LLMDriftAnalyzer:
         tone_evaluator: Evaluator for tone appropriateness.
 
     Example:
+        >>> # Using OpenAI for both querying and evaluation
         >>> config = Config.from_env()
         >>> analyzer = LLMDriftAnalyzer(config)
         >>> prompts = PromptSet.load_from_file("prompts.json")
@@ -55,7 +59,13 @@ class LLMDriftAnalyzer:
         ...     models=["gpt-4-0613", "gpt-4-0125-preview"],
         ...     iterations=10
         ... )
-        >>> results.save_to_file("results.json")
+
+        >>> # Using Ollama for evaluation (free, no API costs)
+        >>> config = Config(
+        ...     evaluator_provider="ollama",
+        ...     evaluator_model="llama3"
+        ... )
+        >>> analyzer = LLMDriftAnalyzer(config, provider="ollama")
     """
 
     def __init__(
@@ -128,24 +138,75 @@ class LLMDriftAnalyzer:
 
         self._logger.info(f"Initialized clients: {list(self.clients.keys())}")
 
-        # Initialize evaluators (requires OpenAI for GPT-4 evaluation)
-        if config.openai_api_key:
-            self._logger.info("Initializing evaluators...")
-            self.instruction_evaluator = InstructionEvaluator(
-                openai_api_key=config.openai_api_key,
-                evaluator_model=config.evaluator_model,
-            )
-            self.factuality_evaluator = FactualityEvaluator(
-                openai_api_key=config.openai_api_key,
-                evaluator_model=config.evaluator_model,
-            )
-            self.tone_evaluator = ToneEvaluator(
-                openai_api_key=config.openai_api_key,
-                evaluator_model=config.evaluator_model,
-            )
+        # Initialize evaluators based on evaluator_provider setting
+        evaluator_provider = config.evaluator_provider.lower()
+        evaluator_model = config.evaluator_model
+        ollama_url = ollama_base_url or config.ollama_base_url
+
+        self._logger.info(
+            f"Initializing evaluators with provider={evaluator_provider}, "
+            f"model={evaluator_model}"
+        )
+
+        if evaluator_provider == "ollama":
+            # Use Ollama for evaluation (free, local)
+            try:
+                self.instruction_evaluator = InstructionEvaluator(
+                    evaluator_provider="ollama",
+                    evaluator_model=evaluator_model,
+                    ollama_base_url=ollama_url,
+                )
+                self.factuality_evaluator = FactualityEvaluator(
+                    evaluator_provider="ollama",
+                    evaluator_model=evaluator_model,
+                    ollama_base_url=ollama_url,
+                )
+                self.tone_evaluator = ToneEvaluator(
+                    evaluator_provider="ollama",
+                    evaluator_model=evaluator_model,
+                    ollama_base_url=ollama_url,
+                )
+                self._logger.info(f"Evaluators initialized with Ollama ({evaluator_model})")
+            except Exception as e:
+                self._logger.warning(
+                    f"Failed to initialize Ollama evaluators: {e}. "
+                    "Evaluation will use defaults."
+                )
+                self.instruction_evaluator = None
+                self.factuality_evaluator = None
+                self.tone_evaluator = None
+
+        elif evaluator_provider == "openai":
+            # Use OpenAI for evaluation (requires API key)
+            if config.openai_api_key:
+                self.instruction_evaluator = InstructionEvaluator(
+                    openai_api_key=config.openai_api_key,
+                    evaluator_provider="openai",
+                    evaluator_model=evaluator_model,
+                )
+                self.factuality_evaluator = FactualityEvaluator(
+                    openai_api_key=config.openai_api_key,
+                    evaluator_provider="openai",
+                    evaluator_model=evaluator_model,
+                )
+                self.tone_evaluator = ToneEvaluator(
+                    openai_api_key=config.openai_api_key,
+                    evaluator_provider="openai",
+                    evaluator_model=evaluator_model,
+                )
+                self._logger.info(f"Evaluators initialized with OpenAI ({evaluator_model})")
+            else:
+                self._logger.warning(
+                    "OpenAI API key not provided but evaluator_provider='openai'. "
+                    "Evaluation will use defaults. Set EVALUATOR_PROVIDER=ollama for local evaluation."
+                )
+                self.instruction_evaluator = None
+                self.factuality_evaluator = None
+                self.tone_evaluator = None
         else:
             self._logger.warning(
-                "OpenAI API key not provided. Evaluation will use defaults."
+                f"Unknown evaluator_provider: {evaluator_provider}. "
+                "Evaluation will use defaults."
             )
             self.instruction_evaluator = None
             self.factuality_evaluator = None

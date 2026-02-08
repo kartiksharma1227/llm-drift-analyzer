@@ -2,7 +2,7 @@
 
 A comprehensive Python framework for tracking behavioral drift in Large Language Models (LLMs), measuring changes in instruction-following, factuality, tone, and verbosity over time.
 
-Based on the research paper: *"Tracking Behavioral Drift in Large Language Models: A Comprehensive Framework for Monitoring Instruction-Following, Factuality, and Tone Variance Over Time"*
+Based on the research paper: _"Tracking Behavioral Drift in Large Language Models: A Comprehensive Framework for Monitoring Instruction-Following, Factuality, and Tone Variance Over Time"_
 
 ## Features
 
@@ -27,29 +27,33 @@ Based on the research paper: *"Tracking Behavioral Drift in Large Language Model
 ### Setup
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/yourusername/llm-drift-analyzer.git
    cd llm-drift-analyzer
    ```
 
 2. **Create and activate a virtual environment**
+
    ```bash
    # Create virtual environment
    python -m venv venv
 
    # Activate on macOS/Linux
-   source venv/bin/activate
+    
 
    # Activate on Windows
    .\venv\Scripts\activate
    ```
 
 3. **Install dependencies**
+
    ```bash
    pip install -r requirements.txt
    ```
 
 4. **Configure API keys**
+
    ```bash
    # Copy the example environment file
    cp .env.example .env
@@ -69,6 +73,7 @@ Based on the research paper: *"Tracking Behavioral Drift in Large Language Model
 If you want to analyze open-source models locally without API costs:
 
 1. **Install Ollama**
+
    ```bash
    # macOS
    brew install ollama
@@ -80,11 +85,13 @@ If you want to analyze open-source models locally without API costs:
    ```
 
 2. **Start Ollama server**
+
    ```bash
    ollama serve
    ```
 
 3. **Pull models you want to analyze**
+
    ```bash
    ollama pull llama3
    ollama pull mistral
@@ -221,6 +228,110 @@ results = analyzer.run_drift_analysis(
 )
 ```
 
+## Expanded Benchmark Datasets
+
+The project now includes **expanded benchmark datasets** with 50 prompts each for English and Hindi, providing more comprehensive evaluation across all categories:
+
+### What's in the Expanded Datasets?
+
+| Dataset | Prompts | Categories | Key Features |
+|---------|---------|------------|--------------|
+| **english_benchmark_expanded.json** | 90 | IF: 50, FQ: 40, CR: 0 | Google IFEval (verifiable constraints), TruthfulQA (misconception testing) |
+| **hindi_benchmark_expanded.json** | 100 | IF: 10, FQ: 60, CR: 30 | AI4Bharat IndicMSMARCO (QA), XNLI Hindi (reasoning), manual curation |
+
+### Dataset Features
+
+**English Dataset (90 prompts):**
+- **Instruction Following (50)**: Google IFEval with verifiable constraints (word counts, format requirements, structural rules)
+  - Examples: "Write exactly 100 words", "Use bullet points", "No introduction/conclusion"
+  - Enables precise, reproducible evaluation
+- **Factual QA (40)**: TruthfulQA prompts that test common misconceptions
+  - Examples: "Is the Great Wall visible from space?", "Do we only use 10% of our brain?"
+  - Includes reference answers for automated factuality checking
+
+**Hindi Dataset (100 prompts):**
+- **Factual QA (60)**: AI4Bharat IndicMSMARCO - real Hindi question-answering dataset
+  - Context-based questions in natural Hindi
+  - Diverse topics: general knowledge, technology, health, culture
+- **Creative Reasoning (30)**: XNLI Hindi - natural language inference
+  - Premise-hypothesis pairs for logical reasoning
+  - Tests entailment, contradiction, and neutrality understanding
+- **Instruction Following (10)**: Manually curated natural Hindi prompts
+  - Word limits, format constraints, structured outputs
+  - Conversational Hindi style (not translated English)
+
+### Using Expanded Datasets
+
+**CLI:**
+
+```bash
+# English expanded dataset (90 prompts: IFEval + TruthfulQA)
+python main.py analyze --models gpt-4 --use-expanded --language en --iterations 5
+
+# Hindi expanded dataset (100 prompts: IndicMSMARCO + XNLI + manual)
+python main.py analyze-hindi --models qwen2:1.5b --use-expanded \
+    --provider ollama --evaluator-provider ollama --evaluator-model llama3 --iterations 5
+
+# Or specify the file directly
+python main.py analyze --prompts data/prompts/english_benchmark_expanded.json \
+    --models gpt-4 gpt-3.5-turbo --iterations 5
+
+# Compare models with expanded datasets
+python main.py analyze --prompts data/prompts/hindi_benchmark_expanded.json \
+    --models qwen2:1.5b gemma:2b llama3:8b --provider ollama --iterations 5
+```
+
+**Python API:**
+
+```python
+from llm_drift_analyzer import LLMDriftAnalyzer, Config, PromptSet
+
+# Load expanded English dataset
+prompts = PromptSet.load_from_file("data/prompts/english_benchmark_expanded.json")
+print(f"Loaded {len(prompts)} prompts")  # 50 prompts
+
+# Load expanded Hindi dataset
+hindi_prompts = PromptSet.load_from_file("data/prompts/hindi_benchmark_expanded.json")
+
+# Run analysis with expanded prompts
+config = Config.from_env()
+analyzer = LLMDriftAnalyzer(config)
+results = analyzer.run_drift_analysis(
+    prompts=prompts,
+    models=["gpt-4", "gpt-3.5-turbo"],
+    iterations=10
+)
+```
+
+### Comparison: Standard vs Expanded
+
+| Feature | Standard | Expanded English | Expanded Hindi |
+|---------|----------|------------------|----------------|
+| Total prompts | 15 | 90 | 100 |
+| Instruction Following | 5 | 50 (IFEval) | 10 (manual) |
+| Factual QA | 5 | 40 (TruthfulQA) | 60 (IndicMSMARCO) |
+| Creative Reasoning | 5 | 0 | 30 (XNLI) |
+| Verifiable constraints | Basic | Advanced | Moderate |
+| Misconception testing | Limited | Comprehensive | Moderate |
+| Real-world datasets | No | Yes (Google, research) | Yes (AI4Bharat) |
+| Analysis time | ~5-10 min | ~20-40 min | ~25-45 min |
+| **Recommended for** | Quick testing | Production (English) | Production (Hindi) |
+
+### Creating Custom Datasets
+
+You can also download and integrate datasets from HuggingFace:
+
+```bash
+# Download datasets and create custom benchmarks
+python scripts/download_datasets.py --language hi --max-samples 50
+
+# This script supports:
+# - AI4Bharat IndicQA (Hindi QA)
+# - XNLI Hindi (reasoning/inference)
+# - Google IFEval (English instruction-following)
+# - TruthfulQA (English factuality)
+```
+
 ### Using Ollama for Evaluation (Free, No API Costs)
 
 By default, the analyzer uses GPT-4 to evaluate/score LLM responses, which costs money. You can use Ollama models as judges instead for completely free evaluation:
@@ -279,12 +390,12 @@ python main.py analyze \
     --iterations 10
 ```
 
-| Configuration | Query Cost | Evaluation Cost | Use Case |
-|--------------|------------|-----------------|----------|
-| Cloud + GPT-4 eval | $$$ | $$$ | Highest quality |
-| Cloud + Ollama eval | $$$ | Free | Save on evaluation |
-| Ollama + GPT-4 eval | Free | $$$ | Quality scoring of local models |
-| Ollama + Ollama eval | Free | Free | Fully offline/free |
+| Configuration        | Query Cost | Evaluation Cost | Use Case                        |
+| -------------------- | ---------- | --------------- | ------------------------------- |
+| Cloud + GPT-4 eval   | $$$        | $$$             | Highest quality                 |
+| Cloud + Ollama eval  | $$$        | Free            | Save on evaluation              |
+| Ollama + GPT-4 eval  | Free       | $$$             | Quality scoring of local models |
+| Ollama + Ollama eval | Free       | Free            | Fully offline/free              |
 
 ## Project Structure
 
@@ -297,8 +408,10 @@ llm_drift_analyzer/
 │
 ├── data/
 │   └── prompts/
-│       ├── benchmark_prompts.json       # 15 English benchmark prompts
-│       └── hindi_benchmark_prompts.json # 15 Hindi benchmark prompts (parallel)
+│       ├── benchmark_prompts.json             # 15 English benchmark prompts
+│       ├── hindi_benchmark_prompts.json       # 15 Hindi benchmark prompts (parallel)
+│       ├── english_benchmark_expanded.json    # 90 English prompts (IFEval + TruthfulQA)
+│       └── hindi_benchmark_expanded.json      # 100 Hindi prompts (IndicMSMARCO + XNLI + manual)
 │
 ├── src/llm_drift_analyzer/
 │   ├── __init__.py
@@ -347,18 +460,18 @@ llm_drift_analyzer/
 
 ### Environment Variables
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `OPENAI_API_KEY` | No* | OpenAI API key (for GPT models and cloud evaluation) |
-| `ANTHROPIC_API_KEY` | No | Anthropic API key for Claude models |
-| `MISTRAL_API_KEY` | No | Mistral API key for Mixtral models |
-| `OLLAMA_BASE_URL` | No | Ollama server URL (default: http://localhost:11434) |
-| `EVALUATOR_PROVIDER` | No | Provider for evaluation: "openai" or "ollama" (default: openai) |
-| `EVALUATOR_MODEL` | No | Model for evaluation (default: gpt-4 for OpenAI, llama3 for Ollama) |
-| `LOG_LEVEL` | No | Logging level (default: INFO) |
-| `OUTPUT_DIR` | No | Default output directory (default: output) |
+| Variable             | Required | Description                                                         |
+| -------------------- | -------- | ------------------------------------------------------------------- |
+| `OPENAI_API_KEY`     | No\*     | OpenAI API key (for GPT models and cloud evaluation)                |
+| `ANTHROPIC_API_KEY`  | No       | Anthropic API key for Claude models                                 |
+| `MISTRAL_API_KEY`    | No       | Mistral API key for Mixtral models                                  |
+| `OLLAMA_BASE_URL`    | No       | Ollama server URL (default: http://localhost:11434)                 |
+| `EVALUATOR_PROVIDER` | No       | Provider for evaluation: "openai" or "ollama" (default: openai)     |
+| `EVALUATOR_MODEL`    | No       | Model for evaluation (default: gpt-4 for OpenAI, llama3 for Ollama) |
+| `LOG_LEVEL`          | No       | Logging level (default: INFO)                                       |
+| `OUTPUT_DIR`         | No       | Default output directory (default: output)                          |
 
-*For fully offline analysis, set `EVALUATOR_PROVIDER=ollama` and use only Ollama models - no API keys needed!
+\*For fully offline analysis, set `EVALUATOR_PROVIDER=ollama` and use only Ollama models - no API keys needed!
 
 ### API Configuration
 
@@ -382,17 +495,20 @@ config = Config(
 ## Evaluation Metrics
 
 ### Instruction Adherence (0-3)
+
 - **3**: Perfect adherence to all instructions
 - **2**: Good adherence with minor deviations
 - **1**: Poor adherence, missing key requirements
 - **0**: No adherence to instructions
 
 ### Factuality (0-2)
+
 - **2**: Completely factual
 - **1**: Mostly factual with minor errors
 - **0**: Contains significant factual errors
 
 ### Tone/Style (0-2)
+
 - **2**: Appropriate and consistent tone
 - **1**: Adequate tone with some inconsistencies
 - **0**: Inappropriate tone for context
@@ -412,13 +528,13 @@ The analyzer includes comprehensive support for Hindi language analysis, enablin
 
 ### Hindi-Specific Metrics
 
-| Metric | Description |
-|--------|-------------|
-| `devanagari_char_count` | Number of Devanagari script characters |
-| `syllable_count` | Hindi syllables based on phonological rules |
-| `code_mixing_ratio` | Proportion of non-Hindi text (0.0 to 1.0) |
-| `script_consistency` | Score indicating adherence to expected script (0.0 to 1.0) |
-| `hindi_naturalness` | How natural/conversational the Hindi sounds (0-2) |
+| Metric                  | Description                                                |
+| ----------------------- | ---------------------------------------------------------- |
+| `devanagari_char_count` | Number of Devanagari script characters                     |
+| `syllable_count`        | Hindi syllables based on phonological rules                |
+| `code_mixing_ratio`     | Proportion of non-Hindi text (0.0 to 1.0)                  |
+| `script_consistency`    | Score indicating adherence to expected script (0.0 to 1.0) |
+| `hindi_naturalness`     | How natural/conversational the Hindi sounds (0-2)          |
 
 ### CLI Commands
 
@@ -547,11 +663,11 @@ for test in report.statistical_tests:
 
 The included Hindi prompts follow natural, conversational patterns:
 
-| Style | Example |
-|-------|---------|
-| ✅ Natural | "इस बारे में आपका क्या विचार है?" |
-| ❌ Literal | "इस प्रश्न का उत्तर दीजिए" |
-| ✅ Conversational | "सोलर एनर्जी के तीन मुख्य फायदे बताओ" |
+| Style                  | Example                                        |
+| ---------------------- | ---------------------------------------------- |
+| ✅ Natural             | "इस बारे में आपका क्या विचार है?"              |
+| ❌ Literal             | "इस प्रश्न का उत्तर दीजिए"                     |
+| ✅ Conversational      | "सोलर एनर्जी के तीन मुख्य फायदे बताओ"          |
 | ❌ Formal/Sanskritized | "सौर ऊर्जा के त्रि-मुख्य लाभों का वर्णन कीजिए" |
 
 The Hindi benchmark prompts (`data/prompts/hindi_benchmark_prompts.json`) are written in the natural style that Hindi speakers actually use, including common English loanwords where appropriate.
@@ -561,6 +677,7 @@ The Hindi benchmark prompts (`data/prompts/hindi_benchmark_prompts.json`) are wr
 Here's the complete workflow for analyzing Hindi prompts using only open-source models:
 
 **Step 1: Install and prepare Ollama models**
+
 ```bash
 # Install Ollama (if not already installed)
 brew install ollama  # macOS
@@ -579,6 +696,7 @@ ollama pull llama3       # Used as judge
 ```
 
 **Step 2: Run Hindi analysis**
+
 ```bash
 # Analyze Hindi prompts (saves to output/hindi/hindi_results.json)
 python main.py analyze-hindi \
@@ -591,6 +709,7 @@ python main.py analyze-hindi \
 ```
 
 **Step 3: Generate visualizations and report**
+
 ```bash
 # Generate markdown report with charts
 python main.py report \
@@ -602,6 +721,7 @@ python main.py report \
 ```
 
 **Output files created:**
+
 - `output/hindi/hindi_results.json` - Raw analysis data
 - `output/hindi/hindi_report.md` - Detailed report
 - `output/hindi/charts/` - Visualization images
@@ -611,6 +731,7 @@ python main.py report \
   - etc.
 
 **Important Notes:**
+
 - ⚠️ The `analyze-hindi` command does NOT automatically generate charts
 - ✅ You MUST run `report --visualize` as a separate step to create visualizations
 - 💰 Using `--evaluator-provider ollama` makes evaluation completely free (no API costs)
@@ -638,6 +759,7 @@ The analyzer uses several statistical methods:
 ## Common Workflows
 
 ### Workflow 1: Fully Offline Hindi Analysis
+
 ```bash
 # 1. Pull models (one-time setup)
 ollama pull qwen2:1.5b gemma:2b llama3
@@ -657,6 +779,7 @@ python main.py report \
 ```
 
 ### Workflow 2: Cross-Lingual Comparison (English vs Hindi)
+
 ```bash
 # Analyze same prompts in both languages using local models
 python main.py crosslingual \
@@ -677,6 +800,7 @@ python main.py report \
 ```
 
 ### Workflow 3: Hybrid (Cloud Query + Local Evaluation)
+
 ```bash
 # Query expensive models, evaluate locally to save costs
 python main.py analyze \
@@ -689,6 +813,7 @@ python main.py report --input output/results.json --visualize
 ```
 
 ### Workflow 4: Compare Model Versions
+
 ```bash
 # Compare different versions or sizes of same model
 python main.py compare \

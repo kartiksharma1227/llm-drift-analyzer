@@ -106,6 +106,11 @@ For more information, see the README.md file.
         help="Path to prompts JSON file"
     )
     analyze_parser.add_argument(
+        "--use-expanded",
+        action="store_true",
+        help="Use expanded benchmark datasets (50 prompts each for English/Hindi with IFEval-style and TruthfulQA-style prompts)"
+    )
+    analyze_parser.add_argument(
         "--iterations", "-i",
         type=int,
         default=10,
@@ -191,6 +196,11 @@ For more information, see the README.md file.
         type=str,
         default=None,
         help="Model to use for evaluation (e.g., gpt-4, llama3)"
+    )
+    hindi_parser.add_argument(
+        "--use-expanded",
+        action="store_true",
+        help="Use expanded Hindi benchmark (50 prompts with more diverse categories)"
     )
 
     # Cross-lingual comparison command
@@ -393,8 +403,23 @@ def cmd_analyze(args: argparse.Namespace, config: Config) -> int:
     if evaluator_model:
         config.evaluator_model = evaluator_model
 
+    # Handle --use-expanded flag
+    use_expanded = getattr(args, 'use_expanded', False)
+    if use_expanded:
+        # Determine which expanded dataset to use based on language
+        language = getattr(args, 'language', None)
+        if language == "hi":
+            prompts_path = Path("data/prompts/hindi_benchmark_expanded.json")
+        elif language == "en":
+            prompts_path = Path("data/prompts/english_benchmark_expanded.json")
+        else:
+            # Default to English expanded for now
+            prompts_path = Path("data/prompts/english_benchmark_expanded.json")
+        logger.info(f"Using expanded benchmark dataset: {prompts_path}")
+    else:
+        prompts_path = Path(args.prompts)
+
     # Load prompts
-    prompts_path = Path(args.prompts)
     if not prompts_path.exists():
         logger.error(f"Prompts file not found: {prompts_path}")
         return 1
@@ -624,8 +649,14 @@ def cmd_analyze_hindi(args: argparse.Namespace, config: Config) -> int:
     if evaluator_model:
         config.evaluator_model = evaluator_model
 
-    # Load Hindi prompts
-    prompts_path = Path("data/prompts/hindi_benchmark_prompts.json")
+    # Load Hindi prompts (use expanded if requested)
+    use_expanded = getattr(args, 'use_expanded', False)
+    if use_expanded:
+        prompts_path = Path("data/prompts/hindi_benchmark_expanded.json")
+        logger.info("Using expanded Hindi benchmark (50 prompts)")
+    else:
+        prompts_path = Path("data/prompts/hindi_benchmark_prompts.json")
+
     if not prompts_path.exists():
         logger.error(f"Hindi prompts file not found: {prompts_path}")
         return 1

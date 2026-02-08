@@ -1,0 +1,1374 @@
+{
+  "name": "Hindi Benchmark Prompts (Expanded)",
+  "version": "2.0.0",
+  "description": "Comprehensive Hindi LLM evaluation prompts from IndicQA, XNLI, and manual curation. Natural, conversational Hindi.",
+  "language": "hi",
+  "total_prompts": 100,
+  "categories": {
+    "instruction_following": 10,
+    "factual_qa": 60,
+    "creative_reasoning": 30
+  },
+  "sources": [
+    "facebook/xnli",
+    "ai4bharat/IndicMSMARCO",
+    "manual"
+  ],
+  "prompts": [
+    {
+      "id": "HI-MSMARCO-001",
+      "text": "हिरलूम टमाटर का क्या अर्थ है",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "टमाटर की एक खुली परागण (गैर-संकर) विरासत किस्म।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-002",
+      "text": "ब्रसेल्स स्प्राउट्स को फ्रिज में कितने दिन तक रखा जा सकता है",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "सामान्य रेफ्रिजरेटर तापमान में लगभग पाँच से दस दिन।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-003",
+      "text": "मायस्थेनिया ग्रेविस का इलाज क्या है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "एसिटाइलकोलिनेस्टरेज़ इनहिबिटर या इम्यूनोसप्रेसेंट जैसी दवाएं, और चयनित मामलों में, थाइमेक्टॉमी (थाइमस ग्रंथि को शल्यचिकित्सा से हटाना)।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-004",
+      "text": "पीवीए का उपयोग किस लिए किया जाता है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "लकड़ी, कागज़, कपड़े और छिद्रयुक्त सामग्री में एक बंधन के रूप में।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-005",
+      "text": "आयोवा विश्वविद्यालय में ट्यूशन लागत",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "राज्य के निवासियों के लिए प्रति वर्ष $6,678।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-006",
+      "text": "संदर्भ: टिप्पणियाँ। बार्सिलोना विसेंटे काल्डेरॉन की यात्रा करता है और एटलेटिको मैड्रिड के साथ एक मैच जिसकी पुष्टि पिछले गुरुवार तक नहीं हुई थी, क्योंकि इसमें अनिश्चितता थी कि स्पेनिश फुटबॉल फेडरेशन द्वारा खिल...\n\nप्रश्न: क्या बार्सिलोना बनाम एटलेटिको मैड्रिड टीवी पर है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "हाँ",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-007",
+      "text": "संदर्भ: विष विज्ञानी, जीव विज्ञान या रसायन विज्ञान में स्नातक की डिग्री विष विज्ञानी बनने के लिए आवश्यक है। यदि आपकी पसंद के कॉलेज में विष विज्ञान की डिग्री के लिए समर्पित कोई कार्यक्रम नहीं है, तो जैविक या र...\n\nप्रश्न: विष विज्ञान में विशेषज्ञता प्राप्त करने के लिए आवश्यकताएं",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "इसमें रसायन विज्ञान, फार्माकोलॉजी या जीव विज्ञान में स्नातक की डिग्री शामिल है।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-008",
+      "text": "संदर्भ: एक टाइट्रेशन एक तकनीक है जहां एक ज्ञात सांद्रता के घोल का उपयोग अज्ञात घोल की सांद्रता का पता लगाने के लिए किया जाता है। आमतौर पर, टाइट्रेंट (ज्ञात घोल) को एक ब्यूरेट से एक ज्ञात मात्रा में विश्लेषक (...\n\nप्रश्न: टाइट्रेशन का उपयोग किस लिए किया जाता है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "अज्ञात अभिक्रियक की सांद्रता का पता लगाने के लिए उपयोग किया जाता है।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-009",
+      "text": "संदर्भ: कोलिन्स डिक्शनरी-अंग्रेजी समानार्थी और थिसॉरस  रोग (रोग बहुवचन) रोग एक बीमारी है जो लोगों, जानवरों या पौधों को प्रभावित करती है, उदाहरण के लिए जो बैक्टीरिया या संक्रमण के कारण होती है। n-var ...क्षेत्...\n\nप्रश्न: रोग पर्यायवाची अंग्रेज़ी",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "बीमारी",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-010",
+      "text": "असभ्यता से",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "अजीब, ढोंगी, स्पष्ट, अशिष्ट, कठोर, विदूषक जैसा, मोटा, अशिष्ट ।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-011",
+      "text": "एचपीवी वैक्सीन की कीमत",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "प्रत्येक के लिए लगभग $ 125, जिससे कुल $ 400 से $ 500 होता है।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-012",
+      "text": "संदर्भ: ड्रॉप बियर (थाइलार्क्टोस प्लमेटस) एक ऑस्ट्रेलियाई मार्सूपियल है। कुछ लोग दावा करते हैं कि यह पूरी तरह से आदिवासी लोककथाओं से लिया गया है और कथित तौर पर 'नकली' जीवाश्म साक्ष्य है। इस कथित रूप से खतरनाक...\n\nप्रश्न: ड्रॉपबियर क्या है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "एक कल्पनात्मक ऑस्ट्रेलियाई मारसूपियल।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-013",
+      "text": "कोशिका में क्या होता है",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "झिल्ली",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-014",
+      "text": "संदर्भ: मूत्र परीक्षण: मूत्राशय कैंसर की जांच करने का एक तरीका मूत्र में रक्त (जिसे हेमाट्यूरिया कहा जाता है) की जांच करना है। यह मूत्र परीक्षण के दौरान किया जा सकता है, जो मूत्र में रक्त और अन्य पदार्थों की ...\n\nप्रश्न: मूत्र परीक्षण से क्या पता चल सकता है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "मूत्र पथ के संक्रमण, गुर्दे की बीमारी और मधुमेह जैसे विभिन्न विकारों का पता लगाएं और उनका मूल्यांकन करें।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-015",
+      "text": "सैल्मन बेक करने के लिए तापमान और समय",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "तापमान 450 डिग्री एफ है और समय 12 से 15 मिनट है।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-016",
+      "text": "संदर्भ: एकल दांत डेंटल इम्प्लांट की कीमत $1,000 से $5,000 तक हो सकती है। पूरे दांतों के सेट को पुनर्निर्माणकारी डेंटल इम्प्लांट से बदलने की फीस $24,000 से $100,000 तक हो सकती है।...\n\nप्रश्न: दांत प्रत्यारोपण की औसत लागत",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "एकल दांत डेंटल इम्प्लांट $1,000 से $5,000 तक।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-017",
+      "text": "संदर्भ: एक घोड़े के मालिक के रूप में, घोड़ों के टीकाकरण की सिफारिशों के साथ बने रहना मुश्किल है। प्रोटोकॉल अक्सर नए उपलब्ध टीकाकरण, नए शोध, या अतिरिक्त देखभाल की आवश्यकता वाले प्रकोपों के आधार पर बदलते हैं। अ...\n\nप्रश्न: घोड़ों के लिए टीकाकरण की लागत",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "प्रति घोड़ा साल में दो बार $35",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-018",
+      "text": "एनसीआईएस का निदेशक कौन है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "जेनिफर जेनी शेपर्ड",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-019",
+      "text": "संदर्भ: लाइसेंस प्राप्त करने के लिए आवश्यकताएं। वर्जीनिया में प्लंबिंग को 3 स्तरों पर लाइसेंस दिया जाता है: जॉर्नीमैन, मास्टर और कॉन्ट्रैक्टर। जॉर्नीमैन प्लंबर या मास्टर प्लंबर बनने के लिए, दो परीक्षा भागों क...\n\nप्रश्न: क्या वर्जीनिया में प्लंबर बनने के लिए विशेष लाइसेंस की आवश्यकता होती है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "हाँ",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-020",
+      "text": "संदर्भ: ग्रैनुलोमैटस मेनिन्जोएन्सेफलाइटिस जिसे जीएमई के नाम से भी जाना जाता है, कुत्तों में केंद्रीय तंत्रिका तंत्र (सीएनएस) की एक सूजन वाली बीमारी है। ग्रैनुलोमैटस सूजन में मोनोन्यूक्लियर कोशिकाओं नामक कोशिक...\n\nप्रश्न: कुत्तों में जीएमई क्या है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "ग्रैनुलोमैटस मेनिन्जोएन्सेफेलोमाइलाइटिस (जीएमई) कुत्तों में केंद्रीय तंत्रिका तंत्र की एक सूजन संबंधी बीमारी है।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-021",
+      "text": "बीसी में केनी डैम रोड कहाँ है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "यह उत्तर-पश्चिमी ब्रिटिश कोलंबिया में नेचाको नदी पर स्थित है।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-022",
+      "text": "संदर्भ: वैक्यूम फॉर्मिंग, जिसे थर्मो फॉर्मिंग भी कहा जाता है, एक प्रक्रिया है जिसमें थर्मोप्लास्टिक की एक गरम शीट को एक मोल्ड पर या उसके अंदर आकार दिया जाता है, जिसे फिर वांछित भाग बनाने के लिए ठंडा होने दिया...\n\nप्रश्न: वैक्यूम फॉर्मिंग क्या है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "यह एक तकनीक है जिसका उपयोग विभिन्न प्रकार के प्लास्टिक को आकार देने के लिए किया जाता है।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-023",
+      "text": "ऑक्सीजन किस तापमान पर तरल बन जाती है",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "-218.79 डिग्री सेल्सियस से -182.96 डिग्री सेल्सियस तक।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-024",
+      "text": "एक्सबरी गार्डन में क्या है",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "यह इंग्लैंड के हैम्पशायर में स्थित एक प्रसिद्ध बगीचा है, जो रोथशाइल्ड परिवार की एक शाखा का है।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-025",
+      "text": "बेराइट किस खनिज समूह में है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "बेरियम सल्फेट",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-026",
+      "text": "ऑस्टेनाइटिक और मार्टेंसिटिक क्या हैं",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "यह स्टेनलेस स्टील का सबसे आम प्रकार है, जो कुल स्टेनलेस स्टील उत्पादन का 70% तक हिस्सा है।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-027",
+      "text": "फाइब्रोमायल्जिया क्या है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "फाइब्रोमायल्जिया (FM) एक चिकित्सा स्थिति है जिसकी विशेषता पुराने व्यापक दर्द और दबाव के प्रति बढ़ी हुई और दर्दनाक प्रतिक्रिया है।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-028",
+      "text": "प्रति वर्ग फुट टाइल स्थापना की लागत",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "प्रति वर्ग फुट $10.02 - $14.22 के बीच।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-029",
+      "text": "एनके कोशिकाएं क्या हैं, वैज्ञानिक नाम",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "प्राकृतिक हत्यारी कोशिकाएं या एनके कोशिकाएं साइटोटॉक्सिक लिम्फोसाइट का एक प्रकार हैं जो जन्मजात प्रतिरक्षा प्रणाली के लिए महत्वपूर्ण हैं।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-030",
+      "text": "हेपेटाइटिस ए, बी और सी के कारण क्या हैं",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "लिवर पर प्रभाव डालते हैं मनोरंजक दवाएं और नुस्खे वाली दवाएं।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-031",
+      "text": "एक घंटे में सामान्य मूत्र उत्पादन क्या है",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "३० से ४० मिलीलीटर प्रति घंटा",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-032",
+      "text": "संदर्भ: (CNN) -- कई लोग कहते हैं कि उनके पास एक 'वर्क स्पाउस' है - एक सहकर्मी जिसके साथ आपका एक करीबी प्लेटोनिक रिश्ता है।...\n\nप्रश्न: क्या कोई ऐसी चीज़ होती है जिसे हम \"वर्क स्पाउस\" कह सकते हैं?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "हाँ",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-033",
+      "text": "ग्रेनाइट माइन किस भौतिक प्रदेश में स्थित है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "एपलाचियन पर्वतों का सबसे पश्चिमी भौतिक भौगोलिक प्रांत घाटी और रिज है।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-034",
+      "text": "किसी वस्तु की गति क्या है",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "किसी वस्तु की औसत गति को तय की गई दूरी को बीते हुए समय से विभाजित करके परिभाषित किया जाता है।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-035",
+      "text": "कौनाकाकाई हवाई कहाँ है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "माउई काउंटी, हवाई, संयुक्त राज्य अमेरिका",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-036",
+      "text": "संदर्भ: एंडीज़। एंडीज़ जमीन पर सबसे लंबी पर्वत शृंखला है। यह दक्षिण अमेरिका के पश्चिमी किनारे पर बना था, जहां दो टेक्टोनिक प्लेटें (चट्टानी प्लेटें जो पृथ्वी की पपड़ी बनाती हैं) टकरा गईं। पहाड़ अभी भी लगभग 10...\n\nप्रश्न: कौन सी पर्वत शृंखला सबसे तेजी से बढ़ रही है, हिमालय या एंडीज?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "हिमालय",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-037",
+      "text": "सिलिकॉन डाइऑक्साइड के निर्माण और उपयोग",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "इसका उपयोग खाद्य उद्योग में एक एंटी-केकिंग एजेंट / फ्री फ्लोइंग एजेंट के रूप में किया जाता है।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-038",
+      "text": "क्या है तेज गंध की भावना का एक लक्षण",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "भोजन का स्वाद अलग होता है, आप फूल की खुशबू नहीं सूंघ सकते।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-039",
+      "text": "संदर्भ: कॉर्निश अर्थ: जेनी नाम एक कॉर्निश बच्चे का नाम है। कॉर्निश में जेनी नाम का अर्थ है: निष्पक्ष और सहनशील।\n\nअंग्रेजी अर्थ: जेनी नाम एक अंग्रेजी बच्चे का नाम है। अंग्रेजी में जेनी नाम का अर्थ है: भगवान दय...\n\nप्रश्न: जेनी क्या है",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "जेनी नाम एक कॉर्निश शिशु नाम है।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-040",
+      "text": "संदर्भ: चित्र 1. फॉस्फोरस चक्र। पौधे मिट्टी से फॉस्फेट लेते हैं, जिसका उपयोग पौधों को खाने वाले जानवर करते हैं, और मिट्टी में जैविक अवशेषों के अपघटन के रूप में मिट्टी में वापस आ जाता है (चित्र 1)। जीवित जीवों...\n\nप्रश्न: फॉस्फोरस चक्र में कौन से पोषक तत्व होते हैं",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "फॉस्फेट आयन (PO 4 3-) के रूप में जैविक रूप से पाया जाता है।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-041",
+      "text": "होवरबोर्ड की कीमत कितनी है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "$10,000",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-042",
+      "text": "कैल ग्रांट कितनी बार वितरित किया जाता है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "प्रति सेमेस्टर एक भुगतान।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-043",
+      "text": "मैं अपने एक पुराने खोए हुए दोस्त को कैसे ढूंढ सकता हूँ?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "फेसबुक या गूगल या विकीवर्ल्ड बुक के साथ खोज कर आसानी से लंबे समय से खोए हुए दोस्त को ढूंढ लिया।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-044",
+      "text": "ब्रेक से पहले काम करने के लिए अनुमत अधिकतम घंटे",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "४.५ घंटे का काम",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-045",
+      "text": "संदर्भ: मानव जीनोम में बैक्टीरियल डीएनए. एक नए अध्ययन में पुख्ता प्रमाण मिले हैं कि बैक्टीरिया मानव जीनोम में जीन स्थानांतरित कर सकते हैं, विशेष रूप से कैंसर कोशिकाओं में. एड योंग द्वारा | 20 जून, 2013. स्यूड...\n\nप्रश्न: बैक्टीरिया में डीएनए",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "यह एक वृत्ताकार क्रोमोसोम है जिसमें प्लाज्मिड भी होते हैं।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-046",
+      "text": "संविधान का अर्थ",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "एक स्थापित कानून या रिवाज: अध्यादेश।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-047",
+      "text": "सूखी बर्फ की औसत लागत प्रति पाउंड",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "प्रति पाउंड लगभग $0.30 से $0.50 तक।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-048",
+      "text": "संदर्भ: पर्यायवाची। 1 यह एक पूर्ण सामान्य पाठ्यपुस्तक, विशेष रूप से रॉबिंस पैथोलॉजिक बेसिस ऑफ डिजीज के साथ एक साथी के रूप में बहुत अच्छी तरह से अनुकूल है क्योंकि पृष्ठ संदर्भों के। 2 यह मात्रा जल्द ही प्रसारि...\n\nप्रश्न: नाम अर्थ साथी",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "एक व्यक्ति जो अक्सर किसी दूसरे के साथ रहता है।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-049",
+      "text": "संदर्भ: रेडियल और अल्नार धमनियाँ, जो ब्रेकियल धमनी की शाखाएँ हैं, हाथ को रक्त आपूर्ति प्रदान करती हैं। पूरक धमनियाँ जो अग्रभुजा में होती हैं उनमें एंटीरियर इंटरओसियस धमनी, पोस्टीरियर इंटरओसियस धमनी और (कभी-कभ...\n\nप्रश्न: हाथ के पृष्ठीय भाग को कौन सी धमनी रक्त आपूर्ति करती है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "पृष्ठीय मेटाकार्पल धमनियाँ।",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-MSMARCO-050",
+      "text": "संदर्भ: शहर के ब्लॉक आकार में भिन्न होते हैं, लेकिन एक विशिष्ट वर्गाकार शहर ब्लॉक 16 या 17 प्रति मील तक पहुंचता है, या 2.21 से 2.50 एकड़ तक। इंजीनियर गणना अनुमानों के लिए एक विशिष्ट शहर ब्लॉक को 100,000 वर्ग ...\n\nप्रश्न: शिकागो में एक शहर ब्लॉक कितना लंबा है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "IndicMSMARCO Hindi - Question answering",
+      "reference_answer": "एक अष्टमांश मील लंबा और एक अष्टमांश मील चौड़ा",
+      "source": "ai4bharat/IndicMSMARCO",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "general_knowledge",
+        "dataset": "IndicMSMARCO"
+      }
+    },
+    {
+      "id": "HI-XNLI-001",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: हालांकि मैं इसके बारे में सोच भी नहीं रहा था लेकिन मैं इतना परेशान था कि मुझे वापस उससे बात करनी ही पड़ेगी\nवाक्य 2: मैंने उससे दोबारा बात नहीं की है।\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "contradiction",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "contradiction"
+      }
+    },
+    {
+      "id": "HI-XNLI-002",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: हालांकि मैं इसके बारे में सोच भी नहीं रहा था लेकिन मैं इतना परेशान था कि मुझे वापस उससे बात करनी ही पड़ेगी\nवाक्य 2: मैं बहुत परेशान था कि मैंने उससे फिर से बात करना शुरू कर दिया।\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "entailment",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "entailment"
+      }
+    },
+    {
+      "id": "HI-XNLI-003",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: हालांकि मैं इसके बारे में सोच भी नहीं रहा था लेकिन मैं इतना परेशान था कि मुझे वापस उससे बात करनी ही पड़ेगी\nवाक्य 2: हमने बहुत बढ़िया बात की थी।\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "neutral",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "neutral"
+      }
+    },
+    {
+      "id": "HI-XNLI-004",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: और मैंने सोचा कि यह एक विशेषाधिकार था, और यह अभी भी है, यह अभी भी है, मैं केवल नौ दो-दो Ex-O जो मेरे AFFC एयर फोर्स कैरियर फील्ड थे।\nवाक्य 2: Mujhe nahi pata tha ki uss din maidan me mai akele nahi tha\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "neutral",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "neutral"
+      }
+    },
+    {
+      "id": "HI-XNLI-005",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: और मैंने सोचा कि यह एक विशेषाधिकार था, और यह अभी भी है, यह अभी भी है, मैं केवल नौ दो-दो Ex-O जो मेरे AFFC एयर फोर्स कैरियर फील्ड थे।\nवाक्य 2: मैं इस धारणा के तहत था कि एएफएफसी वायु सेना करियर क्षेत्र में उस नंबर के साथ मैं अकेला था।\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "entailment",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "entailment"
+      }
+    },
+    {
+      "id": "HI-XNLI-006",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: और मैंने सोचा कि यह एक विशेषाधिकार था, और यह अभी भी है, यह अभी भी है, मैं केवल नौ दो-दो Ex-O जो मेरे AFFC एयर फोर्स कैरियर फील्ड थे।\nवाक्य 2: हम सभी को एक ही सटीक संख्या दी गई थी, इससे कोई फर्क नहीं पड़ता कि हमें कौन से विशेषाधिकार दिए जाने का वादा किया गया था, यह सब झूठ था।\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "contradiction",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "contradiction"
+      }
+    },
+    {
+      "id": "HI-XNLI-007",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: उन्होंने मुझसे कहा की अंत में एक व्यक्ति से मीटिंग करनी होगी ।\nवाक्य 2: मुझे किसी से मिलने के बारे में कुछ भी नहीं बताया गया था।\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "contradiction",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "contradiction"
+      }
+    },
+    {
+      "id": "HI-XNLI-008",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: उन्होंने मुझसे कहा की अंत में एक व्यक्ति से मीटिंग करनी होगी ।\nवाक्य 2: Mujhse bola gaya tha ki ek ladka mujse milne ke liye bulaya jayega\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "entailment",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "entailment"
+      }
+    },
+    {
+      "id": "HI-XNLI-009",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: उन्होंने मुझसे कहा की अंत में एक व्यक्ति से मीटिंग करनी होगी ।\nवाक्य 2: Wo thoda deri se aaya\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "neutral",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "neutral"
+      }
+    },
+    {
+      "id": "HI-XNLI-010",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: इतना है कि आप इसके बारे में बात कर सकते हैं कि मैं इसे छोड़ूँगा|\nवाक्य 2: मैं आपको वह सबकुछ बताना चाहता हूं जिसके बारे में मैं जानता हूँ !\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "contradiction",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "contradiction"
+      }
+    },
+    {
+      "id": "HI-XNLI-011",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: इतना है कि आप इसके बारे में बात कर सकते हैं कि मैं इसे छोड़ूँगा|\nवाक्य 2: मैं इसके बारे में बात नहीं करूंगा, भले ही कवर करने के लिए बहुत कुछ है ।\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "entailment",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "entailment"
+      }
+    },
+    {
+      "id": "HI-XNLI-012",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: इतना है कि आप इसके बारे में बात कर सकते हैं कि मैं इसे छोड़ूँगा|\nवाक्य 2: मैं शहर के इतिहास के बारे में बात नहीं करता क्योंकि कहने के लिए बहुत कुछ है।\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "neutral",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "neutral"
+      }
+    },
+    {
+      "id": "HI-XNLI-013",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: यही प्राथमिक चीज थी जिसे हम बचाना चाहते थे क्युकी एक २०-मेगाटन हाइड्रोजन बम एक ३०  एक सी १२४ को फेकने का कोई और उपाय नहीं था |\nवाक्य 2: हमें कुछ भी बचाने की परवाह नहीं थी।\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "contradiction",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "contradiction"
+      }
+    },
+    {
+      "id": "HI-XNLI-014",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: यही प्राथमिक चीज थी जिसे हम बचाना चाहते थे क्युकी एक २०-मेगाटन हाइड्रोजन बम एक ३०  एक सी १२४ को फेकने का कोई और उपाय नहीं था |\nवाक्य 2: हम एक चीज को बचाने में अन्य चीजों से अधिक उत्सुक थे।\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "entailment",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "entailment"
+      }
+    },
+    {
+      "id": "HI-XNLI-015",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: यही प्राथमिक चीज थी जिसे हम बचाना चाहते थे क्युकी एक २०-मेगाटन हाइड्रोजन बम एक ३०  एक सी १२४ को फेकने का कोई और उपाय नहीं था |\nवाक्य 2: Hum h-bomb nahi upyog karna chahte the kyuki uska niyantran bahut kathin hai\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "neutral",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "neutral"
+      }
+    },
+    {
+      "id": "HI-XNLI-016",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: इसलिए मुझे वाकई यकीन नहीं है कि क्यों ।\nवाक्य 2: मैं निश्चित कारण के कारण निश्चित हूं।\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "contradiction",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "contradiction"
+      }
+    },
+    {
+      "id": "HI-XNLI-017",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: इसलिए मुझे वाकई यकीन नहीं है कि क्यों ।\nवाक्य 2: मुझे नहीं पता कि उसने स्कूलों को क्यों स्थानांतरित कर दिया।\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "neutral",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "neutral"
+      }
+    },
+    {
+      "id": "HI-XNLI-018",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: इसलिए मुझे वाकई यकीन नहीं है कि क्यों ।\nवाक्य 2: मुझे नहीं पता कि ऐसा क्यों हुआ।\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "entailment",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "entailment"
+      }
+    },
+    {
+      "id": "HI-XNLI-019",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: ये है फन्नी फ्लोनो, और ये पली बढ़ी हुई है आग- ऑगस्टा , जी ए में , और वह अपने बचपन के बारे में कुछ कहानिया बताने वाली है ।\nवाक्य 2: फैनी फ़्लोनो को पुनर्निर्धारित करना पड़ा और आज हमें कोई कहानियां बताने में असमर्थ रहेंगी।\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "contradiction",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "contradiction"
+      }
+    },
+    {
+      "id": "HI-XNLI-020",
+      "text": "नीचे दो वाक्य दिए गए हैं। बताओ कि दूसरा वाक्य पहले वाक्य से निकलता है (entailment), विरोधी है (contradiction), या संबंधित नहीं है (neutral)।\n\nवाक्य 1: ये है फन्नी फ्लोनो, और ये पली बढ़ी हुई है आग- ऑगस्टा , जी ए में , और वह अपने बचपन के बारे में कुछ कहानिया बताने वाली है ।\nवाक्य 2: फेनी फ्लोनो यहाँ उपस्थित हैं और वे ऑगस्टा, जॉर्जिया में बड़े होने के दौरान अपनी बचपन की कहानियों के बारे में हमें बताने वाली हैं।\n\nअपना जवाब दो और explain करो क्यों।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "XNLI Hindi - Natural language inference",
+      "reference_answer": "entailment",
+      "source": "facebook/xnli",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "reasoning",
+        "dataset": "XNLI",
+        "label": "entailment"
+      }
+    },
+    {
+      "id": "HI-IF-101",
+      "text": "भारत के पांच सबसे बड़े राज्यों के नाम बताओ। सिर्फ नाम लिखो, कोई explanation नहीं।",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "List format with no explanation constraint",
+      "expected_format": "5 state names only, no explanation",
+      "metadata": {
+        "difficulty": "easy",
+        "topic": "geography"
+      }
+    },
+    {
+      "id": "HI-IF-102",
+      "text": "एक छोटी कविता लिखो जिसमें 'आसमान', 'तारे', और 'सपने' तीनों शब्द हों। कविता 4 lines की होनी चाहिए।",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Poetry with specific words and line count",
+      "expected_format": "4-line poem containing 'आसमान', 'तारे', 'सपने'",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "creative_writing"
+      }
+    },
+    {
+      "id": "HI-IF-103",
+      "text": "मुझे exactly 50 शब्दों में बताओ कि exercise करना क्यों जरूरी है। ना कम, ना ज्यादा।",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Exact word count constraint",
+      "expected_format": "Exactly 50 words about exercise importance",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "health"
+      }
+    },
+    {
+      "id": "HI-IF-104",
+      "text": "नीचे दी गई list को alphabetically sort करो और numbered list में लिखो:\nसेब, आम, केला, अंगूर, संतरा",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Sorting and formatting task",
+      "expected_format": "Numbered list in Hindi alphabetical order",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "language"
+      }
+    },
+    {
+      "id": "HI-IF-105",
+      "text": "एक recipe लिखो जिसमें: (1) Ingredients की list हो, (2) Step-by-step instructions हों (numbered), (3) Total time लगे। Recipe simple होनी चाहिए।",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Multi-section structured format",
+      "expected_format": "Recipe with ingredients list, numbered steps, and time",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "cooking"
+      }
+    },
+    {
+      "id": "HI-IF-106",
+      "text": "मुझे तीन paragraphs में mobile phones के बारे में बताओ:\n1. पहला paragraph: फायदे (pros)\n2. दूसरा paragraph: नुकसान (cons)\n3. तीसरा paragraph: conclusion\n\nहर paragraph 30-40 शब्दों का हो।",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Structured paragraphs with word limits",
+      "expected_format": "3 paragraphs (pros, cons, conclusion), 30-40 words each",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "technology"
+      }
+    },
+    {
+      "id": "HI-IF-107",
+      "text": "एक formal letter लिखो अपने school principal को जिसमें 2 दिन की छुट्टी मांगो। Letter में: date, subject, salutation, body, और signature होनी चाहिए।",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Formal letter format compliance",
+      "expected_format": "Formal Hindi letter with all required components",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "communication"
+      }
+    },
+    {
+      "id": "HI-IF-108",
+      "text": "नीचे दिए गए sentence को passive voice में बदलो:\n'राम ने खाना खाया।'",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Grammar transformation task",
+      "expected_format": "Passive voice: 'राम द्वारा खाना खाया गया।'",
+      "reference_answer": "राम द्वारा खाना खाया गया।",
+      "metadata": {
+        "difficulty": "easy",
+        "topic": "grammar"
+      }
+    },
+    {
+      "id": "HI-IF-109",
+      "text": "एक dialog लिखो जिसमें दो दोस्त cricket match के बारे में बात कर रहे हों। Dialog में कम से कम 6 exchanges (3-3 दोनों तरफ से) होने चाहिए।",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Dialogue format with minimum exchanges",
+      "expected_format": "Dialogue with at least 6 exchanges about cricket",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "sports"
+      }
+    },
+    {
+      "id": "HI-IF-110",
+      "text": "इस paragraph को summarize करो exactly 2 sentences में:\n\n'भारत एक विविधताओं से भरा देश है। यहां अलग-अलग धर्म, भाषाएं, और संस्कृतियां हैं। उत्तर में हिमालय है तो दक्षिण में समुद्र। हर राज्य की अपनी पहचान है। यही विविधता भारत को unique बनाती है।'",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Summarization with exact sentence count",
+      "expected_format": "Exactly 2-sentence summary",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "culture"
+      }
+    },
+    {
+      "id": "HI-FQ-101",
+      "text": "भारत की राजधानी क्या है और इसे कब राजधानी बनाया गया था?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Basic geography fact",
+      "reference_answer": "भारत की राजधानी नई दिल्ली है। इसे 1911 में कलकत्ता की जगह राजधानी बनाया गया था और 1931 में officially shift हुआ।",
+      "metadata": {
+        "difficulty": "easy",
+        "topic": "geography"
+      }
+    },
+    {
+      "id": "HI-FQ-102",
+      "text": "चंद्रयान-3 कब launch हुआ था और इसने क्या achieve किया?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Recent Indian space achievement",
+      "reference_answer": "चंद्रयान-3 14 जुलाई 2023 को launch हुआ। 23 अगस्त 2023 को इसका Vikram lander चंद्रमा के दक्षिणी ध्रुव पर safely land हुआ, जिससे भारत ऐसा करने वाला पहला देश बना।",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "science"
+      }
+    },
+    {
+      "id": "HI-FQ-103",
+      "text": "DNA का full form क्या है और यह किस काम आता है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Biology basic concept",
+      "reference_answer": "DNA का full form Deoxyribonucleic Acid है। यह genetic information store करता है जो parents से बच्चों में transfer होती है। DNA में genes होते हैं जो हमारी body के traits decide करते हैं।",
+      "metadata": {
+        "difficulty": "easy",
+        "topic": "biology"
+      }
+    },
+    {
+      "id": "HI-FQ-104",
+      "text": "भारत में कितने राज्य और केंद्र शासित प्रदेश हैं? 2024 के अनुसार बताओ।",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Current political geography",
+      "reference_answer": "भारत में 28 राज्य और 8 केंद्र शासित प्रदेश हैं (2024 के अनुसार)।",
+      "metadata": {
+        "difficulty": "easy",
+        "topic": "civics"
+      }
+    },
+    {
+      "id": "HI-FQ-105",
+      "text": "पानी का chemical formula क्या है और पानी किस-किस रूप में पाया जाता है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Chemistry basic concept",
+      "reference_answer": "पानी का chemical formula H2O है (2 hydrogen atoms + 1 oxygen atom)। पानी तीन रूपों में पाया जाता है: ठोस (बर्फ), तरल (पानी), और गैस (भाप/water vapor)।",
+      "metadata": {
+        "difficulty": "easy",
+        "topic": "chemistry"
+      }
+    },
+    {
+      "id": "HI-FQ-106",
+      "text": "महाभारत में कितने दिन युद्ध हुआ था और इसमें कौन-कौन सी main armies थीं?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Indian mythology/history",
+      "reference_answer": "महाभारत का युद्ध 18 दिन चला। इसमें दो main armies थीं: पांडव सेना (अर्जुन, भीम, युधिष्ठिर के साथ) और कौरव सेना (दुर्योधन के नेतृत्व में)। श्री कृष्ण पांडवों के सारथी थे।",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "mythology"
+      }
+    },
+    {
+      "id": "HI-FQ-107",
+      "text": "भारत में सबसे लंबी नदी कौन सी है और यह कहां से निकलती है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Geography - Rivers",
+      "reference_answer": "भारत की सबसे लंबी नदी गंगा है (2,525 km)। यह उत्तराखंड में गंगोत्री ग्लेशियर से निकलती है और बंगाल की खाड़ी में मिलती है।",
+      "metadata": {
+        "difficulty": "easy",
+        "topic": "geography"
+      }
+    },
+    {
+      "id": "HI-FQ-108",
+      "text": "Computer में RAM और ROM में क्या difference है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Computer basics",
+      "reference_answer": "RAM (Random Access Memory) temporary memory है जो power off होने पर data खो देती है। ROM (Read Only Memory) permanent memory है जिसका data power off होने पर भी रहता है। RAM में programs run होते हैं, ROM में boot instructions store होती हैं।",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "technology"
+      }
+    },
+    {
+      "id": "HI-FQ-109",
+      "text": "भारत का national anthem किसने लिखा और इसे कब adopt किया गया?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "National symbols",
+      "reference_answer": "भारत का राष्ट्रगान 'जन गण मन' रवींद्रनाथ टैगोर ने लिखा था। इसे 24 जनवरी 1950 को भारत के राष्ट्रगान के रूप में adopt किया गया।",
+      "metadata": {
+        "difficulty": "easy",
+        "topic": "national_symbols"
+      }
+    },
+    {
+      "id": "HI-FQ-110",
+      "text": "Solar system में कितने planets हैं? उनके नाम सूर्य से दूरी के order में बताओ।",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Astronomy basics",
+      "reference_answer": "Solar system में 8 planets हैं। सूर्य से दूरी के order में: बुध (Mercury), शुक्र (Venus), पृथ्वी (Earth), मंगल (Mars), बृहस्पति (Jupiter), शनि (Saturn), अरुण (Uranus), वरुण (Neptune)।",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "astronomy"
+      }
+    },
+    {
+      "id": "HI-CR-101",
+      "text": "अगर धरती पर gravity नहीं होती तो हमारी daily life कैसी होती? कम से कम 5 changes बताओ।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Counterfactual reasoning - physics",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "physics_hypothetical"
+      }
+    },
+    {
+      "id": "HI-CR-102",
+      "text": "एक puzzle solve करो: एक कमरे में 3 switches हैं और दूसरे कमरे में 3 bulbs। तुम एक बार ही दूसरे कमरे में जा सकते हो। कैसे पता करोगे कि कौन सा switch किस bulb का है?",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Logic puzzle",
+      "reference_answer": "पहले switch को 10 मिनट के लिए on करो, फिर off करो। दूसरा switch on करो और तीसरा off रखो। अब दूसरे कमरे में जाओ: जो bulb जल रहा है वो दूसरे switch का है, जो गर्म है पर बंद है वो पहले का है, और जो ठंडा और बंद है वो तीसरे का है।",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "logic_puzzle"
+      }
+    },
+    {
+      "id": "HI-CR-103",
+      "text": "तुम एक time traveler हो और 100 साल पीछे जा सकते हो। तुम किस event को बदलना चाहोगे और क्यों? इसके possible consequences भी बताओ।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Hypothetical scenario with consequence analysis",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "hypothetical"
+      }
+    },
+    {
+      "id": "HI-CR-104",
+      "text": "एक छोटे से गांव में सिर्फ 2 barbers हैं। एक की दुकान बहुत साफ है और वो खुद बहुत well-groomed है। दूसरे की दुकान गंदी है और उसके बाल भी बिखरे हैं। तुम्हें haircut लेना है - किसके पास जाओगे और क्यों?",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Logic puzzle - barber paradox",
+      "reference_answer": "गंदी दुकान वाले barber के पास जाना चाहिए। क्योंकि गांव में सिर्फ 2 barbers हैं, तो वो एक-दूसरे के बाल काटते होंगे। साफ दुकान वाले के बाल गंदी दुकान वाले ने काटे होंगे (जो अच्छे लग रहे हैं), मतलब गंदी दुकान वाला बेहतर barber है।",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "logic_puzzle"
+      }
+    },
+    {
+      "id": "HI-CR-105",
+      "text": "एक कहानी पूरी करो: 'जब मैंने वो पुराना संदूक खोला, तो अंदर से एक चिट्ठी निकली जो 50 साल पहले लिखी गई थी। चिट्ठी में लिखा था...'",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Story continuation",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "creative_writing"
+      }
+    },
+    {
+      "id": "HI-CR-106",
+      "text": "एक नई technology invent करो जो education को बेहतर बना सके। इसका नाम, काम करने का तरीका, और 3 फायदे बताओ।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Innovation and problem solving",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "innovation"
+      }
+    },
+    {
+      "id": "HI-CR-107",
+      "text": "अगर जानवर बोल पाते तो क्या होता? इस scenario के positive और negative दोनों aspects discuss करो।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Counterfactual with balanced analysis",
+      "metadata": {
+        "difficulty": "medium",
+        "topic": "hypothetical"
+      }
+    },
+    {
+      "id": "HI-CR-108",
+      "text": "एक math puzzle: एक train 100 km/hr की speed से चल रही है। एक मक्खी 150 km/hr से उड़ती है। अगर दो trains 200 km दूर से एक-दूसरे की तरफ आ रही हैं और मक्खी पहली train से दूसरी तक, फिर वापस, continuously उड़ती रहती है जब तक trains नहीं मिलतीं - मक्खी total कितना distance cover करेगी?",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Math word problem",
+      "reference_answer": "दोनों trains की relative speed = 100 + 100 = 200 km/hr। वो 200 km cover करने में 1 hour लेंगी। इस 1 hour में मक्खी 150 km/hr से उड़ती रहेगी, तो total distance = 150 km।",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "math_puzzle"
+      }
+    },
+    {
+      "id": "HI-CR-109",
+      "text": "तुम्हारे पास 8 identical दिखने वाले balls हैं। एक ball थोड़ी भारी है। तुम्हारे पास एक balance scale है। minimum कितनी बार तौलना होगा भारी ball ढूंढने के लिए?",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Classic weighing puzzle",
+      "reference_answer": "सिर्फ 2 बार तौलना होगा। पहली बार: 3-3 balls तौलो। अगर equal हैं तो भारी ball बची 2 में है (एक और weighing)। अगर एक side भारी है तो उस group की 3 में से 1-1 तौलो।",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "logic_puzzle"
+      }
+    },
+    {
+      "id": "HI-CR-110",
+      "text": "Climate change से लड़ने के लिए एक ऐसा solution suggest करो जो affordable हो और developing countries में implement हो सके। अपने idea के pros और cons भी बताओ।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Problem solving with constraints",
+      "metadata": {
+        "difficulty": "hard",
+        "topic": "environment"
+      }
+    }
+  ]
+}

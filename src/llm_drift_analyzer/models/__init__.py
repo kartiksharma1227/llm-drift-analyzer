@@ -13,6 +13,7 @@ from llm_drift_analyzer.models.multilingual_analysis import (
     CrossLingualComparison,
     MultilingualDriftReport,
 )
+from llm_drift_analyzer.models.task_fitness import TaskFitnessScore, TaskFitnessMatrix
 
 __all__ = [
     # Core models
@@ -27,4 +28,7 @@ __all__ = [
     "MultilingualResponseAnalysis",
     "CrossLingualComparison",
     "MultilingualDriftReport",
+    # Task fitness models
+    "TaskFitnessScore",
+    "TaskFitnessMatrix",
 ]

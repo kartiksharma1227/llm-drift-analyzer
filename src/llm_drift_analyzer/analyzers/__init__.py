@@ -14,6 +14,7 @@ from llm_drift_analyzer.analyzers.crosslingual_analyzer import (
     LanguagePerformanceStats,
     CrossLingualStatisticalTest,
 )
+from llm_drift_analyzer.analyzers.task_fitness_analyzer import TaskFitnessAnalyzer
 
 __all__ = [
     "LLMDriftAnalyzer",
@@ -22,4 +23,6 @@ __all__ = [
     "CrossLingualAnalyzer",
     "LanguagePerformanceStats",
     "CrossLingualStatisticalTest",
+    # Task fitness
+    "TaskFitnessAnalyzer",
 ]

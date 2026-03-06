@@ -1,0 +1,491 @@
+{
+  "name": "Task Fitness Hindi Benchmark Prompts",
+  "version": "1.0.0",
+  "description": "Hindi benchmark prompts for task-fitness evaluation across 10 categories. Government and practical use-case focused. Natural Hindi phrasing.",
+  "language": "hi",
+  "prompts": [
+    {
+      "id": "TF-HI-IF-001",
+      "text": "RTI (सूचना का अधिकार) आवेदन दाखिल करने के ठीक 5 स्टेप्स बताओ। हर स्टेप एक ही वाक्य में हो।",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Tests structured list generation in Hindi",
+      "expected_format": "Exactly 5 numbered steps, each one sentence",
+      "parallel_id": "TF-IF-001",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-IF-002",
+      "text": "एक सरकारी कार्यालय के लिए 50 शब्दों में एक नोटिस लिखो जिसमें बताया जाए कि 1 अप्रैल 2025 से कार्यालय समय सुबह 9:30 से शाम 5:30 होगा। अधिकारी का नाम 'जिलाधिकारी, लखनऊ' रखो।",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Tests word limit and specific detail inclusion in Hindi",
+      "expected_format": "Formal notice, ~50 words, with specified details",
+      "parallel_id": "TF-IF-002",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-IF-003",
+      "text": "3 कॉलम (योजना का नाम, लाभार्थी, मुख्य लाभ) वाली एक टेबल बनाओ जिसमें 4 भारतीय सरकारी कल्याणकारी योजनाएं हों। Markdown table format में दो।",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Tests table formatting in Hindi",
+      "expected_format": "Markdown table with 3 columns and 4 data rows",
+      "parallel_id": "TF-IF-003",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-IF-004",
+      "text": "एक नागरिक की तरफ से नगर आयुक्त को अनियमित पानी की सप्लाई की शिकायत का एक formal पत्र लिखो। इसमें शामिल हो: भेजने वाले का पता, तारीख, विषय, मुख्य भाग (3 पैराग्राफ), और समापन।",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Tests complex multi-component format compliance in Hindi",
+      "expected_format": "Formal letter with all specified components",
+      "parallel_id": "TF-IF-004",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-IF-005",
+      "text": "प्रधानमंत्री जन धन योजना को ठीक 3 बुलेट पॉइंट्स में समझाओ। हर बुलेट एक क्रिया (verb) से शुरू होना चाहिए।",
+      "category": "instruction_following",
+      "language": "hi",
+      "description": "Tests bullet format and grammatical constraint in Hindi",
+      "expected_format": "3 bullet points, each starting with a verb",
+      "parallel_id": "TF-IF-005",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-FQ-001",
+      "text": "आयुष्मान भारत स्वास्थ्य बीमा योजना के लिए पात्रता क्या है? इसका लाभ कौन उठा सकता है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Tests knowledge of Indian govt scheme in Hindi",
+      "reference_answer": "आयुष्मान भारत (PM-JAY) SECC 2011 के डेटा से चिह्नित परिवारों को कवर करती है। यह प्रति परिवार प्रति वर्ष 5 लाख रुपये तक का माध्यमिक और तृतीयक अस्पताल में भर्ती कवरेज देती है। गरीब, वंचित ग्रामीण परिवार और चिह्नित शहरी कामगार परिवार इसके पात्र हैं।",
+      "parallel_id": "TF-FQ-001",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-FQ-002",
+      "text": "भारत में GST (वस्तु एवं सेवा कर) क्या है? अलग-अलग GST स्लैब समझाओ।",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Tests knowledge of Indian tax system in Hindi",
+      "reference_answer": "GST कई केंद्रीय और राज्य करों की जगह लेने वाला एकीकृत अप्रत्यक्ष कर है। स्लैब: 0% (आवश्यक वस्तुएं), 5% (सामान्य सामान), 12% (मानक सामान), 18% (अधिकांश सेवाएं), 28% (विलासिता सामान)। कुछ वस्तुओं पर क्षतिपूर्ति सेस भी लगता है।",
+      "parallel_id": "TF-FQ-002",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-FQ-003",
+      "text": "पंचायती राज व्यवस्था के तीन स्तर कौन से हैं और उनकी क्या भूमिका है?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Tests knowledge of local governance in Hindi",
+      "reference_answer": "तीन स्तर: ग्राम पंचायत (गांव स्तर) — स्थानीय मुद्दे; पंचायत समिति (ब्लॉक स्तर) — विकास कार्यक्रमों का समन्वय; जिला परिषद (जिला स्तर) — जिला योजना और राज्य सरकार से जोड़ने का काम।",
+      "parallel_id": "TF-FQ-003",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-FQ-004",
+      "text": "भारतीय संविधान नागरिकों को कौन-कौन से मौलिक अधिकार देता है? हर एक का नाम और संक्षिप्त विवरण दो।",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Tests constitutional knowledge in Hindi",
+      "reference_answer": "छह मौलिक अधिकार: समानता का अधिकार (अनुच्छेद 14-18), स्वतंत्रता का अधिकार (19-22), शोषण के विरुद्ध अधिकार (23-24), धार्मिक स्वतंत्रता का अधिकार (25-28), सांस्कृतिक और शैक्षिक अधिकार (29-30), संवैधानिक उपचारों का अधिकार (32)।",
+      "parallel_id": "TF-FQ-004",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-FQ-005",
+      "text": "डिजिटल इंडिया कार्यक्रम क्या है और इसके मुख्य स्तंभ कौन से हैं?",
+      "category": "factual_qa",
+      "language": "hi",
+      "description": "Tests knowledge of govt digital initiative in Hindi",
+      "reference_answer": "डिजिटल इंडिया भारत को डिजिटल रूप से सशक्त समाज बनाने का प्रमुख कार्यक्रम है। मुख्य स्तंभ: डिजिटल बुनियादी ढांचा, मांग पर शासन और सेवाएं, और नागरिकों का डिजिटल सशक्तिकरण। इसमें आधार, UPI, डिजिलॉकर और ई-गवर्नेंस पोर्टल शामिल हैं।",
+      "parallel_id": "TF-FQ-005",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-CR-001",
+      "text": "एक जिला प्रशासन किसान आत्महत्याओं को कम करना चाहता है। भारतीय ग्रामीण वास्तविकताओं को ध्यान में रखते हुए 3 रचनात्मक और व्यावहारिक समाधान सुझाओ।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Tests creative problem-solving in Hindi",
+      "parallel_id": "TF-CR-001",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-CR-002",
+      "text": "ग्रामीण नागरिकों के लिए एक सरल मोबाइल ऐप का concept डिज़ाइन करो जिससे वे सड़क के गड्ढों की शिकायत नगर पालिका को कर सकें। 3 मुख्य features और यह कैसे काम करेगा बताओ।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Tests creative tech solution design in Hindi",
+      "parallel_id": "TF-CR-002",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-CR-003",
+      "text": "अगर भारत को एक यूनिवर्सल बेसिक इनकम सिस्टम बनाना हो, तो 3 सबसे बड़ी चुनौतियां क्या होंगी और हर एक का समाधान कैसे हो सकता है?",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Tests counterfactual reasoning with policy knowledge in Hindi",
+      "parallel_id": "TF-CR-003",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-CR-004",
+      "text": "मान लो तुम एक स्मार्ट सिटी प्रोजेक्ट के सलाहकार हो। बेंगलुरु जैसे शहर में AI से ट्रैफिक मैनेजमेंट सुधारने के 3 तरीके सुझाओ।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Tests creative AI application in governance in Hindi",
+      "parallel_id": "TF-CR-004",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-CR-005",
+      "text": "एक ऐसा गांव जहां इंटरनेट नहीं है, वहां के लोगों को सरकारी सेवाएं कैसे मिल सकती हैं? एक रचनात्मक ऑफलाइन समाधान सुझाओ।",
+      "category": "creative_reasoning",
+      "language": "hi",
+      "description": "Tests innovation under constraints in Hindi",
+      "parallel_id": "TF-CR-005",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-SUM-001",
+      "text": "इस सरकारी परिपत्र को 3-4 वाक्यों में सारांश दो:\n\n'वित्त मंत्रालय, भारत सरकार ने केंद्रीय सरकारी कर्मचारियों को देय महंगाई भत्ते (DA) और पेंशनभोगियों को देय महंगाई राहत (DR) में संशोधन का निर्णय लिया है। संशोधित DA/DR दर 1 जनवरी 2024 से मूल वेतन/पेंशन का 50% होगी। यह सितंबर 2023 के पहले के आदेश का स्थान लेता है जहां दर 46% थी। सभी मंत्रालयों/विभागों से समय पर वितरण सुनिश्चित करने का अनुरोध है। जनवरी-मार्च 2024 की बकाया राशि नकद में दी जाएगी।'",
+      "category": "summarization",
+      "language": "hi",
+      "description": "Tests summarization of government circular in Hindi",
+      "reference_answer": "वित्त मंत्रालय ने 1 जनवरी 2024 से DA/DR दर 46% से बढ़ाकर 50% कर दी है। जनवरी-मार्च 2024 की बकाया राशि नकद में मिलेगी। सभी विभागों को समय पर कार्रवाई करनी है।",
+      "parallel_id": "TF-SUM-001",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-SUM-002",
+      "text": "इस नीति विवरण को 80 शब्दों में सारांश दो:\n\n'मनरेगा हर ग्रामीण परिवार को साल में 100 दिन का रोजगार गारंटी देता है जिसके वयस्क सदस्य अकुशल शारीरिक काम करने को तैयार हों। यह मांग-आधारित योजना है और काम पूरा होने के 15 दिन में मजदूरी दी जाती है। अगर 15 दिन में रोजगार नहीं मिलता तो बेरोजगारी भत्ता मिलता है। इसमें जल संरक्षण, भूमि विकास, ग्रामीण सड़क निर्माण जैसे काम आते हैं। मजदूरी सीधे DBT से बैंक खाते में जाती है।'",
+      "category": "summarization",
+      "language": "hi",
+      "description": "Tests concise summarization with word limit in Hindi",
+      "expected_format": "Under 80 words",
+      "parallel_id": "TF-SUM-002",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-SUM-003",
+      "text": "इस बजट घोषणा के मुख्य बिंदु सारांश में बताओ:\n\n'केंद्रीय बजट 2024-25 में नए आयकर स्लैब: 3 लाख तक कोई कर नहीं, 3-7 लाख 5%, 7-10 लाख 10%, 10-12 लाख 15%, 12-15 लाख 20%, 15 लाख से ऊपर 30%। स्टैंडर्ड डिडक्शन 75,000 रुपये किया गया। पूंजीगत व्यय 11.11 लाख करोड़। कृषि को 1.52 लाख करोड़। 1 करोड़ युवाओं के लिए शीर्ष 500 कंपनियों में इंटर्नशिप योजना। राजकोषीय घाटा GDP का 4.9%।'",
+      "category": "summarization",
+      "language": "hi",
+      "description": "Tests summarization of budget information in Hindi",
+      "parallel_id": "TF-SUM-003",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-SUM-004",
+      "text": "इस समिति रिपोर्ट को 2-3 बुलेट पॉइंट्स में सारांश दो:\n\n'संसदीय स्थायी समिति ने पाया कि NEP 2020 का क्रियान्वयन राज्यों में असमान है। कर्नाटक और मध्य प्रदेश ने प्रगति की है लेकिन कई पूर्वोत्तर राज्य पीछे हैं। शिक्षक प्रशिक्षण कार्यक्रमों को अपर्याप्त धन मिल रहा है — आवंटित बजट का केवल 40% उपयोग हुआ। समिति ने सिफारिश की कि शिक्षा मंत्रालय एक निगरानी सेल बनाए और शिक्षक प्रशिक्षण बजट 25% बढ़ाए।'",
+      "category": "summarization",
+      "language": "hi",
+      "description": "Tests summarization with bullet format in Hindi",
+      "expected_format": "2-3 bullet points",
+      "parallel_id": "TF-SUM-004",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-SUM-005",
+      "text": "इस घोषणा का एक पैराग्राफ में सारांश दो:\n\n'RBI ने लगातार आठवीं बार रेपो दर 6.5% पर रखी है। MPC ने कहा कि महंगाई कम हुई है लेकिन खाद्य महंगाई अभी भी ज्यादा है। FY2025 के लिए GDP वृद्धि अनुमान 7.0% से बढ़ाकर 7.2% किया गया। RBI गवर्नर ने कहा कि महंगाई पर नजर रखते हुए विकास को समर्थन देना जरूरी है।'",
+      "category": "summarization",
+      "language": "hi",
+      "description": "Tests economic policy summarization in Hindi",
+      "expected_format": "One paragraph",
+      "parallel_id": "TF-SUM-005",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-TRN-001",
+      "text": "निम्नलिखित हिंदी पाठ का अंग्रेजी में अनुवाद करो:\n\n'कृषि विभाग ने छोटे और सीमांत किसानों के लिए एक नई फसल बीमा योजना की घोषणा की है। इस योजना के तहत, प्राकृतिक आपदाओं, कीटों और बीमारियों से फसल नुकसान पर किसानों को मुआवजा मिलेगा। प्रीमियम दर खरीफ फसलों के लिए 2% और रबी फसलों के लिए 1.5% तय की गई है।'",
+      "category": "translation",
+      "language": "hi",
+      "description": "Tests Hindi to English translation",
+      "reference_answer": "The Department of Agriculture has announced a new crop insurance scheme for small and marginal farmers. Under this scheme, farmers will receive compensation for crop losses due to natural disasters, pests, and diseases. The premium rate has been fixed at 2% for Kharif crops and 1.5% for Rabi crops.",
+      "parallel_id": "TF-TRN-001",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-TRN-002",
+      "text": "इसका अंग्रेजी में अनुवाद करो:\n\n'हर नागरिक को समय पर और कुशल तरीके से सार्वजनिक सेवाओं तक पहुंच का अधिकार है। सरकार नौकरशाही देरी को कम करने और सभी प्रक्रियाओं में पारदर्शिता सुनिश्चित करने के लिए प्रतिबद्ध है।'",
+      "category": "translation",
+      "language": "hi",
+      "description": "Tests Hindi to English translation of civic content",
+      "reference_answer": "Every citizen has the right to access public services in a timely and efficient manner. The government is committed to reducing bureaucratic delays and ensuring transparency in all processes.",
+      "parallel_id": "TF-TRN-002",
+      "metadata": {"difficulty": "easy", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-TRN-003",
+      "text": "इस तकनीकी पैराग्राफ का अंग्रेजी में अनुवाद करो:\n\n'आधार-आधारित प्रत्यक्ष लाभ हस्तांतरण (DBT) प्रणाली ने बिचौलियों को हटा दिया है और सब्सिडी वितरण में भ्रष्टाचार कम किया है। 300 से अधिक सरकारी योजनाएं अब DBT का उपयोग करती हैं, जिससे डुप्लिकेट और फर्जी लाभार्थियों को हटाकर लगभग 2.7 लाख करोड़ रुपये की बचत हुई है।'",
+      "category": "translation",
+      "language": "hi",
+      "description": "Tests Hindi to English translation of technical content",
+      "reference_answer": "The Aadhaar-based Direct Benefit Transfer (DBT) system has eliminated intermediaries and reduced corruption in subsidy distribution. Over 300 government schemes now use DBT, saving approximately Rs 2.7 lakh crore through deduplication and removal of ghost beneficiaries.",
+      "parallel_id": "TF-TRN-003",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-TRN-004",
+      "text": "अंग्रेजी में अनुवाद करो:\n\n'राष्ट्रीय शिक्षा नीति 2020 का लक्ष्य 2035 तक उच्च शिक्षा में सकल नामांकन अनुपात को 50% तक बढ़ाना है। यह बहु-विषयक दृष्टिकोण अपनाती है और डिग्री कार्यक्रमों में लचीले प्रवेश और निकास बिंदुओं की अनुमति देती है।'",
+      "category": "translation",
+      "language": "hi",
+      "description": "Tests translation of education policy content",
+      "reference_answer": "The National Education Policy 2020 aims to increase the Gross Enrolment Ratio in higher education to 50% by 2035. It introduces a multidisciplinary approach and allows flexible entry and exit points in degree programmes.",
+      "parallel_id": "TF-TRN-004",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-TRN-005",
+      "text": "इसका अंग्रेजी में अनुवाद करो (formal tone बनाए रखो):\n\n'इसके द्वारा सूचित किया जाता है कि मूल्यांकन वर्ष 2024-25 के लिए आयकर रिटर्न जमा करने की अंतिम तिथि 31 जुलाई से बढ़ाकर 15 सितंबर, 2024 कर दी गई है। करदाताओं को सलाह दी जाती है कि वे अंतिम समय की भीड़ से बचने के लिए जल्द से जल्द अपना रिटर्न दाखिल करें।'",
+      "category": "translation",
+      "language": "hi",
+      "description": "Tests translation of formal notification",
+      "reference_answer": "It is hereby notified that the last date for submission of income tax returns for the assessment year 2024-25 has been extended from July 31 to September 15, 2024. Taxpayers are advised to file their returns at the earliest to avoid last-minute rush.",
+      "parallel_id": "TF-TRN-005",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-LM-001",
+      "text": "एक सरकारी कार्यालय में रोज 240 आवेदन आते हैं। 6 कर्मचारी प्रति घंटे 30 आवेदन प्रोसेस करते हैं। अगर 1200 आवेदनों का बैकलॉग 2 दिन में खत्म करना है (साथ में रोज आने वाले नए आवेदन भी), तो कितने अतिरिक्त कर्मचारी चाहिए?",
+      "category": "logical_mathematical",
+      "language": "hi",
+      "description": "Tests arithmetic reasoning in government context in Hindi",
+      "reference_answer": "2 दिन में कुल काम: 1200 बैकलॉग + 480 नए (240×2) = 1680। 1 कर्मचारी प्रति दिन: 30×8 = 240। 2 दिन में 1680 के लिए: 1680/2/240 = 3.5 → 4 कर्मचारी। पहले से 6 हैं, तो कोई अतिरिक्त कर्मचारी नहीं चाहिए।",
+      "parallel_id": "TF-LM-001",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-LM-002",
+      "text": "एक नगर पालिका को 8 वार्डों में 5000 राशन किट बांटने हैं। वार्ड A-D में 800-800 परिवार हैं, वार्ड E-H में 600-600। अनुपात के हिसाब से कितने किट कहां जाएंगे?",
+      "category": "logical_mathematical",
+      "language": "hi",
+      "description": "Tests proportional reasoning in Hindi",
+      "reference_answer": "कुल परिवार: 4×800 + 4×600 = 5600। प्रति परिवार: 5000/5600 = 0.893। वार्ड A-D: 800×0.893 = 714 किट। वार्ड E-H: 600×0.893 = 536 किट। कुल: 4×714 + 4×536 = 5000।",
+      "parallel_id": "TF-LM-002",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-LM-003",
+      "text": "एक राज्य सरकार का राजस्व हर साल 8% बढ़ता है, अभी 50,000 करोड़ है। 3 साल बाद कितना होगा? अगर खर्च 48,000 करोड़ से 10% सालाना बढ़ता है, तो कितने साल में खर्च राजस्व से ज्यादा हो जाएगा?",
+      "category": "logical_mathematical",
+      "language": "hi",
+      "description": "Tests compound growth calculation in Hindi",
+      "reference_answer": "3 साल बाद राजस्व: 50000 × 1.08³ = 62,985 करोड़। खर्च: साल 1 = 52800, साल 2 = 58080, साल 3 = 63888। राजस्व: साल 1 = 54000, साल 2 = 58320, साल 3 = 62985। साल 3 में खर्च (63888) > राजस्व (62985)।",
+      "parallel_id": "TF-LM-003",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-LM-004",
+      "text": "500 घरों के सर्वे में: 300 में पाइप से पानी है, 250 में सीवेज कनेक्शन, 150 में दोनों। कितने घरों में कुछ भी नहीं? पाइप वाले कितने प्रतिशत घरों में सीवेज भी है?",
+      "category": "logical_mathematical",
+      "language": "hi",
+      "description": "Tests set theory logic in Hindi",
+      "reference_answer": "कम से कम एक = 300 + 250 - 150 = 400। कुछ नहीं = 500 - 400 = 100 घर। पाइप वालों में सीवेज: 150/300 = 50%।",
+      "parallel_id": "TF-LM-004",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-LM-005",
+      "text": "तीन सरकारी विभाग एक बिल्डिंग share करते हैं। विभाग A को C से दोगुनी जगह चाहिए। B को C से 1.5 गुना। कुल 9000 वर्ग फीट है। हर विभाग को कितनी जगह मिलेगी?",
+      "category": "logical_mathematical",
+      "language": "hi",
+      "description": "Tests algebraic reasoning in Hindi",
+      "reference_answer": "मान लो C = x। A = 2x, B = 1.5x। कुल: x + 2x + 1.5x = 4.5x = 9000। x = 2000। C = 2000, A = 4000, B = 3000 वर्ग फीट।",
+      "parallel_id": "TF-LM-005",
+      "metadata": {"difficulty": "easy", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-CONV-001",
+      "text": "तुम एक सरकारी हेल्पडेस्क एजेंट हो। एक परेशान नागरिक कहता है: 'मैं 3 महीने से पासपोर्ट का इंतजार कर रहा हूं और कोई कुछ बताता नहीं! यह बकवास है। मुझे अगले महीने ट्रैवल करना है।' मददगार तरीके से जवाब दो।",
+      "category": "conversational",
+      "language": "hi",
+      "description": "Tests empathetic helpdesk response in Hindi",
+      "parallel_id": "TF-CONV-001",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-CONV-002",
+      "text": "तुम एक नगर निगम का चैटबॉट हो। एक नागरिक पूछता है: 'प्रॉपर्टी टैक्स ऑनलाइन कैसे भरें? मैंने कभी कंप्यूटर नहीं चलाया।' आसान भाषा में स्टेप-बाय-स्टेप बताओ।",
+      "category": "conversational",
+      "language": "hi",
+      "description": "Tests clear guidance for non-tech-savvy users in Hindi",
+      "parallel_id": "TF-CONV-002",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-CONV-003",
+      "text": "एक छोटा दुकानदार सरकारी सेवा केंद्र पर आकर कहता है: 'मुझे GST में अपनी दुकान रजिस्टर करनी है पर सुना है बहुत complicated है। क्या करना होगा समझा दो?' उसकी मदद करो।",
+      "category": "conversational",
+      "language": "hi",
+      "description": "Tests informative yet reassuring guidance in Hindi",
+      "parallel_id": "TF-CONV-003",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-CONV-004",
+      "text": "तुम एक ऑटोमेटेड रेलवे इंक्वायरी सिस्टम हो। एक यात्री पूछता है: 'मेरी ट्रेन 6 बजे आने वाली थी लेकिन 8 बज गए और कोई अपडेट नहीं है। क्या करूं? मैं अपने बुजुर्ग माता-पिता के साथ स्टेशन पर हूं।' सही तरीके से जवाब दो।",
+      "category": "conversational",
+      "language": "hi",
+      "description": "Tests handling urgency with practical advice in Hindi",
+      "parallel_id": "TF-CONV-004",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-CONV-005",
+      "text": "एक किसान सरकारी कृषि हेल्पलाइन पर फोन करता है: 'मेरी फसल मर रही है और पता नहीं कौन सी बीमारी है। पत्तियां पीली हो रही हैं और भूरे धब्बे आ रहे हैं। क्या करूं?' व्यावहारिक सलाह दो।",
+      "category": "conversational",
+      "language": "hi",
+      "description": "Tests domain-specific advisory conversation in Hindi",
+      "parallel_id": "TF-CONV-005",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-LA-001",
+      "text": "गांधी जयंती पर 2 अक्टूबर को सार्वजनिक अवकाश की एक छोटी सरकारी अधिसूचना (5-6 वाक्य) लिखो। मानक कानूनी भाषा का प्रयोग करो।",
+      "category": "legal_administrative",
+      "language": "hi",
+      "description": "Tests formal government notification drafting in Hindi",
+      "parallel_id": "TF-LA-001",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-LA-002",
+      "text": "उच्च न्यायालय में जनहित याचिका (PIL) दाखिल करने की प्रक्रिया बताओ। कौन दाखिल कर सकता है, किन आधारों पर, और मूल कदम क्या हैं?",
+      "category": "legal_administrative",
+      "language": "hi",
+      "description": "Tests legal procedure knowledge in Hindi",
+      "reference_answer": "कोई भी नागरिक जनहित के मामले में उच्च न्यायालय में PIL दाखिल कर सकता है। आधार: मौलिक अधिकारों का उल्लंघन, पर्यावरण हानि, या सरकारी निष्क्रियता। कदम: तथ्यों और राहत का वर्णन करते हुए याचिका तैयार करें, हाई कोर्ट रजिस्ट्री में फीस सहित दाखिल करें, कोर्ट प्रतिवादियों को नोटिस जारी कर सकता है।",
+      "parallel_id": "TF-LA-002",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-LA-003",
+      "text": "कार्मिक और प्रशिक्षण विभाग की तरफ से केंद्रीय सरकारी कर्मचारियों के लिए संशोधित Work from Home नियमों के बारे में एक संक्षिप्त कार्यालय ज्ञापन (OM) लिखो। formal और structured रखो।",
+      "category": "legal_administrative",
+      "language": "hi",
+      "description": "Tests formal office memorandum drafting in Hindi",
+      "parallel_id": "TF-LA-003",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-LA-004",
+      "text": "भारत सरकार में 'राजपत्र अधिसूचना' (Gazette Notification) और 'कार्यालय ज्ञापन' (Office Memorandum) में क्या अंतर है? कब किसका प्रयोग होता है?",
+      "category": "legal_administrative",
+      "language": "hi",
+      "description": "Tests knowledge of administrative document types in Hindi",
+      "reference_answer": "राजपत्र अधिसूचना आधिकारिक राजपत्र में प्रकाशित होती है और इसका कानूनी बल होता है — अधिनियम, नियम, नियुक्ति और नीति परिवर्तन के लिए प्रयोग होता है। कार्यालय ज्ञापन विभागों के बीच आंतरिक संचार है — प्रशासनिक निर्देश और प्रक्रियागत मामलों के लिए, सीधे कानूनी बंधन के बिना।",
+      "parallel_id": "TF-LA-004",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-LA-005",
+      "text": "नगर निगम से वार्ड 15 में वर्ष 2023-24 के सड़क निर्माण खर्च की जानकारी मांगते हुए एक संक्षिप्त RTI (सूचना का अधिकार) आवेदन लिखो।",
+      "category": "legal_administrative",
+      "language": "hi",
+      "description": "Tests RTI application drafting in Hindi",
+      "parallel_id": "TF-LA-005",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-SENT-001",
+      "text": "इस नागरिक फीडबैक का sentiment विश्लेषण करो:\n\n'नया ऑनलाइन पोर्टल पहले से थोड़ा बेहतर है पर पीक टाइम में अभी भी क्रैश हो जाता है। कोशिश की तारीफ करता हूं पर execution कमजोर है। कम से कम कोशिश तो कर रहे हैं, पिछली सरकार तो वो भी नहीं करती थी।'",
+      "category": "sentiment_analysis",
+      "language": "hi",
+      "description": "Tests mixed sentiment detection in Hindi",
+      "reference_answer": "मिश्रित/हल्का सकारात्मक — सुधार और प्रयास की सराहना है, पर execution की आलोचना। तुलनात्मक प्रशंसा (पहले से बेहतर, पिछली सरकार से अच्छा) के साथ तकनीकी समस्याओं पर निराशा।",
+      "parallel_id": "TF-SENT-001",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-SENT-002",
+      "text": "इसका sentiment बताओ:\n\n'यकीन नहीं होता कि एक साधारण जन्म प्रमाण पत्र लेने में कितनी मुश्किल है। चार बार ऑफिस गया, हर बार अलग कागज मांगते हैं। किसी को सही जानकारी नहीं है। पूरा समय और पैसा बर्बाद।'",
+      "category": "sentiment_analysis",
+      "language": "hi",
+      "description": "Tests strong negative sentiment in Hindi",
+      "reference_answer": "बहुत नकारात्मक — नौकरशाही अक्षमता से गहरी निराशा। मुख्य भावनाएं: अविश्वास, गुस्सा, थकान। लक्ष्य: प्रक्रिया की असंगतता और कर्मचारियों की योग्यता।",
+      "parallel_id": "TF-SENT-002",
+      "metadata": {"difficulty": "easy", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-SENT-003",
+      "text": "इस फीडबैक का sentiment विश्लेषण करो:\n\n'PM-KISAN योजना हमारे परिवार के लिए वरदान रही है। पैसा सीधे बैंक में हर 4 महीने आता है। हालांकि, verification process बहुत थकाऊ था और मेरे पड़ोसी को गलती से बाहर कर दिया गया। योजना शानदार है पर सिस्टम में सुधार चाहिए।'",
+      "category": "sentiment_analysis",
+      "language": "hi",
+      "description": "Tests nuanced positive-with-caveats sentiment in Hindi",
+      "reference_answer": "मुख्य रूप से सकारात्मक, रचनात्मक आलोचना के साथ। व्यक्तिगत अनुभव बहुत अच्छा (वरदान, सीधा हस्तांतरण)। verification और exclusion की चिंता। कुल: सराहनात्मक पर व्यावहारिक।",
+      "parallel_id": "TF-SENT-003",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-SENT-004",
+      "text": "इस सरकारी अस्पताल की समीक्षा का sentiment बताओ:\n\n'डॉक्टर अच्छे हैं पर काफी कम हैं। एक को दिखाने में 5 घंटे लगे। दवाइयां फ्री मिलती हैं जो हम जैसे लोगों के लिए मददगार है। बिल्डिंग पुरानी है पर साफ-सुथरी। और स्टाफ हो तो बहुत बेहतर हो।'",
+      "category": "sentiment_analysis",
+      "language": "hi",
+      "description": "Tests balanced sentiment in Hindi",
+      "reference_answer": "तटस्थ से हल्का सकारात्मक — संतुलित समीक्षा। सकारात्मक: डॉक्टर गुणवत्ता, मुफ्त दवाइयां, सफाई। नकारात्मक: स्टाफ की कमी, लंबा इंतजार, पुरानी बिल्डिंग। कुल: आभारी पर सुधार चाहते हैं।",
+      "parallel_id": "TF-SENT-004",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-SENT-005",
+      "text": "इस टिप्पणी का tone और sentiment बताओ:\n\n'वाह, नया ट्रैफिक सिस्टम कमाल का काम कर रहा है। आज सिर्फ 2 घंटे जाम में फंसा, पहले 3 घंटे लगते थे। हमारे शानदार प्लानर्स की क्या तारीफ करें।'",
+      "category": "sentiment_analysis",
+      "language": "hi",
+      "description": "Tests sarcasm detection in Hindi",
+      "reference_answer": "नकारात्मक/व्यंग्यात्मक — विडंबना और नकली प्रशंसा से निराशा व्यक्त करता है। 'कमाल का', 'शानदार प्लानर्स' सब व्यंग्यपूर्ण हैं। वास्तविक sentiment: ट्रैफिक मैनेजमेंट से गहरी असंतुष्टि।",
+      "parallel_id": "TF-SENT-005",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-CODE-001",
+      "text": "एक Python function लिखो जो नागरिक शिकायतों की list of dictionaries ले (हर dict में 'category', 'date', 'ward' हो) और हर category में कितनी शिकायतें हैं वो dictionary return करे।",
+      "category": "code_generation",
+      "language": "hi",
+      "description": "Tests basic data processing code from Hindi instructions",
+      "reference_answer": "def count_by_category(complaints):\n    counts = {}\n    for c in complaints:\n        cat = c['category']\n        counts[cat] = counts.get(cat, 0) + 1\n    return counts",
+      "parallel_id": "TF-CODE-001",
+      "metadata": {"difficulty": "easy", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-CODE-002",
+      "text": "एक Python function लिखो जो आधार नंबर validate करे। आधार नंबर 12 अंकों का होता है और 0 या 1 से शुरू नहीं हो सकता।",
+      "category": "code_generation",
+      "language": "hi",
+      "description": "Tests input validation code from Hindi instructions",
+      "reference_answer": "def validate_aadhaar(number):\n    s = str(number).strip()\n    if len(s) != 12:\n        return False\n    if not s.isdigit():\n        return False\n    if s[0] in ('0', '1'):\n        return False\n    return True",
+      "parallel_id": "TF-CODE-002",
+      "metadata": {"difficulty": "easy", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-CODE-003",
+      "text": "एक Python function लिखो जो beneficiary data की CSV फाइल पढ़े (columns: name, aadhaar, amount, status) और दो lists return करे: एक 'approved' लाभार्थियों की और एक 'rejected' लाभार्थियों की।",
+      "category": "code_generation",
+      "language": "hi",
+      "description": "Tests file handling code from Hindi instructions",
+      "parallel_id": "TF-CODE-003",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-CODE-004",
+      "text": "Python में एक `GrievanceTracker` class लिखो जो: (1) id, description, और priority के साथ शिकायत add कर सके, (2) priority के हिसाब से sorted (high पहले) सारी शिकायतें दे, (3) किसी शिकायत को resolved mark कर सके।",
+      "category": "code_generation",
+      "language": "hi",
+      "description": "Tests OOP code generation from Hindi instructions",
+      "parallel_id": "TF-CODE-004",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-HI-CODE-005",
+      "text": "एक Python function लिखो जो एक date string (DD-MM-YYYY format) ले और उस date से आज तक के working days (शनिवार-रविवार छोड़कर) count करे।",
+      "category": "code_generation",
+      "language": "hi",
+      "description": "Tests date handling code from Hindi instructions",
+      "parallel_id": "TF-CODE-005",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    }
+  ]
+}

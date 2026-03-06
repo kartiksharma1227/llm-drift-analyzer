@@ -100,7 +100,7 @@ class OllamaClient(BaseLLMClient):
 
         # Verify Ollama server is running
         try:
-            response = requests.get(f"{self.base_url}/api/tags", timeout=5)
+            response = requests.get(f"{self.base_url}/api/tags", timeout=5, proxies={"http": None, "https": None})
             if response.status_code != 200:
                 raise ConnectionError(f"Ollama server returned status {response.status_code}")
             self._logger.debug(f"Ollama client initialized at {self.base_url}")
@@ -196,7 +196,8 @@ class OllamaClient(BaseLLMClient):
             response = requests.post(
                 f"{self.base_url}/api/generate",
                 json=payload,
-                timeout=self.api_config.timeout if hasattr(self.api_config, 'timeout') else 120
+                timeout=self.api_config.timeout if hasattr(self.api_config, 'timeout') else 120,
+                proxies={"http": None, "https": None}
             )
 
             end_time = time.perf_counter()
@@ -323,7 +324,8 @@ class OllamaClient(BaseLLMClient):
             response = requests.post(
                 f"{self.base_url}/api/chat",
                 json=payload,
-                timeout=120
+                timeout=120,
+                proxies={"http": None, "https": None}
             )
 
             end_time = time.perf_counter()
@@ -379,7 +381,7 @@ class OllamaClient(BaseLLMClient):
             Use `ollama pull <model>` to download new models.
         """
         try:
-            response = requests.get(f"{self.base_url}/api/tags", timeout=10)
+            response = requests.get(f"{self.base_url}/api/tags", timeout=10, proxies={"http": None, "https": None})
             if response.status_code == 200:
                 data = response.json()
                 models = [m["name"] for m in data.get("models", [])]
@@ -412,7 +414,8 @@ class OllamaClient(BaseLLMClient):
             response = requests.post(
                 f"{self.base_url}/api/pull",
                 json={"name": model, "stream": False},
-                timeout=1800  # 30 minutes for large models
+                timeout=1800,  # 30 minutes for large models
+                proxies={"http": None, "https": None}
             )
             return response.status_code == 200
         except Exception as e:
@@ -433,7 +436,8 @@ class OllamaClient(BaseLLMClient):
             response = requests.post(
                 f"{self.base_url}/api/show",
                 json={"name": model},
-                timeout=10
+                timeout=10,
+                proxies={"http": None, "https": None}
             )
             if response.status_code == 200:
                 data = response.json()
@@ -460,7 +464,7 @@ class OllamaClient(BaseLLMClient):
             bool: True if connection is valid.
         """
         try:
-            response = requests.get(f"{self.base_url}/api/tags", timeout=5)
+            response = requests.get(f"{self.base_url}/api/tags", timeout=5, proxies={"http": None, "https": None})
             return response.status_code == 200
         except Exception:
             return False

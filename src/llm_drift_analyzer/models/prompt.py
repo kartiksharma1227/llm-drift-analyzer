@@ -88,6 +88,13 @@ class PromptCategory(Enum):
     INSTRUCTION_FOLLOWING = "instruction_following"
     FACTUAL_QA = "factual_qa"
     CREATIVE_REASONING = "creative_reasoning"
+    SUMMARIZATION = "summarization"
+    TRANSLATION = "translation"
+    LOGICAL_MATHEMATICAL = "logical_mathematical"
+    CONVERSATIONAL = "conversational"
+    LEGAL_ADMINISTRATIVE = "legal_administrative"
+    SENTIMENT_ANALYSIS = "sentiment_analysis"
+    CODE_GENERATION = "code_generation"
 
     @classmethod
     def from_string(cls, value: str) -> "PromptCategory":

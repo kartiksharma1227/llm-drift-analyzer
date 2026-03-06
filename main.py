@@ -27,8 +27,11 @@ from llm_drift_analyzer.models.response_analysis import AnalysisResultSet
 from llm_drift_analyzer.analyzers.drift_analyzer import LLMDriftAnalyzer
 from llm_drift_analyzer.analyzers.statistical_analyzer import DriftStatisticalAnalyzer
 from llm_drift_analyzer.analyzers.crosslingual_analyzer import CrossLingualAnalyzer
+from llm_drift_analyzer.analyzers.task_fitness_analyzer import TaskFitnessAnalyzer
 from llm_drift_analyzer.reporters.report_generator import ReportGenerator
 from llm_drift_analyzer.reporters.visualizer import DriftVisualizer
+from llm_drift_analyzer.reporters.fitness_report_generator import FitnessReportGenerator
+from llm_drift_analyzer.reporters.fitness_visualizer import FitnessVisualizer
 from llm_drift_analyzer.utils.multilingual_tokenizer import MultilingualTokenCounter
 
 
@@ -374,6 +377,86 @@ For more information, see the README.md file.
         help="Validate configuration and API connections"
     )
 
+    # Task Fitness command
+    fitness_parser = subparsers.add_parser(
+        "task-fitness",
+        help="Evaluate which model is best for which task (especially Hindi)"
+    )
+    fitness_parser.add_argument(
+        "--models", "-m",
+        nargs="+",
+        required=True,
+        help="Model identifiers to evaluate (e.g., llama3 mistral qwen2)"
+    )
+    fitness_parser.add_argument(
+        "--provider",
+        type=str,
+        default=None,
+        choices=["openai", "anthropic", "mistral", "ollama"],
+        help="LLM provider to use (default: auto-detect)"
+    )
+    fitness_parser.add_argument(
+        "--ollama-url",
+        type=str,
+        default="http://localhost:11434",
+        help="Ollama server URL (default: http://localhost:11434)"
+    )
+    fitness_parser.add_argument(
+        "--iterations", "-i",
+        type=int,
+        default=3,
+        help="Number of iterations per prompt-model combination (default: 3)"
+    )
+    fitness_parser.add_argument(
+        "--output", "-o",
+        type=str,
+        default="output/task_fitness",
+        help="Output directory for results"
+    )
+    fitness_parser.add_argument(
+        "--languages",
+        type=str,
+        default="both",
+        choices=["en", "hi", "both"],
+        help="Languages to evaluate (default: both)"
+    )
+    fitness_parser.add_argument(
+        "--categories",
+        nargs="+",
+        default=None,
+        help="Filter to specific task categories (default: all)"
+    )
+    fitness_parser.add_argument(
+        "--evaluator-provider",
+        type=str,
+        default=None,
+        choices=["openai", "ollama"],
+        help="Provider for response evaluation/scoring"
+    )
+    fitness_parser.add_argument(
+        "--evaluator-model",
+        type=str,
+        default=None,
+        help="Model to use for evaluation (e.g., gpt-4, llama3)"
+    )
+    fitness_parser.add_argument(
+        "--visualize",
+        action="store_true",
+        help="Generate visualization charts"
+    )
+    fitness_parser.add_argument(
+        "--reasoning-effort",
+        type=str,
+        default=None,
+        choices=["low", "medium", "high"],
+        help=(
+            "Reasoning effort for thinking-capable evaluator models (e.g. gpt-oss). "
+            "One of: low, medium, high. "
+            "Only pass this when your --evaluator-model is a reasoning model — "
+            "it is silently ignored for non-reasoning models."
+        )
+    )
+
     return parser
 
 
@@ -399,9 +482,10 @@ def cmd_analyze(args: argparse.Namespace, config: Config) -> int:
         # Set sensible default model for the provider if not specified
         if not evaluator_model:
             config.evaluator_model = "llama3" if evaluator_provider == "ollama" else "gpt-4"
-        logger.info(f"Using {config.evaluator_provider} for evaluation with model {config.evaluator_model}")
     if evaluator_model:
         config.evaluator_model = evaluator_model
+    if evaluator_provider or evaluator_model:
+        logger.info(f"Using {config.evaluator_provider} for evaluation with model {config.evaluator_model}")
 
     # Handle --use-expanded flag
     use_expanded = getattr(args, 'use_expanded', False)
@@ -914,6 +998,170 @@ def cmd_crosslingual(args: argparse.Namespace, config: Config) -> int:
     return 0
 
 
+def cmd_task_fitness(args: argparse.Namespace, config: Config) -> int:
+    """
+    Execute the task-fitness evaluation command.
+
+    Evaluates which model is best for which task category,
+    with special focus on Hindi performance.
+
+    Args:
+        args: Parsed command line arguments.
+        config: Configuration object.
+
+    Returns:
+        int: Exit code (0 for success).
+    """
+    logger = get_logger()
+    logger.info("Starting task-fitness evaluation")
+
+    # Apply evaluator settings from CLI args
+    evaluator_provider = getattr(args, 'evaluator_provider', None)
+    evaluator_model = getattr(args, 'evaluator_model', None)
+    if evaluator_provider:
+        config.evaluator_provider = evaluator_provider
+        if not evaluator_model:
+            config.evaluator_model = "llama3" if evaluator_provider == "ollama" else "gpt-4"
+    if evaluator_model:
+        config.evaluator_model = evaluator_model
+    if evaluator_provider or evaluator_model:
+        logger.info(f"Using {config.evaluator_provider} for evaluation with model {config.evaluator_model}")
+
+    # Determine which languages to evaluate
+    languages = getattr(args, 'languages', 'both')
+
+    # Load prompt files
+    en_prompts_path = Path("data/prompts/task_fitness_english.json")
+    hi_prompts_path = Path("data/prompts/task_fitness_hindi.json")
+
+    all_prompts = PromptSet()
+
+    if languages in ("en", "both"):
+        if en_prompts_path.exists():
+            en_set = PromptSet.load_from_file(en_prompts_path)
+            logger.info(f"Loaded {len(en_set)} English task-fitness prompts")
+            for p in en_set:
+                all_prompts.add(p)
+        else:
+            logger.warning(f"English prompts not found: {en_prompts_path}")
+
+    if languages in ("hi", "both"):
+        if hi_prompts_path.exists():
+            hi_set = PromptSet.load_from_file(hi_prompts_path)
+            logger.info(f"Loaded {len(hi_set)} Hindi task-fitness prompts")
+            for p in hi_set:
+                all_prompts.add(p)
+        else:
+            logger.warning(f"Hindi prompts not found: {hi_prompts_path}")
+
+    if len(all_prompts) == 0:
+        logger.error("No prompts loaded. Check data/prompts/ directory.")
+        return 1
+
+    # Filter by categories if specified
+    category_filter = getattr(args, 'categories', None)
+    if category_filter:
+        from llm_drift_analyzer.models.prompt import PromptCategory
+        filtered = PromptSet()
+        for p in all_prompts:
+            if p.category.value in category_filter:
+                filtered.add(p)
+        all_prompts = filtered
+        logger.info(f"Filtered to {len(all_prompts)} prompts in categories: {category_filter}")
+
+    logger.info(f"Total prompts: {len(all_prompts)}")
+
+    # Initialize analyzer
+    try:
+        provider = getattr(args, 'provider', None)
+        ollama_url = getattr(args, 'ollama_url', None)
+        reasoning_effort = getattr(args, 'reasoning_effort', None)
+        if reasoning_effort:
+            logger.info(f"Reasoning effort for evaluator: {reasoning_effort}")
+        analyzer = TaskFitnessAnalyzer(
+            config,
+            provider=provider,
+            ollama_base_url=ollama_url,
+            reasoning_effort=reasoning_effort,
+        )
+    except Exception as e:
+        logger.error(f"Failed to initialize analyzer: {e}")
+        return 1
+
+    # Progress callback
+    def progress_callback(current: int, total: int, message: str):
+        percent = (current / total) * 100
+        print(f"\r[{percent:5.1f}%] {message}", end="", flush=True)
+
+    # Run analysis
+    logger.info(f"Running task-fitness analysis with models: {args.models}")
+    logger.info(f"Iterations per prompt-model: {args.iterations}")
+
+    matrix = analyzer.run_fitness_analysis(
+        prompts=all_prompts,
+        models=args.models,
+        iterations=args.iterations,
+        progress_callback=progress_callback,
+    )
+
+    print()  # New line after progress
+
+    # Save results
+    output_dir = Path(args.output)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    matrix_path = output_dir / "fitness_matrix.json"
+    matrix.save_to_file(matrix_path)
+    logger.info(f"Matrix saved to {matrix_path}")
+
+    # Generate report
+    report_gen = FitnessReportGenerator(matrix)
+    report_path = output_dir / "fitness_report.md"
+    report_gen.save_report(report_path, format="markdown")
+    logger.info(f"Report saved to {report_path}")
+
+    # Generate visualizations if requested
+    if getattr(args, 'visualize', False):
+        logger.info("Generating visualizations...")
+        visualizer = FitnessVisualizer(matrix)
+        charts_dir = output_dir / "charts"
+        saved_charts = visualizer.save_all_plots(charts_dir)
+        logger.info(f"Saved {len(saved_charts)} charts to {charts_dir}")
+
+    # Print summary to stdout
+    print("\n" + "=" * 70)
+    print("Task-Fitness Evaluation Complete")
+    print("=" * 70)
+
+    for lang in matrix.languages:
+        lang_label = "Hindi (हिंदी)" if lang == "hi" else "English"
+        print(f"\n{'─' * 60}")
+        print(f"  Recommendations — {lang_label}")
+        print(f"{'─' * 60}")
+
+        recs = matrix.get_recommendations(lang)
+        if recs:
+            cat_width = max(len(r["category"]) for r in recs) + 2
+
+            print(f"  {'Task':<{cat_width}} {'Best Model':<15} {'Score':<8} {'Runner-up':<15}")
+            print(f"  {'─' * (cat_width + 38)}")
+
+            for rec in recs:
+                print(
+                    f"  {rec['category']:<{cat_width}} "
+                    f"{rec['recommended_model']:<15} "
+                    f"{rec['score']:<8.2f} "
+                    f"{rec['runner_up']:<15}"
+                )
+
+        overall = matrix.get_overall_rankings(lang)
+        if overall:
+            print(f"\n  Overall Best ({lang_label}): {overall[0][0]} (avg: {overall[0][1]:.2f}/3.00)")
+
+    print(f"\n📁 Results saved to {output_dir}/")
+    return 0
+
+
 def cmd_list_models(args: argparse.Namespace, config: Config) -> int:
     """
     Execute the list-models command.
@@ -1050,6 +1298,7 @@ def main() -> int:
         "compare": cmd_compare,
         "list-models": cmd_list_models,
         "validate": cmd_validate,
+        "task-fitness": cmd_task_fitness,
     }
 
     handler = commands.get(args.command)

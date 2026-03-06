@@ -1,0 +1,491 @@
+{
+  "name": "Task Fitness English Benchmark Prompts",
+  "version": "1.0.0",
+  "description": "English benchmark prompts for task-fitness evaluation across 10 categories. Government and practical use-case focused.",
+  "language": "en",
+  "prompts": [
+    {
+      "id": "TF-IF-001",
+      "text": "List exactly 5 steps for filing an RTI (Right to Information) application in India. Each step should be one sentence only.",
+      "category": "instruction_following",
+      "language": "en",
+      "description": "Tests structured list generation with count and format constraints",
+      "expected_format": "Exactly 5 numbered steps, each one sentence",
+      "parallel_id": "TF-HI-IF-001",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-IF-002",
+      "text": "Write a 50-word notice for a government office announcing revised working hours from 9:30 AM to 5:30 PM effective April 1, 2025. Include the authority name as 'District Collector, Lucknow'.",
+      "category": "instruction_following",
+      "language": "en",
+      "description": "Tests word limit, specific detail inclusion, and format",
+      "expected_format": "Formal notice, ~50 words, with specified details",
+      "parallel_id": "TF-HI-IF-002",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-IF-003",
+      "text": "Create a table with 3 columns (Scheme Name, Beneficiary, Key Benefit) listing 4 Indian government welfare schemes. Output as a markdown table.",
+      "category": "instruction_following",
+      "language": "en",
+      "description": "Tests table formatting and specific structure",
+      "expected_format": "Markdown table with 3 columns and 4 data rows",
+      "parallel_id": "TF-HI-IF-003",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-IF-004",
+      "text": "Write a formal letter from a citizen to the Municipal Commissioner complaining about irregular water supply. Include: sender address, date, subject line, body (3 paragraphs), and closing.",
+      "category": "instruction_following",
+      "language": "en",
+      "description": "Tests complex multi-component format compliance",
+      "expected_format": "Formal letter with all specified components",
+      "parallel_id": "TF-HI-IF-004",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-IF-005",
+      "text": "Explain the Pradhan Mantri Jan Dhan Yojana in exactly 3 bullet points. Each bullet must start with a verb.",
+      "category": "instruction_following",
+      "language": "en",
+      "description": "Tests bullet format and grammatical constraint",
+      "expected_format": "3 bullet points, each starting with a verb",
+      "parallel_id": "TF-HI-IF-005",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-FQ-001",
+      "text": "What are the eligibility criteria for the Ayushman Bharat health insurance scheme? Who can avail it?",
+      "category": "factual_qa",
+      "language": "en",
+      "description": "Tests knowledge of Indian govt scheme",
+      "reference_answer": "Ayushman Bharat (PM-JAY) covers families identified from SECC 2011 data. It provides Rs 5 lakh per family per year for secondary and tertiary hospitalization. Covers poor, deprived rural families and identified urban worker families.",
+      "parallel_id": "TF-HI-FQ-001",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-FQ-002",
+      "text": "What is the Goods and Services Tax (GST) in India? Explain the different GST slabs.",
+      "category": "factual_qa",
+      "language": "en",
+      "description": "Tests knowledge of Indian tax system",
+      "reference_answer": "GST is a unified indirect tax replacing multiple central and state taxes. The slabs are: 0% (essential items), 5% (common goods), 12% (standard goods), 18% (most services), and 28% (luxury/demerit goods). There is also a compensation cess on some items.",
+      "parallel_id": "TF-HI-FQ-002",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-FQ-003",
+      "text": "Explain the three tiers of the Panchayati Raj system in India and their roles.",
+      "category": "factual_qa",
+      "language": "en",
+      "description": "Tests knowledge of Indian local governance",
+      "reference_answer": "The three tiers are: Gram Panchayat (village level) handling local issues; Panchayat Samiti (block level) coordinating development programs; and Zila Parishad (district level) overseeing district planning and linking with state government.",
+      "parallel_id": "TF-HI-FQ-003",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-FQ-004",
+      "text": "What fundamental rights does the Indian Constitution guarantee to its citizens? Name and briefly describe each.",
+      "category": "factual_qa",
+      "language": "en",
+      "description": "Tests constitutional knowledge",
+      "reference_answer": "Six fundamental rights: Right to Equality (Art 14-18), Right to Freedom (Art 19-22), Right against Exploitation (Art 23-24), Right to Freedom of Religion (Art 25-28), Cultural and Educational Rights (Art 29-30), Right to Constitutional Remedies (Art 32).",
+      "parallel_id": "TF-HI-FQ-004",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-FQ-005",
+      "text": "What is the Digital India programme and what are its key pillars?",
+      "category": "factual_qa",
+      "language": "en",
+      "description": "Tests knowledge of Indian govt digital initiative",
+      "reference_answer": "Digital India is a flagship programme to transform India into a digitally empowered society. Key pillars include: digital infrastructure as utility, governance and services on demand, and digital empowerment of citizens. Includes initiatives like Aadhaar, UPI, DigiLocker, and e-governance portals.",
+      "parallel_id": "TF-HI-FQ-005",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-CR-001",
+      "text": "A district administration wants to reduce farmer suicides. Propose 3 creative, implementable solutions considering Indian rural realities.",
+      "category": "creative_reasoning",
+      "language": "en",
+      "description": "Tests creative problem-solving with real-world constraints",
+      "parallel_id": "TF-HI-CR-001",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-CR-002",
+      "text": "Design a simple mobile app concept for rural citizens to report potholes to the local municipality. Describe 3 key features and how it would work.",
+      "category": "creative_reasoning",
+      "language": "en",
+      "description": "Tests creative tech solution design",
+      "parallel_id": "TF-HI-CR-002",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-CR-003",
+      "text": "If India had to design a universal basic income system, what would be the 3 biggest challenges and how might each be addressed?",
+      "category": "creative_reasoning",
+      "language": "en",
+      "description": "Tests counterfactual reasoning with policy knowledge",
+      "parallel_id": "TF-HI-CR-003",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-CR-004",
+      "text": "Imagine you are advising a smart city project. Propose 3 ways AI could improve traffic management in a city like Bangalore.",
+      "category": "creative_reasoning",
+      "language": "en",
+      "description": "Tests creative AI application in governance",
+      "parallel_id": "TF-HI-CR-004",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-CR-005",
+      "text": "A village has no internet but needs a system for residents to access government services. Propose a creative offline solution.",
+      "category": "creative_reasoning",
+      "language": "en",
+      "description": "Tests innovation under constraints",
+      "parallel_id": "TF-HI-CR-005",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-SUM-001",
+      "text": "Summarize the following government circular in 3-4 sentences:\n\n'The Ministry of Finance, Government of India, has decided to revise the Dearness Allowance (DA) payable to Central Government employees and Dearness Relief (DR) payable to pensioners. The revised rate of DA/DR will be 50% of the basic pay/pension with effect from January 1, 2024. This supersedes the earlier order dated September 2023 where the rate was 46%. All Ministries/Departments of the Government of India are requested to take necessary action and ensure timely disbursement. The arrears for the period January-March 2024 shall be paid in cash. Employees on deputation are entitled to DA at the revised rate from their parent department.'",
+      "category": "summarization",
+      "language": "en",
+      "description": "Tests summarization of government circular",
+      "reference_answer": "The Finance Ministry has increased DA/DR for central government employees and pensioners from 46% to 50% of basic pay, effective January 1, 2024. Arrears for Jan-Mar 2024 will be paid in cash. All departments must ensure timely implementation.",
+      "parallel_id": "TF-HI-SUM-001",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-SUM-002",
+      "text": "Summarize this policy description in under 80 words:\n\n'The Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA) guarantees 100 days of wage employment per year to every rural household whose adult members volunteer to do unskilled manual work. The scheme is demand-driven and the wages are paid within 15 days of work completion. If employment is not provided within 15 days of application, the applicant is entitled to an unemployment allowance. The programme covers activities like water conservation, land development, rural connectivity, and drought proofing. The wages are directly transferred to the bank accounts of beneficiaries through DBT.'",
+      "category": "summarization",
+      "language": "en",
+      "description": "Tests concise summarization with word limit",
+      "expected_format": "Under 80 words",
+      "parallel_id": "TF-HI-SUM-002",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-SUM-003",
+      "text": "Summarize the key points from this budget announcement:\n\n'The Union Budget 2024-25 announced a new income tax regime with revised slabs: no tax up to Rs 3 lakh, 5% for Rs 3-7 lakh, 10% for Rs 7-10 lakh, 15% for Rs 10-12 lakh, 20% for Rs 12-15 lakh, and 30% above Rs 15 lakh. Standard deduction increased to Rs 75,000. The budget allocated Rs 11.11 lakh crore for capital expenditure. Agriculture received Rs 1.52 lakh crore allocation. A new internship scheme for 1 crore youth in top 500 companies was announced. The fiscal deficit target is set at 4.9% of GDP.'",
+      "category": "summarization",
+      "language": "en",
+      "description": "Tests summarization of financial/budget information",
+      "parallel_id": "TF-HI-SUM-003",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-SUM-004",
+      "text": "Summarize this committee report extract in 2-3 bullet points:\n\n'The Parliamentary Standing Committee on Education observed that the implementation of the National Education Policy 2020 has been uneven across states. While states like Karnataka and Madhya Pradesh have made significant progress in adopting the 5+3+3+4 structure, several northeastern states and Union Territories lag behind. The committee noted that teacher training programmes are insufficiently funded, with only 40% of the allocated budget being utilized. The committee recommends that the Ministry of Education establish a dedicated monitoring cell and increase the budget allocation for teacher training by 25% in the next fiscal year.'",
+      "category": "summarization",
+      "language": "en",
+      "description": "Tests summarization with bullet point format",
+      "expected_format": "2-3 bullet points",
+      "parallel_id": "TF-HI-SUM-004",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-SUM-005",
+      "text": "Provide a one-paragraph summary of this announcement:\n\n'The Reserve Bank of India has decided to maintain the repo rate at 6.5% for the eighth consecutive time. The decision was taken by the Monetary Policy Committee (MPC) in its bi-monthly meeting. The MPC noted that while inflation has moderated from its peak, food inflation remains elevated due to supply-side disruptions. The GDP growth projection for FY2025 has been revised upward to 7.2% from 7.0%. The RBI Governor emphasized the need to remain vigilant on inflation while supporting growth. The standing deposit facility rate remains at 6.25% and the marginal standing facility rate at 6.75%.'",
+      "category": "summarization",
+      "language": "en",
+      "description": "Tests economic policy summarization",
+      "expected_format": "One paragraph",
+      "parallel_id": "TF-HI-SUM-005",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-TRN-001",
+      "text": "Translate the following text from English to Hindi:\n\n'The Department of Agriculture has announced a new crop insurance scheme for small and marginal farmers. Under this scheme, farmers will receive compensation for crop losses due to natural disasters, pests, and diseases. The premium rate has been fixed at 2% for Kharif crops and 1.5% for Rabi crops.'",
+      "category": "translation",
+      "language": "en",
+      "description": "Tests English to Hindi translation of government content",
+      "reference_answer": "कृषि विभाग ने छोटे और सीमांत किसानों के लिए एक नई फसल बीमा योजना की घोषणा की है। इस योजना के तहत, किसानों को प्राकृतिक आपदाओं, कीटों और बीमारियों से फसल नुकसान पर मुआवजा मिलेगा। प्रीमियम दर खरीफ फसलों के लिए 2% और रबी फसलों के लिए 1.5% तय की गई है।",
+      "parallel_id": "TF-HI-TRN-001",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-TRN-002",
+      "text": "Translate to Hindi:\n\n'Every citizen has the right to access public services in a timely and efficient manner. The government is committed to reducing bureaucratic delays and ensuring transparency in all processes.'",
+      "category": "translation",
+      "language": "en",
+      "description": "Tests translation of civic/rights content",
+      "reference_answer": "हर नागरिक को समय पर और कुशल तरीके से सार्वजनिक सेवाओं तक पहुंच का अधिकार है। सरकार नौकरशाही देरी को कम करने और सभी प्रक्रियाओं में पारदर्शिता सुनिश्चित करने के लिए प्रतिबद्ध है।",
+      "parallel_id": "TF-HI-TRN-002",
+      "metadata": {"difficulty": "easy", "domain": "government"}
+    },
+    {
+      "id": "TF-TRN-003",
+      "text": "Translate this technical paragraph to Hindi:\n\n'The Aadhaar-based Direct Benefit Transfer (DBT) system has eliminated intermediaries and reduced corruption in subsidy distribution. Over 300 government schemes now use DBT, saving approximately Rs 2.7 lakh crore through deduplication and removal of ghost beneficiaries.'",
+      "category": "translation",
+      "language": "en",
+      "description": "Tests translation of technical government content",
+      "reference_answer": "आधार-आधारित प्रत्यक्ष लाभ हस्तांतरण (DBT) प्रणाली ने बिचौलियों को हटा दिया है और सब्सिडी वितरण में भ्रष्टाचार कम किया है। 300 से अधिक सरकारी योजनाएं अब DBT का उपयोग करती हैं, जिससे डुप्लिकेट और फर्जी लाभार्थियों को हटाकर लगभग 2.7 लाख करोड़ रुपये की बचत हुई है।",
+      "parallel_id": "TF-HI-TRN-003",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-TRN-004",
+      "text": "Translate to Hindi:\n\n'The National Education Policy 2020 aims to increase the Gross Enrolment Ratio in higher education to 50% by 2035. It introduces a multidisciplinary approach and allows flexible entry and exit points in degree programmes.'",
+      "category": "translation",
+      "language": "en",
+      "description": "Tests translation of education policy content",
+      "reference_answer": "राष्ट्रीय शिक्षा नीति 2020 का लक्ष्य 2035 तक उच्च शिक्षा में सकल नामांकन अनुपात को 50% तक बढ़ाना है। यह बहु-विषयक दृष्टिकोण अपनाती है और डिग्री कार्यक्रमों में लचीले प्रवेश और निकास बिंदुओं की अनुमति देती है।",
+      "parallel_id": "TF-HI-TRN-004",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-TRN-005",
+      "text": "Translate to Hindi (maintain formal tone):\n\n'It is hereby notified that the last date for submission of income tax returns for the assessment year 2024-25 has been extended from July 31 to September 15, 2024. Taxpayers are advised to file their returns at the earliest to avoid last-minute rush.'",
+      "category": "translation",
+      "language": "en",
+      "description": "Tests translation of formal notification",
+      "reference_answer": "इसके द्वारा सूचित किया जाता है कि मूल्यांकन वर्ष 2024-25 के लिए आयकर रिटर्न जमा करने की अंतिम तिथि 31 जुलाई से बढ़ाकर 15 सितंबर, 2024 कर दी गई है। करदाताओं को सलाह दी जाती है कि वे अंतिम समय की भीड़ से बचने के लिए जल्द से जल्द अपना रिटर्न दाखिल करें।",
+      "parallel_id": "TF-HI-TRN-005",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-LM-001",
+      "text": "A government office receives 240 applications per day. If they process 30 applications per hour with 6 employees, how many additional employees are needed to clear a backlog of 1200 applications in 2 days while also handling daily incoming applications?",
+      "category": "logical_mathematical",
+      "language": "en",
+      "description": "Tests arithmetic reasoning in government context",
+      "reference_answer": "Daily incoming: 240. In 2 days: 480 new + 1200 backlog = 1680 total. Current capacity: 6 employees × 30/hr × 8 hrs = 1440/day = 2880 in 2 days. Need 1680 in 2 days = 840/day. At 240/employee/day (30×8), need 840/240 = 3.5 → 4 employees. So need 4 total, meaning they can manage with fewer than their current 6. But if they also handle daily load: 1680 total / 2 days / 240 per employee per day = 3.5 → 4 employees needed. Current 6 are sufficient, no additional employees needed.",
+      "parallel_id": "TF-HI-LM-001",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-LM-002",
+      "text": "A municipality needs to distribute 5000 ration kits across 8 wards. Wards A-D have 800 families each, and Wards E-H have 600 families each. How should the kits be distributed proportionally?",
+      "category": "logical_mathematical",
+      "language": "en",
+      "description": "Tests proportional reasoning",
+      "reference_answer": "Total families: 4×800 + 4×600 = 3200 + 2400 = 5600. Ratio per family: 5000/5600 = 0.893 kits/family. Wards A-D: 800 × 0.893 = 714 kits each. Wards E-H: 600 × 0.893 = 536 kits each. Total: 4×714 + 4×536 = 2856 + 2144 = 5000.",
+      "parallel_id": "TF-HI-LM-002",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-LM-003",
+      "text": "If a state government's revenue increases by 8% annually and current revenue is Rs 50,000 crore, what will the revenue be after 3 years? Also, if expenditure grows at 10% from a current Rs 48,000 crore, in how many years will expenditure exceed revenue?",
+      "category": "logical_mathematical",
+      "language": "en",
+      "description": "Tests compound growth calculation",
+      "reference_answer": "Revenue after 3 years: 50000 × 1.08³ = 50000 × 1.2597 = Rs 62,985 crore. Expenditure: Year 1: 52800 vs 54000, Year 2: 58080 vs 58320. Expenditure exceeds revenue in year 2 since 48000×1.1² = 58080 > 50000×1.08² = 58320. Actually checking: Rev Y1=54000, Exp Y1=52800. Rev Y2=58320, Exp Y2=58080. Rev Y3=62985, Exp Y3=63888. Expenditure exceeds in Year 3.",
+      "parallel_id": "TF-HI-LM-003",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-LM-004",
+      "text": "A survey of 500 households found: 300 have access to piped water, 250 have sewage connection, and 150 have both. How many households have neither? What percentage of households with piped water also have sewage?",
+      "category": "logical_mathematical",
+      "language": "en",
+      "description": "Tests set theory / Venn diagram logic",
+      "reference_answer": "Using inclusion-exclusion: At least one = 300 + 250 - 150 = 400. Neither = 500 - 400 = 100 households. Percentage with both among piped water users: 150/300 = 50%.",
+      "parallel_id": "TF-HI-LM-004",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-LM-005",
+      "text": "Three government departments share a building. Department A needs twice the space of Department C. Department B needs 1.5 times the space of Department C. If the total available space is 9000 sq ft, how much does each department get?",
+      "category": "logical_mathematical",
+      "language": "en",
+      "description": "Tests algebraic reasoning",
+      "reference_answer": "Let C = x. A = 2x, B = 1.5x. Total: x + 2x + 1.5x = 4.5x = 9000. x = 2000. So C = 2000, A = 4000, B = 3000 sq ft.",
+      "parallel_id": "TF-HI-LM-005",
+      "metadata": {"difficulty": "easy", "domain": "government"}
+    },
+    {
+      "id": "TF-CONV-001",
+      "text": "You are a government helpdesk agent. A frustrated citizen says: 'I have been waiting 3 months for my passport and nobody tells me anything! This is ridiculous. I need to travel next month.' Respond helpfully.",
+      "category": "conversational",
+      "language": "en",
+      "description": "Tests empathetic helpdesk response",
+      "parallel_id": "TF-HI-CONV-001",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-CONV-002",
+      "text": "You are a chatbot for a municipal corporation. A citizen asks: 'How do I pay my property tax online? I have never used a computer before.' Guide them step by step in simple language.",
+      "category": "conversational",
+      "language": "en",
+      "description": "Tests clear guidance for non-tech-savvy users",
+      "parallel_id": "TF-HI-CONV-002",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-CONV-003",
+      "text": "A small business owner approaches a government service center and says: 'I want to register my shop under GST but I heard it is very complicated. Can you help me understand what I need to do?' Assist them.",
+      "category": "conversational",
+      "language": "en",
+      "description": "Tests informative yet reassuring guidance",
+      "parallel_id": "TF-HI-CONV-003",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-CONV-004",
+      "text": "You are an automated railway enquiry system. A user asks: 'My train was supposed to arrive at 6 PM but it is 8 PM and there is no update. What should I do? I am at the station with my elderly parents.' Respond appropriately.",
+      "category": "conversational",
+      "language": "en",
+      "description": "Tests handling urgency with practical advice",
+      "parallel_id": "TF-HI-CONV-004",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-CONV-005",
+      "text": "A farmer calls a government agriculture helpline and says: 'My crops are dying and I don't know what disease they have. The leaves are turning yellow and there are brown spots. What should I do?' Respond with actionable advice.",
+      "category": "conversational",
+      "language": "en",
+      "description": "Tests domain-specific advisory conversation",
+      "parallel_id": "TF-HI-CONV-005",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-LA-001",
+      "text": "Draft a short government notification (5-6 sentences) announcing a public holiday on October 2nd for Gandhi Jayanti. Include standard legal phrasing.",
+      "category": "legal_administrative",
+      "language": "en",
+      "description": "Tests formal government notification drafting",
+      "parallel_id": "TF-HI-LA-001",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-LA-002",
+      "text": "Explain the procedure for filing a Public Interest Litigation (PIL) in the High Court. Include who can file, grounds, and basic steps.",
+      "category": "legal_administrative",
+      "language": "en",
+      "description": "Tests legal procedure knowledge",
+      "reference_answer": "Any citizen can file a PIL in the High Court for matters of public interest. Grounds include violation of fundamental rights, environmental harm, or government inaction. Steps: draft a petition stating facts and relief sought, file it in the High Court registry with required fees, the court may issue notice to respondents.",
+      "parallel_id": "TF-HI-LA-002",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-LA-003",
+      "text": "Write a brief office memorandum (OM) from the Department of Personnel and Training regarding revised rules for Work from Home for central government employees. Keep it formal and structured.",
+      "category": "legal_administrative",
+      "language": "en",
+      "description": "Tests formal office memorandum drafting",
+      "parallel_id": "TF-HI-LA-003",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-LA-004",
+      "text": "What is the difference between a 'Gazette Notification' and an 'Office Memorandum' in Indian government? When is each used?",
+      "category": "legal_administrative",
+      "language": "en",
+      "description": "Tests knowledge of administrative document types",
+      "reference_answer": "A Gazette Notification is published in the Official Gazette and has legal force — used for acts, rules, appointments, and policy changes. An Office Memorandum is an internal communication between departments for administrative instructions and procedural matters without direct legal binding.",
+      "parallel_id": "TF-HI-LA-004",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-LA-005",
+      "text": "Draft a brief RTI (Right to Information) request asking the Municipal Corporation for details about road construction expenditure in Ward 15 for the year 2023-24.",
+      "category": "legal_administrative",
+      "language": "en",
+      "description": "Tests RTI application drafting",
+      "parallel_id": "TF-HI-LA-005",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-SENT-001",
+      "text": "Analyze the sentiment of this citizen feedback:\n\n'The new online portal is slightly better than before but it still crashes during peak hours. I appreciate the effort but the execution is lacking. At least they are trying, unlike the previous administration.'",
+      "category": "sentiment_analysis",
+      "language": "en",
+      "description": "Tests mixed sentiment detection",
+      "reference_answer": "Mixed/slightly positive — acknowledges improvement and effort, but criticizes execution. Contains comparative praise (better than before, unlike previous admin) along with frustration about technical issues.",
+      "parallel_id": "TF-HI-SENT-001",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-SENT-002",
+      "text": "Analyze the sentiment:\n\n'I cannot believe how difficult it is to get a simple birth certificate. Four visits to the office, each time a different document is demanded. Nobody seems to know the actual requirements. Complete waste of time and money.'",
+      "category": "sentiment_analysis",
+      "language": "en",
+      "description": "Tests strong negative sentiment with frustration",
+      "reference_answer": "Strongly negative — extreme frustration with bureaucratic inefficiency. Key emotions: disbelief, anger, exasperation. Targets: process inconsistency and staff competence.",
+      "parallel_id": "TF-HI-SENT-002",
+      "metadata": {"difficulty": "easy", "domain": "government"}
+    },
+    {
+      "id": "TF-SENT-003",
+      "text": "Analyze the sentiment of this feedback:\n\n'The PM-KISAN scheme has been a lifesaver for our family. The money comes directly to our bank account every 4 months. However, the verification process was tedious and my neighbor was wrongly excluded. The idea is great but the system needs improvement.'",
+      "category": "sentiment_analysis",
+      "language": "en",
+      "description": "Tests nuanced positive-with-caveats sentiment",
+      "reference_answer": "Predominantly positive with constructive criticism. Personal experience is very positive (lifesaver, direct transfer). But raises concerns about verification process and exclusion errors. Overall: appreciative but pragmatic.",
+      "parallel_id": "TF-HI-SENT-003",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-SENT-004",
+      "text": "What is the sentiment in this review of a government hospital?\n\n'Doctors are good but there are never enough of them. Waited 5 hours to see one. The medicines are free which is helpful for people like us. The building is old but clean. Could be much better with more staff.'",
+      "category": "sentiment_analysis",
+      "language": "en",
+      "description": "Tests balanced sentiment with specific pros and cons",
+      "reference_answer": "Neutral to slightly positive — balanced review. Positives: doctor quality, free medicines, cleanliness. Negatives: understaffing, long wait times, old infrastructure. Overall grateful but wanting improvement.",
+      "parallel_id": "TF-HI-SENT-004",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-SENT-005",
+      "text": "Analyze the tone and sentiment:\n\n'Oh sure, the new traffic system is working wonderfully. I only sat in a jam for 2 hours today instead of the usual 3. What an achievement by our brilliant planners.'",
+      "category": "sentiment_analysis",
+      "language": "en",
+      "description": "Tests sarcasm detection",
+      "reference_answer": "Negative/sarcastic — uses irony and mock praise to express frustration. 'Wonderfully', 'achievement', 'brilliant planners' are all sarcastic. The actual sentiment is deep dissatisfaction with traffic management.",
+      "parallel_id": "TF-HI-SENT-005",
+      "metadata": {"difficulty": "hard", "domain": "government"}
+    },
+    {
+      "id": "TF-CODE-001",
+      "text": "Write a Python function that takes a list of dictionaries representing citizen complaints (each with 'category', 'date', 'ward') and returns a dictionary with the count of complaints per category.",
+      "category": "code_generation",
+      "language": "en",
+      "description": "Tests basic data processing code generation",
+      "reference_answer": "def count_by_category(complaints):\n    counts = {}\n    for c in complaints:\n        cat = c['category']\n        counts[cat] = counts.get(cat, 0) + 1\n    return counts",
+      "parallel_id": "TF-HI-CODE-001",
+      "metadata": {"difficulty": "easy", "domain": "government"}
+    },
+    {
+      "id": "TF-CODE-002",
+      "text": "Write a Python function to validate an Aadhaar number. An Aadhaar number is a 12-digit number that should not start with 0 or 1.",
+      "category": "code_generation",
+      "language": "en",
+      "description": "Tests input validation code generation",
+      "reference_answer": "def validate_aadhaar(number):\n    s = str(number).strip()\n    if len(s) != 12:\n        return False\n    if not s.isdigit():\n        return False\n    if s[0] in ('0', '1'):\n        return False\n    return True",
+      "parallel_id": "TF-HI-CODE-002",
+      "metadata": {"difficulty": "easy", "domain": "government"}
+    },
+    {
+      "id": "TF-CODE-003",
+      "text": "Write a Python function that reads a CSV file of beneficiary data (columns: name, aadhaar, amount, status) and returns two lists: one of 'approved' beneficiaries and one of 'rejected' beneficiaries.",
+      "category": "code_generation",
+      "language": "en",
+      "description": "Tests file handling and data processing",
+      "parallel_id": "TF-HI-CODE-003",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-CODE-004",
+      "text": "Write a Python class called `GrievanceTracker` that can: (1) add a grievance with id, description, and priority, (2) get all grievances sorted by priority (high first), and (3) mark a grievance as resolved.",
+      "category": "code_generation",
+      "language": "en",
+      "description": "Tests OOP code generation",
+      "parallel_id": "TF-HI-CODE-004",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    },
+    {
+      "id": "TF-CODE-005",
+      "text": "Write a Python function that takes a date string (DD-MM-YYYY) and calculates the number of working days (excluding Saturdays and Sundays) between that date and today.",
+      "category": "code_generation",
+      "language": "en",
+      "description": "Tests date handling code generation",
+      "parallel_id": "TF-HI-CODE-005",
+      "metadata": {"difficulty": "medium", "domain": "government"}
+    }
+  ]
+}

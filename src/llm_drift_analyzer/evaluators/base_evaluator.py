@@ -61,7 +61,8 @@ class BaseEvaluator(ABC):
         evaluator_model: str = "gpt-4",
         evaluator_provider: str = "openai",
         ollama_base_url: str = "http://localhost:11434",
-        temperature: float = 0.1
+        temperature: float = 0.1,
+        reasoning_effort: Optional[str] = None,
     ):
         """
         Initialize the evaluator.
@@ -70,10 +71,15 @@ class BaseEvaluator(ABC):
             openai_api_key: OpenAI API key (required if provider is "openai").
             evaluator_model: Model to use for evaluation.
                 For OpenAI: "gpt-4", "gpt-4-turbo", "gpt-3.5-turbo"
-                For Ollama: "llama3", "mistral", "mixtral", etc.
+                For Ollama: "llama3", "mistral", "mixtral", "gpt-oss", etc.
             evaluator_provider: Provider for evaluation ("openai" or "ollama").
             ollama_base_url: Ollama server URL (only used if provider is "ollama").
             temperature: Temperature for evaluation queries.
+            reasoning_effort: Reasoning effort for thinking models via Ollama.
+                Set to "low", "medium", or "high" for models like gpt-oss.
+                When set, the Ollama `think` parameter is included in requests
+                and the reasoning trace is automatically stripped from responses.
+                Leave as None for non-reasoning models (default behaviour).
 
         Raises:
             ValueError: If provider is "openai" but no API key provided.
@@ -82,6 +88,7 @@ class BaseEvaluator(ABC):
         self.evaluator_model = evaluator_model
         self.temperature = temperature
         self.ollama_base_url = ollama_base_url.rstrip("/")
+        self.reasoning_effort = reasoning_effort  # None means non-reasoning model
         self._logger = get_logger(f"evaluators.{self.metric_name}")
 
         if self.evaluator_provider == "openai":
@@ -114,7 +121,7 @@ class BaseEvaluator(ABC):
             ConnectionError: If Ollama server is not reachable.
         """
         try:
-            response = requests.get(f"{self.ollama_base_url}/api/tags", timeout=5)
+            response = requests.get(f"{self.ollama_base_url}/api/tags", timeout=5, proxies={"http": None, "https": None})
             if response.status_code != 200:
                 raise ConnectionError(f"Ollama returned status {response.status_code}")
         except requests.exceptions.ConnectionError as e:
@@ -263,28 +270,69 @@ class BaseEvaluator(ABC):
             "just output the single number."
         )
 
+        if self.reasoning_effort is not None:
+            # Reasoning model (e.g. gpt-oss): no token cap — the model decides
+            # how long to think. num_predict=-1 means unlimited in Ollama.
+            options = {
+                "temperature": self.temperature,
+                "num_predict": -1,
+            }
+        else:
+            options = {
+                "temperature": self.temperature,
+                "num_predict": 8192,
+                "num_ctx": 8192,
+            }
+
         payload = {
             "model": self.evaluator_model,
             "prompt": evaluation_prompt,
             "system": system_prompt,
             "stream": False,
-            "options": {
-                "temperature": self.temperature,
-                "num_predict": 20,  # Short response - just need a number
-            }
+            "options": options,
         }
+
+        # For reasoning models (e.g. gpt-oss), pass the think level.
+        # gpt-oss requires "low"/"medium"/"high" — true/false is ignored by it.
+        if self.reasoning_effort is not None:
+            payload["think"] = self.reasoning_effort
 
         response = requests.post(
             f"{self.ollama_base_url}/api/generate",
             json=payload,
-            timeout=60
+            timeout=300,  # Thinking models can take longer with extended output
+            proxies={"http": None, "https": None}
         )
 
         if response.status_code != 200:
             raise RuntimeError(f"Ollama API error: {response.text}")
 
         result = response.json()
-        return result.get("response", "").strip()
+
+        # Check for error field (Ollama returns 200 with {"error": "..."} for missing models)
+        if "error" in result:
+            raise RuntimeError(f"Ollama model error: {result['error']}")
+
+        # If the model returned a separate thinking field, Ollama has already split
+        # the reasoning trace from the final answer. Use the final answer directly —
+        # no need to parse or strip anything.
+        if result.get("thinking"):
+            score_text = result.get("response", "").strip()
+            self._logger.debug(
+                f"Reasoning model detected (thinking field present). "
+                f"Using final response directly: {repr(score_text)}"
+            )
+        else:
+            score_text = result.get("response", "").strip()
+            self._logger.debug(f"Raw evaluator response: {repr(score_text)}")
+
+        if not score_text:
+            raise RuntimeError(
+                f"Ollama returned an empty response for model '{self.evaluator_model}'. "
+                "Check that the model exists with: ollama list"
+            )
+
+        return score_text
 
     def _parse_score(self, text: str) -> int:
         """
@@ -301,10 +349,23 @@ class BaseEvaluator(ABC):
         Raises:
             ValueError: If no valid score found.
         """
-        # Try to extract just the number
-        numbers = re.findall(r'\d+', text)
-        if numbers:
-            return int(numbers[0])
+        # --- Pass 1: strip complete thinking blocks ---
+        # Handles: "Thinking...\n...\n...done thinking." (gpt-oss, QwQ, etc.)
+        cleaned = re.sub(r'Thinking\.+.*?done thinking\.?', '', text, flags=re.DOTALL | re.IGNORECASE)
+        # Handles: <think>...</think> and <thinking>...</thinking> (DeepSeek-R1, etc.)
+        cleaned = re.sub(r'<think(?:ing)?>.*?</think(?:ing)?>', '', cleaned, flags=re.DOTALL | re.IGNORECASE)
+        cleaned = cleaned.strip()
+
+        if cleaned:
+            numbers = re.findall(r'\d+', cleaned)
+            if numbers:
+                return int(numbers[-1])
+
+        # --- Pass 2: thinking block was cut off (hit num_predict limit) ---
+        # Look for a standalone number on its own line at the end of the text
+        standalone = re.findall(r'(?:^|\n)\s*(\d+)\s*(?:\n|$)', text)
+        if standalone:
+            return int(standalone[-1])
 
         raise ValueError(f"Could not parse score from: {text}")
 

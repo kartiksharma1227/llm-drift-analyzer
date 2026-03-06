@@ -1,6 +1,6 @@
 # LLM Behavioral Drift Analyzer
 
-A comprehensive Python framework for tracking behavioral drift in Large Language Models (LLMs), measuring changes in instruction-following, factuality, tone, and verbosity over time.
+A comprehensive Python framework for tracking behavioral drift in Large Language Models (LLMs) and evaluating which open-source model is best suited for which task — with a special focus on Hindi for government and public-sector use cases.
 
 Based on the research paper: _"Tracking Behavioral Drift in Large Language Models: A Comprehensive Framework for Monitoring Instruction-Following, Factuality, and Tone Variance Over Time"_
 
@@ -15,6 +15,8 @@ Based on the research paper: _"Tracking Behavioral Drift in Large Language Model
 - **Extensible Architecture**: Easy to add new providers, evaluators, and metrics
 - **CLI Interface**: Full command-line interface for running analyses
 - **Detailed Reports**: Markdown, JSON, and text report generation
+- **Task-Fitness Evaluation**: Determine which open-source model is best for which task (summarization, translation, legal/admin, etc.) — especially in Hindi
+- **Government Use-Case Benchmarks**: 100 prompts (50 Hindi + 50 English) covering RTI, GST, MGNREGA, PIL, Aadhaar, and more
 
 ## Installation
 
@@ -40,7 +42,7 @@ Based on the research paper: _"Tracking Behavioral Drift in Large Language Model
    python -m venv venv
 
    # Activate on macOS/Linux
-    
+    source venv/bin/activate
 
    # Activate on Windows
    .\venv\Scripts\activate
@@ -160,6 +162,41 @@ python main.py crosslingual \
 python main.py analyze-hindi --models qwen2:1.5b --provider ollama --iterations 5
 # Step 2: Generate report with visualizations
 python main.py report --input output/hindi/hindi_results.json --visualize
+
+# ── Task-Fitness Evaluation ──────────────────────────────────────────────────
+
+# Find the best model for each task in Hindi (fully offline, free)
+python main.py task-fitness \
+    --models qwen2:1.5b tinyllama \
+    --provider ollama \
+    --iterations 3 \
+    --languages hi \
+    --evaluator-provider ollama \
+    --evaluator-model qwen2:1.5b \
+    --visualize \
+    --output output/task_fitness_hindi
+
+# Both Hindi and English
+python main.py task-fitness \
+    --models llama3 mistral qwen2 \
+    --provider ollama \
+    --iterations 3 \
+    --languages both \
+    --evaluator-provider ollama \
+    --evaluator-model llama3 \
+    --visualize \
+    --output output/task_fitness
+
+# Filter to specific task categories only
+python main.py task-fitness \
+    --models qwen2:1.5b tinyllama \
+    --provider ollama \
+    --iterations 2 \
+    --languages hi \
+    --categories summarization legal_administrative translation \
+    --evaluator-provider ollama \
+    --evaluator-model qwen2:1.5b \
+    --output output/task_fitness_gov
 ```
 
 ### Using as a Library
@@ -411,14 +448,17 @@ llm_drift_analyzer/
 │       ├── benchmark_prompts.json             # 15 English benchmark prompts
 │       ├── hindi_benchmark_prompts.json       # 15 Hindi benchmark prompts (parallel)
 │       ├── english_benchmark_expanded.json    # 90 English prompts (IFEval + TruthfulQA)
-│       └── hindi_benchmark_expanded.json      # 100 Hindi prompts (IndicMSMARCO + XNLI + manual)
+│       ├── hindi_benchmark_expanded.json      # 100 Hindi prompts (IndicMSMARCO + XNLI + manual)
+│       ├── task_fitness_english.json          # 50 English task-fitness prompts (government-focused)
+│       └── task_fitness_hindi.json            # 50 Hindi task-fitness prompts (RTI, GST, MGNREGA, etc.)
 │
 ├── src/llm_drift_analyzer/
 │   ├── __init__.py
 │   ├── models/                       # Data models
-│   │   ├── prompt.py                 # Prompt and PromptSet classes (with Language enum)
+│   │   ├── prompt.py                 # Prompt and PromptSet classes (10 categories)
 │   │   ├── response_analysis.py      # ResponseAnalysis class
-│   │   └── multilingual_analysis.py  # Cross-lingual comparison models
+│   │   ├── multilingual_analysis.py  # Cross-lingual comparison models
+│   │   └── task_fitness.py           # TaskFitnessScore and TaskFitnessMatrix dataclasses
 │   ├── clients/                      # LLM API clients
 │   │   ├── base_client.py            # Abstract base class
 │   │   ├── openai_client.py          # OpenAI implementation
@@ -427,17 +467,27 @@ llm_drift_analyzer/
 │   │   └── ollama_client.py          # Ollama (local models) implementation
 │   ├── evaluators/                   # Response evaluators
 │   │   ├── base_evaluator.py         # Abstract base class
-│   │   ├── instruction_evaluator.py  # Instruction adherence
-│   │   ├── factuality_evaluator.py   # Factual accuracy
-│   │   ├── tone_evaluator.py         # Tone/style
-│   │   └── multilingual_evaluator.py # Hindi-aware evaluators
+│   │   ├── instruction_evaluator.py  # Instruction adherence (0-3)
+│   │   ├── factuality_evaluator.py   # Factual accuracy (0-2)
+│   │   ├── tone_evaluator.py         # Tone/style (0-2)
+│   │   ├── multilingual_evaluator.py # Hindi-aware evaluators
+│   │   ├── summarization_evaluator.py    # Summarization quality (0-3)
+│   │   ├── translation_evaluator.py      # Translation quality (0-3)
+│   │   ├── logical_math_evaluator.py     # Logical/math reasoning (0-3)
+│   │   ├── conversational_evaluator.py   # Conversational quality (0-3)
+│   │   ├── legal_admin_evaluator.py      # Legal/administrative quality (0-3)
+│   │   ├── sentiment_evaluator.py        # Sentiment analysis quality (0-3)
+│   │   └── code_generation_evaluator.py  # Code generation quality (0-3)
 │   ├── analyzers/                    # Analysis engines
-│   │   ├── drift_analyzer.py         # Main analyzer
+│   │   ├── drift_analyzer.py         # Main drift analyzer
 │   │   ├── statistical_analyzer.py   # Statistical analysis
-│   │   └── crosslingual_analyzer.py  # English vs Hindi comparison
+│   │   ├── crosslingual_analyzer.py  # English vs Hindi comparison
+│   │   └── task_fitness_analyzer.py  # Task-fitness orchestrator (CATEGORY_EVALUATOR_MAP)
 │   ├── reporters/                    # Report generation
-│   │   ├── report_generator.py       # Text reports
-│   │   └── visualizer.py             # Charts
+│   │   ├── report_generator.py       # Drift text reports
+│   │   ├── visualizer.py             # Drift charts
+│   │   ├── fitness_report_generator.py  # Task-fitness markdown report
+│   │   └── fitness_visualizer.py        # Heatmap, radar, bar, comparison charts
 │   └── utils/                        # Utilities
 │       ├── config.py                 # Configuration
 │       ├── logger.py                 # Logging
@@ -494,24 +544,32 @@ config = Config(
 
 ## Evaluation Metrics
 
-### Instruction Adherence (0-3)
+### Behavioral Drift Metrics
 
-- **3**: Perfect adherence to all instructions
-- **2**: Good adherence with minor deviations
-- **1**: Poor adherence, missing key requirements
-- **0**: No adherence to instructions
+| Metric | Range | Description |
+|--------|-------|-------------|
+| Instruction Adherence | 0-3 | How well the model follows explicit instructions |
+| Factuality | 0-2 | Accuracy of factual claims |
+| Tone/Style | 0-2 | Appropriateness and consistency of tone |
 
-### Factuality (0-2)
+### Task-Fitness Metrics (all 0-3 for cross-task comparison)
 
-- **2**: Completely factual
-- **1**: Mostly factual with minor errors
-- **0**: Contains significant factual errors
+| Metric | Description |
+|--------|-------------|
+| `summarization_quality` | Key point capture, conciseness, no hallucination |
+| `translation_quality` | Meaning accuracy, natural Hindi phrasing, grammar |
+| `logical_mathematical_reasoning` | Correct answer + valid reasoning chain |
+| `conversational_quality` | Helpfulness, natural tone, empathy |
+| `legal_administrative_quality` | Correct terminology, formal structure, precision |
+| `sentiment_analysis_quality` | Correct sentiment, nuance, sarcasm detection |
+| `code_generation_quality` | Syntax correctness, logic, best practices |
 
-### Tone/Style (0-2)
+**Scoring scale (0-3) for all task-fitness evaluators:**
 
-- **2**: Appropriate and consistent tone
-- **1**: Adequate tone with some inconsistencies
-- **0**: Inappropriate tone for context
+- **3**: Excellent — fully correct, natural, well-structured
+- **2**: Good — mostly correct with minor gaps
+- **1**: Partial — incomplete or some errors
+- **0**: Poor — incorrect or missing response
 
 ## Hindi/Multilingual Analysis
 
@@ -745,6 +803,135 @@ The cross-lingual analysis generates additional reports:
 - `language_parity.json`: Detailed parity metrics per model
 - `charts/language_comparison.png`: Visual comparison of scores
 - `charts/parity_index.png`: Language parity visualization
+
+## Task-Fitness Evaluation
+
+This feature answers the question: **"Which open-source model is best for which task — especially in Hindi?"**
+
+Designed for government agencies and public-sector organizations that need to select the right local LLM for a specific job without fine-tuning or API costs.
+
+### Task Categories
+
+| Category | Evaluator | Score | Description |
+|----------|-----------|-------|-------------|
+| `summarization` | `SummarizationEvaluator` | 0-3 | Key point capture, conciseness, no hallucination |
+| `translation` | `TranslationEvaluator` | 0-3 | Meaning accuracy, natural Hindi phrasing, grammar |
+| `logical_mathematical` | `LogicalMathEvaluator` | 0-3 | Correct answer + valid reasoning chain |
+| `conversational` | `ConversationalEvaluator` | 0-3 | Helpfulness, natural tone, contextual appropriateness |
+| `legal_administrative` | `LegalAdminEvaluator` | 0-3 | Correct legal/admin terminology, formal structure |
+| `sentiment_analysis` | `SentimentEvaluator` | 0-3 | Sentiment accuracy, nuance, sarcasm detection |
+| `code_generation` | `CodeGenerationEvaluator` | 0-3 | Syntax correctness, logic, best practices |
+| `instruction_following` | `InstructionEvaluator` | 0-3 | Adherence to explicit instructions |
+| `factual_qa` | `FactualityEvaluator` | 0-2 | Factual accuracy |
+| `creative_reasoning` | `ToneEvaluator` | 0-2 | Creative and reasoning quality |
+
+### Government Use-Case Benchmark Prompts
+
+The `task_fitness_hindi.json` dataset covers real government scenarios in natural Hindi:
+
+| Domain | Example Prompt |
+|--------|---------------|
+| RTI (सूचना का अधिकार) | RTI आवेदन कैसे लिखें? |
+| GST | GST पंजीकरण की प्रक्रिया क्या है? |
+| MGNREGA | मनरेगा जॉब कार्ड के लिए आवेदन कैसे करें? |
+| PIL (याचिका) | जनहित याचिका दाखिल करने की प्रक्रिया |
+| Aadhaar | आधार कार्ड अपडेट कैसे करें? |
+| नगर निगम | संपत्ति कर कैसे भरें? |
+| Ayushman Bharat | आयुष्मान भारत योजना में नाम कैसे जोड़ें? |
+
+### Output Files
+
+Running `task-fitness` produces:
+
+| File | Description |
+|------|-------------|
+| `fitness_matrix.json` | Raw model × task × language scores |
+| `fitness_report.md` | Full report: executive summary, fitness table, per-task rankings, Hindi-focus section, government recommendations |
+| `charts/fitness_heatmap.png` | Color-coded model × task grid |
+| `charts/model_radar_profiles.png` | Radar chart per model across all tasks |
+| `charts/task_rankings_bar.png` | Grouped bar chart: best model per task |
+| `charts/hindi_vs_english.png` | Side-by-side Hindi vs English score comparison |
+
+### How the Hindi Evaluation Works
+
+The entire pipeline is Hindi end-to-end:
+
+1. **Input** — Hindi prompt from `task_fitness_hindi.json` (e.g., *"RTI आवेदन कैसे लिखें?"*)
+2. **Model response** — The tested model responds in Hindi
+3. **Evaluator** — A second local model (e.g., `qwen2:1.5b`) reads both the Hindi prompt and Hindi response, then assigns a score (0-3)
+
+No translation happens at any stage. The evaluator scores the Hindi response directly.
+
+### Using Task-Fitness in Python
+
+```python
+from llm_drift_analyzer import Config
+from llm_drift_analyzer.models import PromptSet
+from llm_drift_analyzer.analyzers import TaskFitnessAnalyzer
+from llm_drift_analyzer.reporters import FitnessReportGenerator, FitnessVisualizer
+
+# Load Hindi benchmark prompts
+prompts = PromptSet.load_from_file("data/prompts/task_fitness_hindi.json")
+
+# Run fitness analysis
+config = Config.from_env()
+config.evaluator_provider = "ollama"
+config.evaluator_model = "qwen2:1.5b"
+
+analyzer = TaskFitnessAnalyzer(config, provider="ollama")
+matrix = analyzer.run_fitness_analysis(
+    prompts=prompts,
+    models=["qwen2:1.5b", "tinyllama", "llama3"],
+    iterations=3,
+)
+
+# Get recommendations for Hindi
+for rec in matrix.get_recommendations(language="hi"):
+    print(f"{rec['category']}: {rec['recommended_model']} (score: {rec['score']:.2f})")
+
+# Generate report and charts
+FitnessReportGenerator(matrix).save_report("output/fitness_report.md")
+FitnessVisualizer(matrix).save_all_plots("output/charts/", language="hi")
+```
+
+### Task-Fitness Workflow (Fully Offline)
+
+```bash
+# Step 1: Pull small models (one-time)
+ollama pull qwen2:1.5b
+ollama pull tinyllama
+
+# Step 2: Run task-fitness evaluation (Hindi only, 1 iteration for quick test)
+python main.py task-fitness \
+    --models qwen2:1.5b tinyllama \
+    --provider ollama \
+    --iterations 1 \
+    --languages hi \
+    --evaluator-provider ollama \
+    --evaluator-model qwen2:1.5b \
+    --visualize \
+    --output output/task_fitness_hindi
+
+# Step 3: Open the report
+open output/task_fitness_hindi/fitness_report.md
+```
+
+### CLI Reference: `task-fitness`
+
+| Argument | Default | Description |
+|----------|---------|-------------|
+| `--models` | required | Models to evaluate (e.g., `qwen2:1.5b tinyllama`) |
+| `--provider` | `ollama` | LLM provider for querying models |
+| `--ollama-url` | `http://localhost:11434` | Ollama server URL |
+| `--iterations` | `3` | Prompts per model per category |
+| `--languages` | `both` | `en`, `hi`, or `both` |
+| `--categories` | all | Filter to specific categories |
+| `--evaluator-provider` | `openai` | Provider for scoring (`ollama` for free) |
+| `--evaluator-model` | `gpt-4` | Model used as judge |
+| `--visualize` | off | Generate heatmap, radar, and bar charts |
+| `--output` | `output/task_fitness` | Output directory |
+
+---
 
 ## Statistical Methods
 
